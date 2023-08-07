@@ -1,0 +1,87 @@
+import React, { useContext } from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ImageBackground } from 'react-native';
+import { UserContext } from '../assets/UserContext/UserContext';
+import styles from '../assets/Styles/style';
+
+
+
+
+const ProfileScreen = ({ navigation }) => {
+
+    const {
+        firstName,
+        lastName,
+        email,
+        username,
+        country,
+        city,
+
+    } = useContext(UserContext);
+
+
+    return (
+        <View style={styles.container}>
+
+            <View style={styles.overlay} />
+            <View style={styles.profilePictureContainer}>
+                <Image
+                    source={require('../assets/images/icon/navbar/profile.png')}
+                    style={{ width: '100%', height: '100%', resizeMode: 'cover' }}
+                />
+                <Text style={styles.title}>User 1</Text>
+            </View>
+
+            <View style={styles.catalogSection}>
+
+
+            </View>
+
+
+
+            <View style={styles.userDetailsSection}>
+                <Text style={styles.userDetailsText}>Name          Ron Levi</Text>
+                <Text style={styles.userDetailsText}>Email           RonLevi@gmail.com</Text>
+                <Text style={styles.userDetailsText}>City              Herzeliya, Israel</Text>
+                <Text style={styles.userDetailsText}>Payment      (Verified)  </Text>
+
+
+            </View>
+            <View style={styles.line1Section}><Text style={styles.line1}></Text></View>
+            <View style={styles.actionButtonsContainer}>
+                <TouchableOpacity onPress={() => {
+                    navigation.navigate('FullCatalog')
+                }} style={styles.actionButton}>
+                    <Text style={styles.actionButtonText}>My Catalog</Text>
+                    <Image source={require('../assets/images/home/add.png')} style={styles.Imagsbox} />
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.actionButton}>
+                    <Text style={styles.actionButtonText}>Rent history</Text>
+                    <Image source={require('../assets/images/categories/misc.png')} style={styles.Imagsbox} />
+                </TouchableOpacity>
+
+
+
+
+
+            </View>
+
+            <View style={styles.actionButtonsContainer}>
+                <TouchableOpacity onPress={() => navigation.navigate('ExploreScreen')} style={styles.actionButton}>
+                    <Text style={styles.actionButtonText}>Explore</Text>
+                    <Image source={require('../assets/images/categories/books.png')} style={styles.Imagsbox} />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Inbox')} style={styles.actionButton}>
+                    <Text style={styles.actionButtonText}>Inbox</Text>
+                    <Image source={require('../assets/images/home/inbox.png')} style={styles.Imagsbox} />
+                </TouchableOpacity>
+
+            </View>
+        </View>
+
+
+
+    );
+};
+
+export default ProfileScreen;
