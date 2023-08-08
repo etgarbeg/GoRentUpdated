@@ -1,0 +1,37 @@
+[{
+  "_id": {
+    "$oid": "64d1efd719a05efa28314ca6"
+  },
+  "name": "Tech",
+  "image": "../images/categories/tech.png"
+},{
+  "_id": {
+    "$oid": "64d1f03019a05efa28314ca7"
+  },
+  "name": "Sport",
+  "image": "../images/categories/sport.png"
+},{
+  "_id": {
+    "$oid": "64d1f04b19a05efa28314ca8"
+  },
+  "name": "Home",
+  "image": "../images/categories/Home.png"
+},{
+  "_id": {
+    "$oid": "64d1f06219a05efa28314ca9"
+  },
+  "name": "Books",
+  "image": "../images/categories/books.png"
+},{
+  "_id": {
+    "$oid": "64d1f07a19a05efa28314caa"
+  },
+  "name": "clothes",
+  "image": "../images/categories/cloth.png"
+},{
+  "_id": {
+    "$oid": "64d1f09119a05efa28314cab"
+  },
+  "name": "Misc",
+  "image": "../images/categories/misc.png"
+}]

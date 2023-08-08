@@ -1,6 +1,7 @@
 import React, { createContext, useState } from 'react';
 import { UserContext } from './UserContext';
 import { date } from 'yup';
+import users from '../../data/users.json'
 
 export const UserProvider = ({ children }) => {
     const [firstName, setFirstName] = useState('');
@@ -77,11 +78,21 @@ export const UserProvider = ({ children }) => {
 
 
 
+    const validateFormLogin = (email, password) => {
+
+        const foundUser = users.find(user => user.email === email && user.password === password);
+        console.log(email, password)
+        if (foundUser) {
+
+            return true;
+        } else {
+
+            return false;
+        }
 
 
 
-
-
+    }
 
 
 
@@ -104,17 +115,9 @@ export const UserProvider = ({ children }) => {
         setPassword,
         setCountry,
         setCity,
-        validateFormRegister
+        validateFormRegister,
+        validateFormLogin
     };
-
-
-
-
-
-
-
-
-
 
 
 
@@ -125,5 +128,5 @@ export const UserProvider = ({ children }) => {
         <UserContext.Provider value={value}>
             {children}
         </UserContext.Provider>
-    );
-};
+    )
+}

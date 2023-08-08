@@ -31,7 +31,7 @@ const ExploreScreen = ({ navigation }) => {
         <View style={styles.containerHome}>
 
             <SearchBar style={styles.searchBar} />
-            <Categories style={styles.categoriesContainer} navigate={navigation} />
+            <Categories style={styles.categoriesContainer} navigation={navigation} />
 
             <View style={styles.line1Section}><Text style={styles.line1}></Text></View>
             <View style={styles.myFavoritesContainer}>
@@ -45,7 +45,7 @@ const ExploreScreen = ({ navigation }) => {
 
 
                 <View style={styles.containerAllFavor} >
-                    <CatalogPreView navigate={navigation} />
+                    <CatalogPreView navigation={navigation} />
                 </View>
             </View>
 
