@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+//manu
 
 //userContext
 import { UserProvider } from './assets/UserContext/UserProvider';
@@ -16,7 +17,7 @@ import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import InboxScreen from './screens/InboxScreen';
-
+import PasswordResetVerification from './screens/PasswordResetVerification';
 
 
 import FullCatalog from './screens/FullCatalog';
@@ -40,6 +41,12 @@ const ExploreStack = () => (
       component={LoginScreen}
       options={{ headerShown: false }}
     />
+    <Stack.Screen
+      name="PasswordResetVerification"
+      component={PasswordResetVerification}
+      options={{ headerShown: false }}
+    />
+
     <Stack.Screen
       name="Register"
       component={RegisterScreen}

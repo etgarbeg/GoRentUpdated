@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
         borderColor: '#fff', // color white,
         position: 'absolute',
         left: 110,
-        top: 560
+        top: 460
 
     },
     button: {
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
         borderColor: '#fff', // color white,
         position: 'absolute',
         left: 110,
-        top: 620
+        top: 520
 
     },
     TextWhite: {
@@ -1053,6 +1053,67 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
     },
+
+
+    ///reset password screen 
+
+    conatiner7: {
+        flex: 1,
+
+        margin: 10,
+        borderWidth: 0,
+        borderColor: 'rgba(0,0,0,0.2)',
+        borderRadius: 25,
+        padding: 25,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'white'
+    },
+    button7: {
+        backgroundColor: '#4c4c4c', // white with 30% opacity
+        padding: 10,
+        borderRadius: 25,
+        marginTop: 50,
+        marginBottom: 10,
+        minWidth: 200,
+        alignItems: 'center',
+        borderWidth: 1, // stroke of 2px
+        borderColor: '#fff', // color white,
+
+
+
+    },
+    buttonText7: {
+        color: 'white'
+    },
+    red: {
+        color: 'red'
+    },
+    input7: {
+
+        padding: 10,
+        fontSize: 16,
+    }, txt7: {
+        padding: 10,
+        marginTop: 20,
+        textAlign: 'center'
+
+    }
+    ,
+
+    //single chat
+
+    containerOneMess: {
+        margin: 3,
+        borderWidth: 1,
+        borderColor: 'rgba(0,0,0,0.2)',
+        borderRadius: 25,
+        margin: 10,
+        padding: 10,
+        width: '100%',
+        backgroundColor: 'white'
+    }
+
 });
 
 

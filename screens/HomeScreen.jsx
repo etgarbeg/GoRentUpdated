@@ -13,7 +13,7 @@ const HomeScreen = ({ navigation }) => {
         <View style={styles.container}>
             <View style={styles.overlay} />
             <ImageBackground
-                source={require('../assets/images/background/GoRententerScreen.png')}
+                source={require('../assets/images/background/GoRententerScreen1.png')}
                 style={styles.imageBackground}>
 
 

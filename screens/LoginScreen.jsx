@@ -3,10 +3,12 @@ import { View, TextInput, Text, StyleSheet, Button, Image, ImageBackground, Touc
 import styles from '../assets/Styles/style';
 import { UserContext } from '../assets/UserContext/UserContext';
 const LoginScreen = ({ navigation }) => {
-
-
-
     const [err, setErrors] = useState('');
+
+
+
+
+
 
     const {
         email,
@@ -61,7 +63,7 @@ const LoginScreen = ({ navigation }) => {
                 <View style={styles.container5}>
                     <Text style={styles.ErrorTxt}>{err}</Text>
                 </View>
-                <TouchableOpacity style={styles.ForgotP} onPress={() => alert("set new password: ", <input></input>)}>
+                <TouchableOpacity style={styles.ForgotP} onPress={() => { navigation.navigate('PasswordResetVerification'); }}>
                     <Text style={styles.twoOptionsTxt}>forgot password</Text>
                 </TouchableOpacity>
 
