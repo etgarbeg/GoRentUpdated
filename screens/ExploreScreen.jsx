@@ -14,15 +14,7 @@ import SearchBar from '../assets/components/SearchBar';
 const ExploreScreen = ({ navigation }) => {
 
 
-    const posts = [
-        {
-            userImg: <Image source={require('../assets/images/icon/navbar/profile.png')} style={styles.userImgProfSmall} />,
-            username: 'John',
-            title: 'Post 1',
-            img: <Image source={require('../assets/images/exmpleProducts/books/Barney.jpg')} style={styles.postImg} />,
-        }
 
-    ];
 
 
 
@@ -33,10 +25,10 @@ const ExploreScreen = ({ navigation }) => {
             <SearchBar style={styles.searchBar} />
             <Categories style={styles.categoriesContainer} navigation={navigation} />
 
-            <View style={styles.line1Section}><Text style={styles.line1}></Text></View>
+
             <View style={styles.myFavoritesContainer}>
                 <View style={styles.topTitleFavor}>
-                    <Text style={styles.textExploreTitle}>My Favorites</Text>
+                    <Text style={styles.textExploreTitle}>Near by</Text>
                     <TouchableOpacity style={styles.seeAllButton} >
                         <Text style={styles.seeAllButtonText}>See All</Text>
                     </TouchableOpacity>

@@ -135,9 +135,7 @@ const ProfileStack = () => (
 
 
 
-
 const App = ({ navigation }) => {
-
 
 
 
@@ -195,6 +193,8 @@ const App = ({ navigation }) => {
           <Tab.Screen name="Profile" component={ProfileStack} />
           <Tab.Screen name="Inbox" component={InboxStack} />
         </Tab.Navigator>
+
+
       </NavigationContainer>
     </UserProvider>
   );

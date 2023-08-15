@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     },
     //catagories elments
     containerCatagoryBox: {
-        width: 100,
+        width: 150,
         margin: 3,
         paddingTop: 70,
         flexDirection: 'colum',
@@ -139,6 +139,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         flexDirection: 'row',
         paddingHorizontal: 20,
+
     },
     row: {
         flexDirection: 'row',
@@ -423,16 +424,17 @@ const styles = StyleSheet.create({
     container4: {
         margin: 3,
         borderWidth: 1,
+        overflow: 'hidden',
         borderColor: 'rgba(0,0,0,0.2)',
-        borderRadius: 25,
-        padding: 10,
+        borderRadius: 30,
+        padding: 20,
         backgroundColor: 'white'
     },
     container5: {
         marginTop: 10,
 
-        paddingBottom: 0, flexDirection: 'row',
-        alignItems: 'center',
+        paddingBottom: 0, flexDirection: 'colum',
+        alignItems: 'flex-start',
         justifyContent: 'space-between',
     },
     distanceText: {
@@ -448,20 +450,20 @@ const styles = StyleSheet.create({
 
     },
     container3Circle: {
-        width: 30,
-        height: 30,
+        width: 40,
+        height: 40,
         borderRadius: 25,
         backgroundColor: 'white',
 
     },
     usernameTitle: {
-        marginLeft: -65,
+        marginLeft: -115,
         fontWeight: 500,
 
     },
     heartIconContainer: {
-        width: 25,
-        height: 25,
+        width: 45,
+        height: 45,
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -471,11 +473,63 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderColor: 'rgba(1,1,1,0.1)',
+        overflow: 'hidden',
+        borderRadius: 30,
 
-        borderBottomEndRadius: 10,
-        borderBottomLeftRadius: 10,
-        marginBottom: 10,
 
+
+
+
+    },
+    imageBanner: {
+        width: '100%',
+        height: '100%',
+        resizeMode: 'cover'
+
+    },
+    lineBanner: {
+        width: '100%',
+
+        flex: 0.25, overflow: 'hidden',
+        borderRadius: 0,
+        borderBottomLeftRadius: 0,
+        borderBottomEndRadius: 0,
+
+        marginVertical: 20,
+        marginTop: -50,
+
+
+    }, imageBanner2: {
+        width: '130%',
+        height: '130%',
+        resizeMode: 'cover'
+
+    },
+    lineBanner2: {
+        width: '50%',
+
+        height: '10%',
+        justifyContent: 'center',
+        alignItems: 'center',
+
+        overflow: 'hidden',
+
+        borderRadius: 20,
+        marginVertical: 10,
+
+
+
+    },
+    CatalogTitle: {
+        fontSize: 24,
+        fontWeight: 700,
+        marginLeft: 20
+    }
+    ,
+    sectionContainer: {
+        flexDirection: 'row',
+        padding: 10,
+        marginBottom: 30
 
     },
     titlePost: {
@@ -484,6 +538,7 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     postImage: {
+
         width: '100%',
         height: '100%',
         resizeMode: 'cover',
@@ -492,8 +547,9 @@ const styles = StyleSheet.create({
     },
     bottomSection: {
         backgroundColor: 'white',
-        borderRadius: 15,
-        paddingVertical: 5,
+        borderRadius: 500,
+        width: 50,
+        height: 50,
         alignItems: 'center',
         justifyContent: 'center',
         borderWidth: 1,
@@ -504,10 +560,16 @@ const styles = StyleSheet.create({
         color: 'rgba(1,1,1,0.8)',
         fontSize: 14,
         fontWeight: 'light',
-    },
+    }, conatinerBoxRowB: {
+        flexDirection
+            : 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: 10,
+        paddingVertical: 10
+    }
     ///search bar
 
-
+    ,
     containerSearchBar: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -548,7 +610,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingHorizontal: 10,
+        paddingHorizontal: 20,
 
         marginBottom: 20,
 
@@ -571,7 +633,7 @@ const styles = StyleSheet.create({
 
     textExploreTitle: {
 
-        color: 'rgba(1,1,1,0.7)',
+        color: 'rgba(1,1,1,0.9)',
         fontSize: 30,
         marginLeft: 10,
         shadowOffset: {
@@ -964,12 +1026,21 @@ const styles = StyleSheet.create({
     //fullCatalog
 
     containeCollectionColum: {
-        itemContainer: {
-            flex: 0.5, // Each item should take half of the available width
-            paddingHorizontal: 5, // Adjust horizontal spacing as needed
 
-        },
+        height: '100%',
 
+    }, itemContainer: {
+        flex: 1,
+        height: '100%',
+        width: '100%', // Each item should take half of the available width
+        paddingHorizontal: 0, // Adjust horizontal spacing as needed
+        flexDirection: 'colum',
+        justifyContent: 'center',
+
+        alignItems: 'center'
+
+    }, containerCatallog: {
+        alignItems: 'center'
     },
     //singleItemScreen
     conatinerInner1Item: {

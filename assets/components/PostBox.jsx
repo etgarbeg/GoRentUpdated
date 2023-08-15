@@ -16,22 +16,12 @@ const PostBox = ({ navigation }) => {
 
     return (
 
-        <View style={[styles.container4, { height: screenHeight * 0.25, width: 200 }]}>
-            <View style={styles.topPostSec}>
-                <TouchableOpacity style={styles.container3Circle}><Image style={styles.container3Circle} source={require('../images/icon/navbar/profile.png')}></Image></TouchableOpacity>
-                <Text style={styles.usernameTitle}>Ron12</Text>
-                <TouchableOpacity onPress={handleLikePress} style={styles.heartIconContainer}>
-                    <Icon name={isLiked ? 'heart' : 'heart-o'} size={20} color={isLiked ? 'red' : 'black'} />
-                </TouchableOpacity>
+        <View style={[styles.container4, { height: screenHeight * 0.32, width: 280 }]}>
 
-            </View>
-            <View style={styles.container5}>
-                <Text style={styles.titlePost}>cdPlayer 2002 nok</Text>
-                <Text style={styles.distanceText}>0.5km</Text>
-            </View>
-            <TouchableOpacity onPress={() => {
+
+            <TouchableOpacity onPress={() =>
                 navigation.navigate('ItemScreen')
-            }} style={styles.middleSection}
+            } style={styles.middleSection}
 
             >
 
@@ -39,12 +29,21 @@ const PostBox = ({ navigation }) => {
 
                 <Image source={require('../images/exmpleProducts/books/Barney.jpg')} style={styles.postImage} />
             </TouchableOpacity>
-            <View style={styles.ShadowContainer}>
+            <View style={[styles.ShadowContainer, styles.conatinerBoxRowB]}>
+                <View style={styles.container5}>
+                    <Text style={styles.titlePost}>cdPlayer 2002 nok</Text>
+                    <Text style={styles.distanceText}>0.5km</Text>
+
+
+                </View>
+
+
                 <TouchableOpacity onPress={() => {
                     navigation.navigate('ItemScreen')
                 }} style={styles.bottomSection} activeOpacity={0.5}>
 
-                    <Text style={styles.rentText}>VIEW</Text>
+
+                    <Text style={styles.rentText}>+</Text>
                 </TouchableOpacity>
             </View>
         </View >

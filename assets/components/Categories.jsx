@@ -4,6 +4,9 @@ import styles from '../Styles/style';
 import { View, ScrollView, StyleSheet, TouchableOpacity, Dimensions, Text, Image } from 'react-native';
 import categoreis from '../../data/categories.json'
 
+
+
+
 const Categories = ({ Navigation }) => {
 
 
