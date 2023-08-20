@@ -38,14 +38,31 @@ const ProfileScreen = ({ navigation }) => {
 
 
 
-            <View style={styles.userDetailsSection}>
-                <Text style={styles.userDetailsText}>Name          Ron Levi</Text>
-                <Text style={styles.userDetailsText}>Email           RonLevi@gmail.com</Text>
-                <Text style={styles.userDetailsText}>City              Herzeliya, Israel</Text>
-                <Text style={styles.userDetailsText}>Payment      (Verified)  </Text>
+            <View style={[styles.userDetailsSection, styles.leftalign]}>
+
+                <View>
 
 
+                    <Text style={styles.userDetailsText}>Name          Ron Levi</Text>
+                    <Text style={styles.userDetailsText}>Email           RonLevi@gmail.com</Text>
+                    <Text style={styles.userDetailsText}>City              Herzeliya, Israel</Text>
+                    <Text style={styles.userDetailsText}>Payment      (Verified)  </Text>
+                </View>
+
+                <View style={styles.catalogSection}>
+                    <TouchableOpacity
+                        onPress={() => {
+                            //navigation.navigate('EditProfile'); // Change this to your edit profile screen
+                        }}
+                        style={styles.editButton}
+                    >
+                        <Image source={require('../assets/images/icon/forms/edit.png')} style={styles.editIcon} />
+                    </TouchableOpacity>
+
+                </View>
             </View>
+
+
             <View style={styles.line1Section}><Text style={styles.line1}></Text></View>
             <View style={styles.actionButtonsContainer}>
                 <TouchableOpacity onPress={() => {

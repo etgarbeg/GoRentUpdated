@@ -16,50 +16,60 @@ const ItemScreen = ({ navigation }) => {
 
 
 
+    const writeReview = () => {
+
+
+        confirm('want to wirte? ')
+    }
+
+
+
 
     return (
         <View style={styles.containerItem}>
             <View style={styles.conatinerInner1Item} >
-                <Text style={styles.titleItem}>Item Name</Text>
-                <View style={styles.container4}>
 
-                </View>
 
                 <Image style={styles.SingleImageProductScreenItem} source={require('../assets/images/exmpleProducts/books/book1.jpg')} />
-                <View style={styles.container4}>
+                <View style={styles.container6}>
 
+                    <TouchableOpacity style={styles.rentButtonItemClicked} onPress={writeReview}>
+                        <Text style={styles.rentButtonTextItemClicked}>review</Text>
+                    </TouchableOpacity>
                 </View>
 
                 <View style={styles.itemInfoItem}>
 
-                    <Text style={styles.valueItem}>description of the item</Text>
+                    <Text style={styles.titleItem}>Item Name</Text>
 
+                    <Text style={styles.valueItem}>description of the item</Text>
 
                     <Text style={styles.labelItem}>Description:</Text>
                     <Text style={styles.valueItem}>A simple and elegant item.</Text>
                 </View>
 
-                {
-                    isRented ? <View style={styles.container6}>
 
-
-
-                        <TouchableOpacity style={styles.rentButtonItemClicked} onPress={handleRentPress}>
-                            <Text style={styles.rentButtonTextItemClicked}>Remove</Text>
-                        </TouchableOpacity>
-                    </View> :
-
-
-
-                        <TouchableOpacity style={styles.rentButtonItem} onPress={handleRentPress}>
-                            <Text style={styles.rentButtonTextItem}>Rent</Text>
-                        </TouchableOpacity>
-
-
-
-
-                }
             </View>
+            {
+                isRented ? <View style={styles.container6}>
+
+
+
+                    <TouchableOpacity style={styles.rentButtonItemClicked} onPress={handleRentPress}>
+                        <Text style={styles.rentButtonTextItemClicked}>Remove</Text>
+                    </TouchableOpacity>
+                </View> :
+
+
+
+                    <TouchableOpacity style={styles.rentButtonItem} onPress={handleRentPress}>
+                        <Text style={styles.rentButtonTextItem}>Rent</Text>
+                    </TouchableOpacity>
+
+
+
+
+            }
 
         </View>
     );

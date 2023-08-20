@@ -272,6 +272,17 @@ const styles = StyleSheet.create({
         fontWeight: 700
     },
 
+
+    editIcon: {
+        resizeMode: 'cover',
+        width: 20,
+        height: 20
+    },
+    leftalign: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+
     //titles
     title1: {
         fontSize: 15, fontWeight: 300,
@@ -299,6 +310,9 @@ const styles = StyleSheet.create({
 
 
     //sizes
+
+
+
 
 
 
@@ -1045,7 +1059,7 @@ const styles = StyleSheet.create({
     //singleItemScreen
     conatinerInner1Item: {
         width: '90%',
-        height: '90%',
+        height: '80%',
         alignItems: 'center',
         backgroundColor: 'white',
         paddingTop: 40,
@@ -1102,7 +1116,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#4c4c4c',
         paddingHorizontal: 90,
         paddingVertical: 10,
-        borderRadius: 5,
+        borderRadius: 50,
         marginTop: 20,
     },
     rentButtonTextItem: {
@@ -1114,10 +1128,11 @@ const styles = StyleSheet.create({
 
     rentButtonItemClicked: {
         backgroundColor: 'rgba(0,0,0,0.1)',
-        paddingHorizontal: 40,
+        paddingHorizontal: 10,
         paddingVertical: 10,
-        borderRadius: 5,
+        borderRadius: 50,
         marginTop: 20,
+        marginLeft: -150
     },
     rentButtonTextItemClicked: {
         color: '#000',
