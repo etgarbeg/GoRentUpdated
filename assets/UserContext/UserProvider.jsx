@@ -20,11 +20,6 @@ export const UserProvider = ({ children }) => {
 
         console.log(firstName, lastName, username, email, password, Validpassword, country, city)
         const StringRegex = /^[a-zA-Z0-9]/;
-
-
-
-
-
         if (firstName == '' || lastName == '' || username == '' || email == '' || password == '' || country == '' || city == '') {
             return 'missing details'
         }

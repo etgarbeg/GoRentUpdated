@@ -7,7 +7,7 @@ import categoreis from '../../data/categories.json'
 
 
 
-const Categories = ({ Navigation }) => {
+const Categories = ({ navigation }) => {
 
 
     return (
@@ -18,7 +18,7 @@ const Categories = ({ Navigation }) => {
 
                     <TouchableOpacity
                         key={index} style={styles.containerCatagoryBox}
-                        onPress={() => { Navigation.navigate('FullCatalog') }}>
+                        onPress={() => { navigation.navigate('FullCatalog') }}>
                         <Text style={styles.title1}>{category.name}</Text>
                         <Image source={(category.image)} style={styles.imageCtagory} />
 

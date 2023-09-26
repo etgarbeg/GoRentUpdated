@@ -28,7 +28,7 @@ const LoginScreen = ({ navigation }) => {
     const handleSubmit = () => {
 
         if (validateFormLogin(email, password)) {
-            setErrors('Login successful.')
+            setErrors('')
             navigation.navigate('Profile')
         }
         else {

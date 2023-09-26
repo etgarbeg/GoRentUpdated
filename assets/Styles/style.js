@@ -754,6 +754,7 @@ const styles = StyleSheet.create({
 
     , containerLogin: {
         flex: 1,
+        backgroundColor: 'white'
     },
     imageBackgroundLogin: {
         flex: 1,
@@ -1190,17 +1191,67 @@ const styles = StyleSheet.create({
     //single chat
 
     containerOneMess: {
-        margin: 3,
+        flex: 1,
+
         borderWidth: 1,
         borderColor: 'rgba(0,0,0,0.2)',
-        borderRadius: 25,
+        borderRadius: 5,
         margin: 10,
         padding: 10,
-        width: '100%',
-        backgroundColor: 'white'
-    }
 
-});
+        backgroundColor: 'white'
+    },
+    messageContainer: {
+
+        width: '80%',
+        height: 50,
+        borderWidth: 1,
+        borderColor: 'rgba(0,0,0,0.1)',
+        padding: 15
+        ,
+        marginVertical: 15,
+        borderRadius: 10
+    },
+    user1Message: {
+        textAlign: 'left'
+        ,
+    }
+    , user2Message: {
+        textAlign: 'right',
+        backgroundColor: 'rgba(0,0,0,0.2)',
+
+    }
+    ,
+    messageInputContainer: {
+        flex: 0.5,
+        backgroundColor: 'rgba(0,0,0,0.2)',
+        padding: 20
+    },
+    sendButton: {
+        border: 1,
+        padding: 20,
+        backgroundColor: 'grey',
+        width: '30%',
+        borderRadius: 20,
+        textAlign: 'center', textAlign: 'center'
+    },
+    messageInput: {
+        padding: 20,
+        borderWidth: 1,
+        borderTopColor: 'rgba(0,0,0,0.2)',
+        borderColor: 'transparent'
+
+    },
+    sendButtonText: {
+        textAlign: 'center',
+        color: 'white'
+    },
+    titlee: {
+        textAlign: 'center', marginTop: -10,
+        fontSize: 12
+    }
+}
+);
 
 
 

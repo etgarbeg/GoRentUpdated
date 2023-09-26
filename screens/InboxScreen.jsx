@@ -5,6 +5,11 @@ import styles from '../assets/Styles/style';
 import SearchBar from '../assets/components/SearchBar';
 
 import { ScrollView } from 'react-native';
+
+
+import users from '../data/users.json'
+
+
 const InboxScreen = ({ navigation }) => {
 
     return (
@@ -17,8 +22,9 @@ const InboxScreen = ({ navigation }) => {
                     source={require('../assets/images/icon/navbar/profile.png')}
                     style={{ width: '100%', height: '100%', resizeMode: 'cover' }}
                 />
-                <Text style={styles.title}>User 1</Text>
+
             </View>
+            <Text style={styles.titlee}>{users[0].username}</Text>
             <SearchBar />
 
             <View style={styles.MainSectionInbox}>
