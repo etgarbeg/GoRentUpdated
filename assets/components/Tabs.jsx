@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { TouchableOpacity } from 'react-native';
 import HomeScreen from '../../screens/HomeScreen';
 import LoginScreen from '../../screens/LoginScreen';
 import PasswordResetVerification from '../../screens/PasswordResetVerification';
@@ -12,24 +13,18 @@ import InboxScreen from '../../screens/InboxScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import OnboardingScreen from '../../screens/OnBoarding/OnboardingScreen';
-
+import OnBoardingScreen from '../../screens/OnBoarding';
 const Stack = createStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
 
-
-
-
-const ExploreStack = () => (
-
-
+const onBoardingStack = () => (
 
     <Stack.Navigator>
         <Stack.Screen
-            name="Home"
-            component={HomeScreen}
+            name="onboarding"
+            component={OnBoardingScreen}
             options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -38,13 +33,13 @@ const ExploreStack = () => (
             options={{ headerShown: false }}
         />
         <Stack.Screen
-            name="PasswordResetVerification"
-            component={PasswordResetVerification}
+            name="Home"
+            component={HomeScreen}
             options={{ headerShown: false }}
         />
         <Stack.Screen
-            name="onboarding"
-            component={OnboardingScreen}
+            name="PasswordResetVerification"
+            component={PasswordResetVerification}
             options={{ headerShown: false }}
         />
 
@@ -53,6 +48,18 @@ const ExploreStack = () => (
             component={RegisterScreen}
             options={{ headerShown: false }}
         />
+
+    </Stack.Navigator>
+
+)
+    ;
+
+const ExploreStack = () => (
+
+
+    <Stack.Navigator>
+
+
         <Stack.Screen
             name="ExploreScreen"
             component={ExploreScreen}
@@ -73,11 +80,7 @@ const ExploreStack = () => (
             component={ItemScreen}
             options={{ headerShown: false }}
         />
-        <Stack.Screen
-            name="SingleChat"
-            component={SingleChat}
-            options={{ headerShown: false }}
-        />
+
     </Stack.Navigator>
 );
 
@@ -125,18 +128,26 @@ const ProfileStack = () => (
             component={ItemScreen}
             options={{ headerShown: false }}
         />
+
+        <Stack.Screen
+            name="Inbox"
+            component={InboxScreen}
+            options={{ headerShown: false }}
+        />
+
         <Stack.Screen
             name="SingleChat"
             component={SingleChat}
             options={{ headerShown: false }}
         />
-
-
         <Stack.Screen
-            name="onboarding"
-            component={OnboardingScreen}
+            name="ExploreScreen"
+            component={ExploreScreen}
             options={{ headerShown: false }}
         />
+
+
+
     </Stack.Navigator>
 );
 
@@ -152,7 +163,6 @@ const ProfileStack = () => (
 const Tabs = ({ navigation }) => {
 
 
-    const [onboardingFinish, setonboardingFinish] = useState(false);
 
 
 
@@ -160,66 +170,33 @@ const Tabs = ({ navigation }) => {
 
 
 
+        <Tab.Navigator
+            screenOptions={({ route }) => ({
+                tabBarIcon: ({ color, size }) => {
+                    // Define your tab icons here
+                    let iconName;
 
-        <Tab.Navigator screenOptions={({ route }) => ({
-            tabBarIcon: ({ color, size }) => {
-                let iconName;
+                    if (route.name === 'Explore') {
+                        iconName = 'magnify';
+                    } else if (route.name === 'Profile') {
+                        iconName = 'account';
+                    } else if (route.name === 'Inbox') {
+                        iconName = 'email';
+                    }
 
-                if (route.name === 'Explore') {
-                    iconName = 'magnify';
-                } else if (route.name === 'Profile') {
-                    iconName = 'account';
-                } else if (route.name === 'Inbox') {
-                    iconName = 'email';
-                }
-
-                return <MaterialCommunityIcons name={iconName} size={35} color={'rgba(0,0,0,0.5)'} />;
-            },
-        })}
-
-
+                    return <MaterialCommunityIcons name={iconName} size={size} color={color} />;
+                },
+            })}
             tabBarOptions={{
-
-                style: {
-                    backgroundColor: 'rgba(0,0,0,0.3)', // Change the background color of the tab bar
-                }, iconStyle: {
-                    marginTop: 10, // Adjust the vertical positioning of the icons
-                },
-                activeTintColor: 'black', // Change the active tab icon and text color
-                labelStyle: {
-                    color: 'black', // Change the inactive tab text color
-                },
-                tabStyle: {
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                },
-                indicatorStyle: {
-                    backgroundColor: '#000', // Change the active tab indicator color
-                    height: '100%',
-                    width: '33%',
-                    borderRadius: 100,
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                }, showLabel: false, // Hide the tab titles
-
+                style: { display: 'none' },
             }}
+            initialRouteName="Onboarding" // Set the initial route to the tab you want to start with
         >
 
-
-            {
-
-            }
-
+            <Tab.Screen name="Onboarding" component={onBoardingStack} options={{ tabBarButton: () => null, headerShown: false, tabBarVisible: false }} />
             <Tab.Screen name="Explore" component={ExploreStack} />
             <Tab.Screen name="Profile" component={ProfileStack} />
             <Tab.Screen name="Inbox" component={InboxStack} />
-
-
-
-
-
-
         </Tab.Navigator>
 
 
