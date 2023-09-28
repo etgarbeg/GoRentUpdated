@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { View, TextInput, Text, StyleSheet, Button, Image, ImageBackground, TouchableOpacity } from 'react-native';
 import styles from '../assets/Styles/style';
 import { UserContext } from '../assets/UserContext/UserContext';
@@ -6,6 +6,7 @@ import { UserContext } from '../assets/UserContext/UserContext';
 const RegisterScreen = ({ navigation }) => {
     const [err, setErrors] = useState('');
     const [Validpassword, setValidPassword] = useState('');
+    const [AllCities, setAllCities] = useState([]);
 
     const { firstName,
         lastName,
@@ -50,6 +51,26 @@ const RegisterScreen = ({ navigation }) => {
     }
 
 
+    useEffect(() => {
+        fetch("https://data.gov.il/api/3/action/datastore_search?resource_id=1b14e41c-85b3-4c21-bdce-9fe48185ffca&limit=5")
+            .then(response => response.json())
+            .then(data => {
+                if (data.result && data.result.records && data.result.records.length > 0) {
+                    setAllCities(data.result.records); // Access the 'records' array within 'result'
+                    console.log(data.result.records); // Log the entire records array
+                    // Log city names individually
+                    data.result.records.forEach(record => {
+                        console.log('City Name:', record.city_name);
+                    });
+                } else {
+                    console.log('No city records found.');
+                }
+            })
+            .catch(error => {
+                // Handle the error here (e.g., show an error message).
+                console.log("Error fetching data:", error);
+            });
+    }, []); // Empty dependency array means this effect runs only once
     return (
 
 
