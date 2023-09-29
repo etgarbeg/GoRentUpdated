@@ -887,7 +887,54 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         width: '70%',
         backgroundColor: 'white'
+    }, inputContainerRegisterCityPIckerIn: {
+        marginBottom: 0,
+
+
+
+        borderRadius: 0,
+        width: '70%',
+
+
+        height: 100,
+        backgroundColor: 'transparent'
+    }
+
+    , inputContainerRegisterCityPIcker: {
+        marginBottom: 0,
+
+        borderWidth: 1,
+        borderColor: 'transparent',
+        borderRadius: 50,
+        marginBottom: 0,
+        paddingLeft: 10,
+        paddingHorizontal: 30,
+        justifyContent: 'center',
+        width: '70%',
+        height: 40,
+
+        backgroundColor: 'white'
+    }
+
+
+    , pickerOption: {
+
+        height: 30,
+        backgroundColor: 'white',
+        border: 1,
+
+        alignItems: 'center'
     },
+    flatlistCities:
+    {
+        marginTop: -13,
+
+        borderRadius: 0,
+        borderBottomEndRadius: 50,
+        borderBottomLeftRadius: 50
+    },
+
+
     inputLabelRegister: {
         fontSize: 16,
         marginBottom: 5,
@@ -904,6 +951,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         marginVertical: 10,
         minWidth: 150,
+
         alignItems: 'center',
         borderWidth: 1, // stroke of 2px
         borderColor: '#555', // color white

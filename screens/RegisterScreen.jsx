@@ -1,12 +1,14 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { View, TextInput, Text, StyleSheet, Button, Image, ImageBackground, TouchableOpacity } from 'react-native';
+import { View, TextInput, Text, Modal, FlatList, Image, ImageBackground, TouchableOpacity } from 'react-native';
 import styles from '../assets/Styles/style';
 import { UserContext } from '../assets/UserContext/UserContext';
 
 const RegisterScreen = ({ navigation }) => {
     const [err, setErrors] = useState('');
     const [Validpassword, setValidPassword] = useState('');
-    const [AllCities, setAllCities] = useState([]);
+    const [AllCities, setAllCities] = useState([{}]);
+    const [isCityPickerVisible, setCityPickerVisible] = useState(false);
+    const [selectedCity, setSelectedCity] = useState('');
 
     const { firstName,
         lastName,
@@ -51,13 +53,28 @@ const RegisterScreen = ({ navigation }) => {
     }
 
 
+
+    const handleCitySelect = (cityName) => {
+        setCity(cityName);
+        toggleCityPicker();
+    };
+
+
+    const toggleCityPicker = () => {
+        setCityPickerVisible(!isCityPickerVisible);
+    };
+
+
+
+
     useEffect(() => {
         fetch("https://data.gov.il/api/3/action/datastore_search?resource_id=1b14e41c-85b3-4c21-bdce-9fe48185ffca&limit=5")
             .then(response => response.json())
             .then(data => {
                 if (data.result && data.result.records && data.result.records.length > 0) {
-                    setAllCities(data.result.records); // Access the 'records' array within 'result'
-                    console.log(data.result.records); // Log the entire records array
+
+                    setAllCities(data.result.records);
+                    console.log(data.result.records);
                     // Log city names individually
                     data.result.records.forEach(record => {
                         console.log('City Name:', record.city_name);
@@ -71,6 +88,10 @@ const RegisterScreen = ({ navigation }) => {
                 console.log("Error fetching data:", error);
             });
     }, []); // Empty dependency array means this effect runs only once
+
+    // Log AllCities here after the state has been updated
+    console.log("AllCities:", AllCities);
+
     return (
 
 
@@ -137,13 +158,29 @@ const RegisterScreen = ({ navigation }) => {
                 </View>
 
 
-                <View style={styles.inputContainerRegister}>
+                <View style={styles.inputContainerRegisterCityPIcker}>
+                    <TouchableOpacity style={styles.pickerLine} onPress={toggleCityPicker}>
+                        <Text>{city || 'Select a city'}</Text>
+                    </TouchableOpacity>
 
-                    <TextInput style={styles.inputRegister} placeholder="city"
-                        placeholderTextColor="#555" value={city}
-                        onChangeText={setCity} />
                 </View>
-
+                <View style={styles.inputContainerRegisterCityPIckerIn}>
+                    {isCityPickerVisible && (
+                        <FlatList
+                            style={styles.flatlistCities}
+                            data={AllCities}
+                            keyExtractor={(item) => item.city_name}
+                            renderItem={({ item }) => (
+                                <TouchableOpacity
+                                    onPress={() => handleCitySelect(item.city_name)}
+                                    style={styles.pickerOption}
+                                >
+                                    <Text>{item.city_name}</Text>
+                                </TouchableOpacity>
+                            )}
+                        />
+                    )}
+                </View>
                 {err ? <Text style={styles.ErrorTxt}>*{err}</Text> : <Text></Text>}
                 <TouchableOpacity style={styles.buttonRegister} onPress={handleSubmit}>
                     <Text style={styles.buttonTextRegister}>Register</Text>
@@ -151,6 +188,7 @@ const RegisterScreen = ({ navigation }) => {
             </View>
 
         </View>
+
     );
 };
 
