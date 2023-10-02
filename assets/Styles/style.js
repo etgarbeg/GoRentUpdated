@@ -167,8 +167,11 @@ const styles = StyleSheet.create({
     imageCtagory: {
         justifyContent: 'center',
         alignItems: 'center',
-        width: 100, height: 100,
-        alignContent: 'center'
+        width: 200, height: 100,
+        alignContent: 'center',
+        resizeMode: 'contain',
+
+
     }
     ,
 
@@ -430,6 +433,29 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
 
+    }, filterOptionsContainer: {
+        position: 'absolute',
+        backgroundColor: 'white',
+        width: '30%',
+        top: 50, // Adjust the top position to position the square as desired
+        right: 10, // Adjust the right position to position the square as desired
+        borderWidth: 1,
+        borderRadius: 30,
+        borderColor: '#ccc',
+        borderRadius: 5,
+        zIndex: 2,
+        elevation: 5, zIndex: 9999
+    },
+    filterOption: {
+        paddingVertical: 10,
+        paddingHorizontal: 15,
+        borderBottomWidth: 1,
+        borderBottomColor: '#ccc',
+    },
+    modalTitle: {
+        fontWeight: 'bold',
+        fontSize: 16,
+        padding: 10,
     },
 
 
@@ -591,6 +617,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 10,
         paddingHorizontal: 10,
+        zIndex: 9999,
 
         margin: 20,
         width: '90%', shadowColor: 'rgba(0,0,0,0.3)',

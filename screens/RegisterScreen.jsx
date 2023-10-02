@@ -68,7 +68,7 @@ const RegisterScreen = ({ navigation }) => {
 
 
     useEffect(() => {
-        fetch("https://data.gov.il/api/3/action/datastore_search?resource_id=1b14e41c-85b3-4c21-bdce-9fe48185ffca&limit=5")
+        fetch("https://data.gov.il/api/3/action/datastore_search?resource_id=1b14e41c-85b3-4c21-bdce-9fe48185ffca")
             .then(response => response.json())
             .then(data => {
                 if (data.result && data.result.records && data.result.records.length > 0) {
@@ -150,17 +150,11 @@ const RegisterScreen = ({ navigation }) => {
                         placeholderTextColor="#555" value={Validpassword}
                         onChangeText={setValidPassword} />
                 </View>
-                <View style={styles.inputContainerRegister}>
-
-                    <TextInput style={styles.inputRegister} placeholder="country"
-                        placeholderTextColor="#555" value={country}
-                        onChangeText={setCountry} />
-                </View>
 
 
                 <View style={styles.inputContainerRegisterCityPIcker}>
                     <TouchableOpacity style={styles.pickerLine} onPress={toggleCityPicker}>
-                        <Text>{city || 'Select a city'}</Text>
+                        <Text>{city || 'Select a Adress'}</Text>
                     </TouchableOpacity>
 
                 </View>
@@ -175,7 +169,7 @@ const RegisterScreen = ({ navigation }) => {
                                     onPress={() => handleCitySelect(item.city_name)}
                                     style={styles.pickerOption}
                                 >
-                                    <Text>{item.city_name}</Text>
+                                    <Text>{item.city_name},{item.street_name},{item.region_name}</Text>
                                 </TouchableOpacity>
                             )}
                         />

@@ -4,37 +4,37 @@
   "_id": {
     "$oid": "64d1efd719a05efa28314ca6"
   },
-  "name": "Tech",
-  "image":"tech.png"
+  "name": "tech",
+  "image":"../images/categories/books.png"
 },{
   "_id": {
     "$oid": "64d1f03019a05efa28314ca7"
   },
-  "name": "Sport",
-  "image": "sport.png"
+  "name": "sport",
+  "image": "../images/categories/books.png"
   
   },{
   "_id": {
     "$oid": "64d1f04b19a05efa28314ca8"
   },
-  "name": "Home",
-  "image": "Home.png"
+  "name": "home",
+  "image": "../images/categories/books.png"
 },{
   "_id": {
     "$oid": "64d1f06219a05efa28314ca9"
   },
-  "name": "Books",
-  "image": "books.png"
+  "name": "books",
+  "image": "../images/categories/books.png"
 },{
   "_id": {
     "$oid": "64d1f07a19a05efa28314caa"
   },
   "name": "clothes",
-  "image": "cloth.png"
+  "image": "../images/categories/clothes.png"
 },{
   "_id": {
     "$oid": "64d1f09119a05efa28314cab"
   },
-  "name": "Misc",
-  "image": "misc.png"
+  "name": "misc",
+  "image": "../images/categories/misc.png"
 }]

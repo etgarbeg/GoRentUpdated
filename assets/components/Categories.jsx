@@ -17,10 +17,12 @@ const Categories = ({ navigation }) => {
                 {categoreis.map((category, index) => (
 
                     <TouchableOpacity
+
+
                         key={index} style={styles.containerCatagoryBox}
                         onPress={() => { navigation.navigate('FullCatalog') }}>
                         <Text style={styles.title1}>{category.name}</Text>
-                        <Image source={(category.image)} style={styles.imageCtagory} />
+                        <Image style={styles.imageCtagory} />
 
                     </TouchableOpacity>
                 ))}

@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import { UserContext } from './UserContext';
 import { date } from 'yup';
 import users from '../../data/users.json'
@@ -113,8 +113,6 @@ export const UserProvider = ({ children }) => {
         validateFormRegister,
         validateFormLogin
     };
-
-
 
 
 

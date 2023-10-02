@@ -5,7 +5,6 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import styles from '../assets/Styles/style';
 import Categories from '../assets/components/Categories';
 
-import PostBox from '../assets/components/PostBox';
 import CatalogPreView from '../assets/components/collections/CatalogPreView';
 import SearchBar from '../assets/components/SearchBar';
 

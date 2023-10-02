@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ImageBackground } from 'react-native';
 import { UserContext } from '../assets/UserContext/UserContext';
 import styles from '../assets/Styles/style';
@@ -15,8 +15,24 @@ const ProfileScreen = ({ navigation }) => {
         username,
         country,
         city,
+        creditCard
 
     } = useContext(UserContext);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     return (
@@ -43,10 +59,10 @@ const ProfileScreen = ({ navigation }) => {
                 <View>
 
 
-                    <Text style={styles.userDetailsText}>Name          Ron Levi</Text>
-                    <Text style={styles.userDetailsText}>Email           RonLevi@gmail.com</Text>
-                    <Text style={styles.userDetailsText}>City              Herzeliya, Israel</Text>
-                    <Text style={styles.userDetailsText}>Payment      (Verified)  </Text>
+                    <Text style={styles.userDetailsText}>Name          {firstName}{lastName}</Text>
+                    <Text style={styles.userDetailsText}>Email           {email}</Text>
+                    <Text style={styles.userDetailsText}>City              {country},{city}</Text>
+                    <Text style={styles.userDetailsText}>Payment        (verified)  </Text>
                 </View>
 
                 <View style={styles.catalogSection}>
