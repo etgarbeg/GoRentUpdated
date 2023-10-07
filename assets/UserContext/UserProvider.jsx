@@ -12,6 +12,47 @@ export const UserProvider = ({ children }) => {
     const [country, setCountry] = useState('');
     const [city, setCity] = useState('');
     const [street, setStreet] = useState('');
+    const [users, setUsers] = useState([]);
+
+
+
+
+
+
+
+    const fetchUserData = async () => {
+        try {
+            const response = await fetch('http://192.168.1.207:3000/users'); // Replace with your API URL
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const userData = await response.json();
+            return userData;
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+            throw error;
+        }
+    };
+
+    useEffect(() => {
+        // Fetch user data from your API or database
+        // Update the 'user' state with the fetched data
+        fetchUserData().then((userData) => {
+            setUsers(userData);
+        });
+    }, []);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -75,19 +116,30 @@ export const UserProvider = ({ children }) => {
 
     const validateFormLogin = (email, password) => {
 
-        const foundUser = users.find(user => user.email === email && user.password === password);
-        console.log(email, password)
-        if (foundUser) {
-
-            return true;
+        const user = users.find((user) => user.username === email && user.password === password);
+        if (user) {
+            console.log("user foud")
+            return user;
         } else {
 
-            return false;
+            console.log("sorry,no match")
+            return null;
+
         }
+    };
 
 
 
-    }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -101,8 +153,10 @@ export const UserProvider = ({ children }) => {
         username,
         password,
         country,
-        city,
+        city, users,
 
+
+        setUsers,
         setFirstName,
         setLastName,
         setEmail,

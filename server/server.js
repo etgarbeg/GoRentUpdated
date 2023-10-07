@@ -1,56 +1,51 @@
+import express from 'express';
 
-const express = require('express');
-
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import { useState } from 'react';
+import cors from 'cors';
+import axios from 'axios';
 
 const app = express();
+const uri = 'mongodb+srv://etgarbeg:xqbHZKp06i4ZG8vd@cluster0.zqcb5gw.mongodb.net/GoRentDB';
 
+app.use(cors());
+mongoose.connect(uri);
+// Event listener for a successful connection
+mongoose.connection.on('connected', () => {
+    console.log('Connected to MongoDB via URI:', uri);
+});
 
-app.get('/api', (req, res) => {
-
-    res.json({ "users": ["userOne", "userTwo"] })
-
+// Event listener for connection error
+mongoose.connection.on('error', (err) => {
+    console.error('MongoDB connection error:', err);
 });
 
 
 
+const UserSchema = mongoose.Schema({
+    name: String,
+    age: Number
+})
+
+const UserModel = mongoose.model("users", UserSchema);
 
 
-
-
-mongoose.connect('https://mongodb+srv://etgarbeg:xqbHZKp06i4ZG8vd@cluster0.zqcb5gw.mongodb.net', { useNewUrlParser: true, useUnifiedTopology: true });
-
-const User = mongoose.model('User', {
-    userName: String,
-
-    email: String,
-
-});
-app.get('https://eu-central-1.aws.data.mongodb-api.com/app/data-vnycj/endpoint/data/v1', async (req, res) => {
+app.get('/users', async (req, res) => {
     try {
-        const user = await User.findById(req.params.Id);
-        if (user) {
-            res.json(user);
-        } else {
-            res.status(404).json({ error: 'User not found' });
-        }
-    } catch (error) {
-        res.status(500).json({ error: 'Error fetching user data' });
+        const Allusers = await UserModel.find({});
+        res.json(Allusers);
+
+        console.log(Allusers)
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'An error occurred while fetching users.' });
     }
 });
 
-
-
+// Express Server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
+
 });
-
-
-
-
-
-app.listen(5000, () => console.log('Server started on port 5000'));
-
-
 

@@ -15,7 +15,7 @@ const LoginScreen = ({ navigation }) => {
         password,
         setEmail,
         setPassword,
-        validateFormLogin } = useContext(UserContext);
+        validateFormLogin, users } = useContext(UserContext);
 
     const clearForm = () => {
 
@@ -27,13 +27,13 @@ const LoginScreen = ({ navigation }) => {
     }
     const handleSubmit = () => {
 
-        if (validateFormLogin(email, password)) {
-            setErrors('')
-            navigation.navigate('Profile')
+        const user = validateFormLogin(email, password);
+        if (user) {
+            navigation.navigate('Profile', { userId: user.id });
+
+
         }
-        else {
-            setErrors('invalid email/password')
-        }
+        else setErrors('invalid email/password')
 
     }
     return (
@@ -76,7 +76,7 @@ const LoginScreen = ({ navigation }) => {
             </View>
 
             <TouchableOpacity style={styles.twoOptions} onPress={() => navigation.navigate('Register')}>
-                <Text style={styles.twoOptionsTxt}>i don't have a user</Text>
+                <Text style={styles.twoOptionsTxt}>{console.log(users)}</Text>
             </TouchableOpacity>
 
         </View>

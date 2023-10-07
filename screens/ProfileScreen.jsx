@@ -4,9 +4,7 @@ import { UserContext } from '../assets/UserContext/UserContext';
 import styles from '../assets/Styles/style';
 
 
-
-
-const ProfileScreen = ({ navigation }) => {
+const ProfileScreen = ({ navigation, useId }) => {
 
     const {
         firstName,
@@ -15,7 +13,8 @@ const ProfileScreen = ({ navigation }) => {
         username,
         country,
         city,
-        creditCard
+        creditCard,
+
 
     } = useContext(UserContext);
 
@@ -49,7 +48,7 @@ const ProfileScreen = ({ navigation }) => {
 
             <View style={styles.catalogSection}>
 
-
+                { }
             </View>
 
 

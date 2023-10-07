@@ -76,7 +76,7 @@ const Tabs = () => {
             }}
             initialRouteName="Onboarding"
         >
-            <Tab.Screen name="Onboarding" component={onBoardingStack} options={{ tabBarButton: () => null, headerShown: false, }} />
+            <Tab.Screen name="Onboarding" component={onBoardingStack} options={{ tabBarButton: () => null, headerShown: false, tabBarVisible: false }} />
             <Tab.Screen name="Profile" component={ProfileStack} />
             <Tab.Screen name="Explore" component={ExploreStack} />
 
