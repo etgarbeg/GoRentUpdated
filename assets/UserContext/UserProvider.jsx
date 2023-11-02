@@ -13,6 +13,7 @@ export const UserProvider = ({ children }) => {
     const [city, setCity] = useState('');
     const [street, setStreet] = useState('');
     const [users, setUsers] = useState([]);
+    const [currentUser, setCurrentUser] = useState({});
 
 
 
@@ -116,9 +117,11 @@ export const UserProvider = ({ children }) => {
 
     const validateFormLogin = (email, password) => {
 
-        const user = users.find((user) => user.username === email && user.password === password);
+        const user = users.find((user) => user.email === email && user.password === password);
         if (user) {
-            console.log("user foud")
+            console.log("user foud");
+
+
             return user;
         } else {
 
@@ -153,9 +156,10 @@ export const UserProvider = ({ children }) => {
         username,
         password,
         country,
-        city, users,
+        city, users, currentUser,
 
 
+        setCurrentUser,
         setUsers,
         setFirstName,
         setLastName,

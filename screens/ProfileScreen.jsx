@@ -4,34 +4,10 @@ import { UserContext } from '../assets/UserContext/UserContext';
 import styles from '../assets/Styles/style';
 
 
-const ProfileScreen = ({ navigation, useId }) => {
+const ProfileScreen = ({ navigation }) => {
 
     const {
-        firstName,
-        lastName,
-        email,
-        username,
-        country,
-        city,
-        creditCard,
-
-
-    } = useContext(UserContext);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        currentUser } = useContext(UserContext);
 
 
     return (
@@ -43,7 +19,7 @@ const ProfileScreen = ({ navigation, useId }) => {
                     source={require('../assets/images/icon/navbar/profile.png')}
                     style={{ width: '100%', height: '100%', resizeMode: 'cover' }}
                 />
-                <Text style={styles.title}>User 1</Text>
+                <Text style={styles.title}>{currentUser.username}</Text>
             </View>
 
             <View style={styles.catalogSection}>
@@ -58,10 +34,10 @@ const ProfileScreen = ({ navigation, useId }) => {
                 <View>
 
 
-                    <Text style={styles.userDetailsText}>Name          {firstName}{lastName}</Text>
-                    <Text style={styles.userDetailsText}>Email           {email}</Text>
-                    <Text style={styles.userDetailsText}>City              {country},{city}</Text>
-                    <Text style={styles.userDetailsText}>Payment        (verified)  </Text>
+                    <Text style={styles.userDetailsText}>Name         {currentUser.firstName} {currentUser.lastName} </Text>
+                    <Text style={styles.userDetailsText}>Email           {currentUser.email}</Text>
+                    <Text style={styles.userDetailsText}>City              {currentUser.adress.city}, {currentUser.adress.street}</Text>
+                    <Text style={styles.userDetailsText}>Payment        {currentUser.crreditCard === null ? <Text>(N-Verified)</Text> : <Text>(Verified)</Text>}  </Text>
                 </View>
 
                 <View style={styles.catalogSection}>

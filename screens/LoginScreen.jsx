@@ -14,7 +14,12 @@ const LoginScreen = ({ navigation }) => {
         email,
         password,
         setEmail,
+        currentUser,
         setPassword,
+        setFirstName,
+        setCurrentUser,
+
+
         validateFormLogin, users } = useContext(UserContext);
 
     const clearForm = () => {
@@ -29,7 +34,9 @@ const LoginScreen = ({ navigation }) => {
 
         const user = validateFormLogin(email, password);
         if (user) {
-            navigation.navigate('Profile', { userId: user.id });
+            setCurrentUser(user);
+            navigation.navigate('Profile');
+            clearForm();
 
 
         }

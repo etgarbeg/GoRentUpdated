@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; import { useContext } from 'react';
+import { UserContext } from '../UserContext/UserContext';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+
 import { Dimensions } from 'react-native';
 import styles from '../Styles/style';
 
@@ -9,7 +10,8 @@ const screenHeight = Dimensions.get('window').height;
 
 const PostBox = ({ navigation }) => {
     const [isLiked, setIsLiked] = useState(false);
-
+    const {
+        currentUser } = useContext(UserContext);
     const handleLikePress = () => {
         setIsLiked(!isLiked);
     };
@@ -31,8 +33,10 @@ const PostBox = ({ navigation }) => {
             </TouchableOpacity>
             <View style={[styles.ShadowContainer, styles.conatinerBoxRowB]}>
                 <View style={styles.container5}>
-                    <Text style={styles.titlePost}>cdPlayer 2002 nok</Text>
-                    <Text style={styles.distanceText}>0.5km</Text>
+                    <Text style={styles.titlePost}>{currentUser.products[0].productName}</Text>
+                    <Text style={styles.distanceText}>{currentUser.products[0].productAvaliable ? <Text>
+                        Avaliable
+                    </Text> : <Text>Taken</Text>}</Text>
 
 
                 </View>
@@ -43,7 +47,7 @@ const PostBox = ({ navigation }) => {
                 }} style={styles.bottomSection} activeOpacity={0.5}>
 
 
-                    <Text style={styles.rentText}>+</Text>
+
                 </TouchableOpacity>
             </View>
         </View >

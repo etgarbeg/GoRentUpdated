@@ -597,7 +597,7 @@ const styles = StyleSheet.create({
         ,
     },
     rentText: {
-        color: 'rgba(1,1,1,0.8)',
+        color: 'rgba(1,1,1,0.3)',
         fontSize: 14,
         fontWeight: 'light',
     }, conatinerBoxRowB: {
@@ -1177,12 +1177,14 @@ const styles = StyleSheet.create({
     itemInfoItem: {
         flexDirection: 'colum',
         marginBottom: 10,
-        marginTop: 20
+        marginTop: 20,
+        width: '80%'
     },
     labelItem: {
-        fontSize: 16,
+        fontSize: 14,
         marginRight: 10,
-        color: '#555',
+        color: '#999',
+
     },
     valueItem: {
         fontSize: 16,
@@ -1208,7 +1210,8 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         borderRadius: 50,
         marginTop: 20,
-        marginLeft: -150
+        alignItems: 'center',
+        width: 230
     },
     rentButtonTextItemClicked: {
         color: '#000',
@@ -1216,7 +1219,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 
-
+    reviewButtonItemClicked: {
+        backgroundColor: 'rgba(0,0,0,0.1)',
+        paddingHorizontal: 10,
+        paddingVertical: 10,
+        borderRadius: 50,
+        marginTop: 20,
+        marginLeft: -240
+    },
     ///reset password screen 
 
     conatiner7: {
