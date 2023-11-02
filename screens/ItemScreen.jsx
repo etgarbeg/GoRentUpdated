@@ -27,7 +27,7 @@ const ItemScreen = ({ navigation }) => {
     const writeReview = () => {
 
 
-        confirm('want to wirte? ')
+        alert('review');
     }
 
 
@@ -47,14 +47,16 @@ const ItemScreen = ({ navigation }) => {
                 </View>
 
                 <View style={styles.itemInfoItem}>
-
+                    <Text style={styles.categorySmall}>{currentUser.products[0].category}</Text>
                     <Text style={styles.titleItem}>{currentUser.products[0].productName}</Text>
 
 
 
 
-
+                    <Text style={styles.singleLines}>____________</Text>
                     <Text style={styles.valueItem}>{currentUser.products[0].productDetails}</Text>
+                    <Text></Text>
+
                 </View>
 
 

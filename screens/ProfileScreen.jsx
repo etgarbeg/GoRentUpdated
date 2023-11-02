@@ -7,7 +7,8 @@ import styles from '../assets/Styles/style';
 const ProfileScreen = ({ navigation }) => {
 
     const {
-        currentUser } = useContext(UserContext);
+        currentUser, otherUsers } = useContext(UserContext);
+
 
 
     return (
@@ -24,7 +25,7 @@ const ProfileScreen = ({ navigation }) => {
 
             <View style={styles.catalogSection}>
 
-                { }
+
             </View>
 
 

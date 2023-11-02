@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 import { UserContext } from './UserContext';
 import { date } from 'yup';
 import users from '../../data/users.json'
+import { useContext } from 'react';
 
 export const UserProvider = ({ children }) => {
     const [firstName, setFirstName] = useState('');
@@ -14,7 +15,7 @@ export const UserProvider = ({ children }) => {
     const [street, setStreet] = useState('');
     const [users, setUsers] = useState([]);
     const [currentUser, setCurrentUser] = useState({});
-
+    const [otherUsers, setOtherUsers] = useState([]);
 
 
 
@@ -40,6 +41,7 @@ export const UserProvider = ({ children }) => {
         // Update the 'user' state with the fetched data
         fetchUserData().then((userData) => {
             setUsers(userData);
+            FindOtherUsers();
         });
     }, []);
 
@@ -135,6 +137,15 @@ export const UserProvider = ({ children }) => {
 
 
 
+    const FindOtherUsers = () => {
+        const data = users.filter((user) => user.email !== currentUser.email);
+
+        setOtherUsers(data);
+
+    };
+
+
+
 
 
 
@@ -157,8 +168,9 @@ export const UserProvider = ({ children }) => {
         password,
         country,
         city, users, currentUser,
+        otherUsers,
 
-
+        FindOtherUsers,
         setCurrentUser,
         setUsers,
         setFirstName,

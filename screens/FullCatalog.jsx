@@ -7,12 +7,13 @@ import BannerSlideshow from '../assets/components/BannerSlideshow';
 import SearchBar from '../assets/components/SearchBar';
 import { useState } from 'react';
 const FullCatalog = ({ navigation }) => {
-
+    //MY catalog
 
     const {
         currentUser } = useContext(UserContext);
     const data = currentUser.products; // Example data array, replace with your actual data
     const [currentIndex, SetcurrentIndex] = useState(0);
+
     return (
 
 

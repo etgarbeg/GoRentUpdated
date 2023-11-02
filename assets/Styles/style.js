@@ -577,6 +577,12 @@ const styles = StyleSheet.create({
         alignContent: 'flex-start',
         marginBottom: 5,
     },
+    categorySmall: {
+        fontSize: 12,
+        alignContent: 'flex-start',
+        marginBottom: 5,
+        color: 'rgba(0,0,0,0.4)'
+    },
     postImage: {
 
         width: '100%',
@@ -1171,13 +1177,13 @@ const styles = StyleSheet.create({
     titleItem: {
         fontSize: 24,
         fontWeight: 'bold',
-        marginBottom: 20,
+        marginBottom: 0,
         color: '#333',
     },
     itemInfoItem: {
         flexDirection: 'colum',
         marginBottom: 10,
-        marginTop: 20,
+        marginTop: 10,
         width: '80%'
     },
     labelItem: {
@@ -1187,8 +1193,13 @@ const styles = StyleSheet.create({
 
     },
     valueItem: {
-        fontSize: 16,
-        color: '#333',
+        fontSize: 14,
+        marginLeft: 8,
+        color: '#111',
+    },
+    singleLines: {
+        color: 'rgba(0,0,0,0.2)',
+        marginBottom: 15
     },
     rentButtonItem: {
         backgroundColor: '#4c4c4c',

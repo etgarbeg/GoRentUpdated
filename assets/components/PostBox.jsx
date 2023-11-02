@@ -49,6 +49,7 @@ const PostBox = ({ navigation }) => {
 
 
                 </TouchableOpacity>
+
             </View>
         </View >
 

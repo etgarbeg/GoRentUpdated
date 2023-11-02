@@ -1,18 +1,19 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import React, { useContext } from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 
 
 import styles from '../assets/Styles/style';
 import Categories from '../assets/components/Categories';
 
-import CatalogPreView from '../assets/components/collections/CatalogPreView';
 import SearchBar from '../assets/components/SearchBar';
+import { UserContext } from '../assets/UserContext/UserContext';
 
 
 
 const ExploreScreen = ({ navigation }) => {
 
 
+    const { users, currentUser, otherUsers, FOtherUsers } = useContext(UserContext);
 
 
 
@@ -36,11 +37,13 @@ const ExploreScreen = ({ navigation }) => {
 
 
                 <View style={styles.containerAllFavor} >
-                    <CatalogPreView navigation={navigation} />
-                </View>
-            </View>
 
-        </View>
+
+
+                </View>
+            </View >
+
+        </View >
 
 
 
