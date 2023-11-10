@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
-import Tabs from './assets/components/Tabs';
+import MainNavigation from './assets/components/Tabs';
 import { UserProvider } from './assets/UserContext/UserProvider';
 
 import axios from 'axios';
@@ -28,8 +28,8 @@ const App = ({ navigation }) => {
   return (
     <UserProvider>
       <NavigationContainer>
+        <MainNavigation />
 
-        <Tabs />
       </NavigationContainer>
     </UserProvider>
   );

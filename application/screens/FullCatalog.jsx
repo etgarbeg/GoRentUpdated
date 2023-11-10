@@ -35,7 +35,7 @@ const FullCatalog = ({ navigation }) => {
                                 {data.map((item, index) => (
                                     <View key={index} style={styles.itemContainer}>
 
-                                        <PostBox navigation={navigation} />
+                                        <PostBox navigation={navigation} product={item} />
 
                                     </View>
                                 ))}
@@ -52,7 +52,7 @@ const FullCatalog = ({ navigation }) => {
                             <View style={styles.sectionContainer}>
                                 {data.map((item, index) => (
                                     <View key={index} style={styles.itemContainer}>
-                                        <PostBox navigation={navigation} />
+                                        <PostBox navigation={navigation} product={item} />
                                     </View>
                                 ))}
                             </View>

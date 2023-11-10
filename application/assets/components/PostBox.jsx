@@ -8,7 +8,7 @@ import styles from '../Styles/style';
 const screenHeight = Dimensions.get('window').height;
 
 
-const PostBox = ({ navigation }) => {
+const PostBox = ({ navigation, product }) => {
     const [isLiked, setIsLiked] = useState(false);
     const {
         currentUser } = useContext(UserContext);
@@ -29,12 +29,12 @@ const PostBox = ({ navigation }) => {
 
 
 
-                <Image source={require('../images/exmpleProducts/books/Barney.jpg')} style={styles.postImage} />
+                <Image style={styles.postImage} />
             </TouchableOpacity>
             <View style={[styles.ShadowContainer, styles.conatinerBoxRowB]}>
                 <View style={styles.container5}>
-                    <Text style={styles.titlePost}>{currentUser.products[0].productName}</Text>
-                    <Text style={styles.distanceText}>{currentUser.products[0].productAvaliable ? <Text>
+                    <Text style={styles.titlePost}>{product.productName}</Text>
+                    <Text style={styles.distanceText}>{product.productAvaliable ? <Text>
                         Avaliable
                     </Text> : <Text>Taken</Text>}</Text>
 

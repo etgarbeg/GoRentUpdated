@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         margin: 3,
         paddingTop: 70,
         flexDirection: 'colum',
-        height: 200,
+        height: 160,
         justifyContent: 'center',
 
         borderRadius: 10,
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     imageCtagory: {
         justifyContent: 'center',
         alignItems: 'center',
-        width: 200, height: 100,
+        width: 150, height: 150,
         alignContent: 'center',
         resizeMode: 'contain',
 
@@ -289,7 +289,8 @@ const styles = StyleSheet.create({
     //titles
     title1: {
         fontSize: 15, fontWeight: 300,
-        alignSelf: 'center'
+        alignSelf: 'center',
+
     },
     title2: {
         fontSize: 50,

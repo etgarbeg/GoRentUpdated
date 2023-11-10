@@ -41,7 +41,7 @@ export const UserProvider = ({ children }) => {
         // Update the 'user' state with the fetched data
         fetchUserData().then((userData) => {
             setUsers(userData);
-            FindOtherUsers();
+
         });
     }, []);
 
@@ -137,13 +137,6 @@ export const UserProvider = ({ children }) => {
 
 
 
-    const FindOtherUsers = () => {
-        const data = users.filter((user) => user.email !== currentUser.email);
-
-        setOtherUsers(data);
-
-    };
-
 
 
 
@@ -170,7 +163,7 @@ export const UserProvider = ({ children }) => {
         city, users, currentUser,
         otherUsers,
 
-        FindOtherUsers,
+        setOtherUsers,
         setCurrentUser,
         setUsers,
         setFirstName,

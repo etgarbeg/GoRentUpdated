@@ -18,7 +18,7 @@ const LoginScreen = ({ navigation }) => {
         setPassword,
         setFirstName,
         setCurrentUser,
-        FindOtherUsers,
+        setOtherUsers, otherUsers,
 
         validateFormLogin, users } = useContext(UserContext);
 
@@ -35,7 +35,9 @@ const LoginScreen = ({ navigation }) => {
         const user = validateFormLogin(email, password);
         if (user) {
             setCurrentUser(user);
-            FindOtherUsers();
+
+
+
             navigation.navigate('Profile');
             clearForm();
 
@@ -44,6 +46,23 @@ const LoginScreen = ({ navigation }) => {
         else setErrors('invalid email/password')
 
     }
+
+
+
+    const FindOtherUsers = () => {
+
+        const data = users.filter((currentUser) => currentUser.email !== currentUser.email);
+
+
+        setOtherUsers(data);
+
+
+    };
+
+
+
+
+
     return (
         <View style={styles.containerLogin}>
 

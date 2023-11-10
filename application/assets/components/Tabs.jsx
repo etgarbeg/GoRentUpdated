@@ -18,6 +18,22 @@ import OnBoardingScreen from '../../screens/OnBoarding';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+const mainTabs = () => {
+    <Tab.Navigator    >
+
+        <Tab.Screen name="Profile" component={ProfileStack} options={{ tabBarIcon: () => <MaterialCommunityIcons name='account' size={20} color='black' /> }} />
+        <Tab.Screen name="Explore" component={ExploreStack} options={{ tabBarIcon: () => <MaterialCommunityIcons name='account' size={20} color='black' /> }} />
+
+        <Tab.Screen name="Inbox" component={InboxStack} options={{ tabBarIcon: () => <MaterialCommunityIcons name='account' size={20} color='black' /> }} />
+    </Tab.Navigator>
+
+}
+
+
+
+
+
+
 const onBoardingStack = () => (
     <Stack.Navigator>
         <Stack.Screen name="onboarding" component={OnBoardingScreen} options={{ headerShown: false }} />
@@ -55,34 +71,17 @@ const ProfileStack = () => (
     </Stack.Navigator>
 );
 
-const Tabs = () => {
+const MainNavigation = () => {
     return (
-        <Tab.Navigator
-            screenOptions={({ route }) => ({
-                tabBarIcon: ({ color, size }) => {
-                    let iconName;
-                    if (route.name === 'Explore') {
-                        iconName = 'magnify';
-                    } else if (route.name === 'Profile') {
-                        iconName = 'account';
-                    } else if (route.name === 'Inbox') {
-                        iconName = 'email';
-                    }
-                    return <MaterialCommunityIcons name={iconName} size={size} color={color} />;
-                },
-            })}
-            tabBarOptions={{
-                style: { display: 'none' }, // Hide the tab bar by default
-            }}
-            initialRouteName="Onboarding"
-        >
-            <Tab.Screen name="Onboarding" component={onBoardingStack} options={{ tabBarButton: () => null, headerShown: false, tabBarVisible: false }} />
-            <Tab.Screen name="Profile" component={ProfileStack} />
-            <Tab.Screen name="Explore" component={ExploreStack} />
-
-            <Tab.Screen name="Inbox" component={InboxStack} />
-        </Tab.Navigator>
-    );
+        <Stack.Navigator>
+            <Stack.Screen name="onboarding" component={OnBoardingScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="PasswordResetVerification" component={PasswordResetVerification} options={{ headerShown: false }} />
+            <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="tabs" component={mainTabs} options={{ headerShown: false }} />
+        </Stack.Navigator>
+    )
 };
 
-export default Tabs;
+export default MainNavigation;

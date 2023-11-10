@@ -7,9 +7,9 @@ import styles from '../assets/Styles/style';
 const ProfileScreen = ({ navigation }) => {
 
     const {
-        currentUser, otherUsers } = useContext(UserContext);
+        currentUser, otherUsers, users } = useContext(UserContext);
 
-
+    const other = users.filter(user => user.id !== currentUser.id)
 
     return (
         <View style={styles.container}>

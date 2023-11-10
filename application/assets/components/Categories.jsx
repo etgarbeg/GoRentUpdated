@@ -9,7 +9,14 @@ import categoreis from '../../data/categories.json'
 
 const Categories = ({ navigation }) => {
 
-
+    const images = [
+        require('../images/categories/tech.png'),
+        require('../images/categories/sport.png'),
+        require('../images/categories/Home.png'),
+        require('../images/categories/books.png'),
+        require('../images/categories/cloth.png'),
+        require('../images/categories/misc.png'),
+    ];
     return (
 
         <View style={styles.containerCatagories}>
@@ -22,7 +29,7 @@ const Categories = ({ navigation }) => {
                         key={index} style={styles.containerCatagoryBox}
                         onPress={() => { navigation.navigate('FullCatalog') }}>
                         <Text style={styles.title1}>{category.name}</Text>
-                        <Image style={styles.imageCtagory} />
+                        <Image style={styles.imageCtagory} source={images[index]} />
 
                     </TouchableOpacity>
                 ))}
