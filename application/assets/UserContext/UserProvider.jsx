@@ -4,7 +4,12 @@ import { date } from 'yup';
 import users from '../../data/users.json'
 import { useContext } from 'react';
 
+import { API_BASE_URL } from '../../data/api';
+
 export const UserProvider = ({ children }) => {
+
+
+
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [password, setPassword] = useState('');
@@ -17,33 +22,6 @@ export const UserProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState({});
     const [otherUsers, setOtherUsers] = useState([]);
 
-
-
-
-
-
-    const fetchUserData = async () => {
-        try {
-            const response = await fetch('http://192.168.1.207:3000/users'); // Replace with your API URL
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const userData = await response.json();
-            return userData;
-        } catch (error) {
-            console.error('Error fetching user data:', error);
-            throw error;
-        }
-    };
-
-    useEffect(() => {
-        // Fetch user data from your API or database
-        // Update the 'user' state with the fetched data
-        fetchUserData().then((userData) => {
-            setUsers(userData);
-
-        });
-    }, []);
 
 
 
@@ -117,36 +95,6 @@ export const UserProvider = ({ children }) => {
 
 
 
-    // const validateFormLogin = (email, password) => {
-
-    //     const user = users.find((user) => user.email === email && user.password === password);
-    //     if (user) {
-    //         console.log("user foud");
-
-
-    //         return user;
-    //     } else {
-
-    //         console.log("sorry,no match")
-    //         return null;
-
-    //     }
-    // };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -174,7 +122,7 @@ export const UserProvider = ({ children }) => {
         setCountry,
         setCity,
         validateFormRegister,
-        validateFormLogin
+
     };
 
 
