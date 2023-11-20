@@ -10,14 +10,16 @@ cloudinary.config({
 async function UploadImage(req, res, next) {
     try {
         let { image } = req.body;
+        console.log(image);
+        if (!image || image == undefined) { console.log("here"); next(); };
         let imageStr = `data:image/jpg;base64,${image}`;
         cloudinary.uploader.upload_large(imageStr, { quality: "auto", fetch_format: "auto" }, (err, result) => {
-            if (err) throw new Error(err)
+            if (err) throw new Error(err);
             req.cloudinaryRes = result;
             next();
         })
     } catch (error) {
-        res.status(500).json({ error });
+        res.status(500).json({ ...error });
     }
 }
 

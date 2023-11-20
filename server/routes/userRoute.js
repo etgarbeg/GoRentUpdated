@@ -8,10 +8,13 @@ userRouter.post('/register', UploadImage, async (req, res) => {
         let { username, password, firstName, lastName, email, adress, creditCard, products } = req.body;
         //save image
         let { cloudinaryRes } = req;
-        let user = await UserModel.Register(username, password, firstName, lastName, email, adress, creditCard, products, cloudinaryRes.secure_url);
+        console.log("2");
+        console.log(cloudinaryRes);
+        let imageUrl = cloudinaryRes != undefined ? cloudinaryRes.secure_url : '';
+        let user = await UserModel.Register(username, password, firstName, lastName, email, adress, creditCard, products, imageUrl);
         res.status(201).json({ user });
-
-    } catch (error) {
+    }
+    catch (error) {
         res.status(500).json({ error });
     }
 
@@ -20,6 +23,7 @@ userRouter.post('/register', UploadImage, async (req, res) => {
 userRouter.post('/login', async (req, res) => {
     try {
         let { email, password } = req.body;
+        console.log(email, password);
         let user = await UserModel.Login(email, password);
         if (!user) // if(user == null || user == undefined)
             res.status(401).json({ msg: "incorrect details" });
