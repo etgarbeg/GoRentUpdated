@@ -66,7 +66,7 @@ userRouter.post('/messages', async (req, res) => {
 
 // { username: "newUsername", email: "newEmail@example.com", ...otherFields }
 // Express route handler for updating a user's profile based on form data
-app.post('/update-profile/:userId', async (req, res) => {
+userRouter.post('/update-profile/:userId', async (req, res) => {
     const userId = req.params.userId;
     const updatedProfile = req.body; // Assuming form data is sent in the request body
 
