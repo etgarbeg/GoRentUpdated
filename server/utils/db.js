@@ -25,6 +25,18 @@ class DB {
         }
     }
 
+    async FindById(collection, id, options = {}) {
+        try {
+            await this.client.connect();
+            return await this.client.db(this.db_name).collection(collection).findOne({ _id: new ObjectId(id) }, options);
+        } catch (error) {
+            throw error;
+        } finally {
+            await this.client.close();
+        }
+    }
+
+
     async FindOne(collection, query = {}, options = {}) {
         try {
             await this.client.connect();

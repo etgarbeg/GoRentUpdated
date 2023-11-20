@@ -117,21 +117,21 @@ export const UserProvider = ({ children }) => {
 
 
 
-    const validateFormLogin = (email, password) => {
+    // const validateFormLogin = (email, password) => {
 
-        const user = users.find((user) => user.email === email && user.password === password);
-        if (user) {
-            console.log("user foud");
+    //     const user = users.find((user) => user.email === email && user.password === password);
+    //     if (user) {
+    //         console.log("user foud");
 
 
-            return user;
-        } else {
+    //         return user;
+    //     } else {
 
-            console.log("sorry,no match")
-            return null;
+    //         console.log("sorry,no match")
+    //         return null;
 
-        }
-    };
+    //     }
+    // };
 
 
 
