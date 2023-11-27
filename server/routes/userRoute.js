@@ -1,5 +1,7 @@
+const express = require('express');
+
 const UserModel = require('../models/userModel');
-const userRouter = require('express').Router();
+const userRouter = express.Router();
 const UploadImage = require('../utils/upload');
 
 userRouter.get('/', async (req, res) => {
@@ -41,8 +43,10 @@ userRouter.post('/login', async (req, res) => {
         else
             res.status(200).json(user);
     } catch (error) {
-        res.status(500).json({ error });
+        console.error('Error during login:', error);
+        res.status(500).json({ error: error.message }); // Send a more descriptive error message to the client
     }
+
 });
 
 ///messeges between two users 

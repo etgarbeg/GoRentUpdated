@@ -109,19 +109,22 @@ export default function UserContextProvider({ children }) {
 
 
     const LoginUser = async () => {
-        const response = await axios.post(`${API_BASE_URL}/login`, {
-            email,
-            password
-        }, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
+        try {
+            const response = await axios.post(`${API_BASE_URL}/login`, {
+                email,
+                password
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
 
-        console.log('Server Response:', response.data);
-
+            console.log('Server Response:', response.data);
+        } catch (error) {
+            console.error('Error during login:', error);
+            throw new Error('Login failed');
+        }
     };
-
 
 
 
