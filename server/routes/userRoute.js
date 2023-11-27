@@ -2,6 +2,17 @@ const UserModel = require('../models/userModel');
 const userRouter = require('express').Router();
 const UploadImage = require('../utils/upload');
 
+userRouter.get('/', async (req, res) => {
+    try {
+        const users = await UserModel.FindAll();
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
+
 userRouter.post('/register', UploadImage, async (req, res) => {
     try {
         //create user

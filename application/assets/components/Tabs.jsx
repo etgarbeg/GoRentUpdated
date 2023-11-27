@@ -30,20 +30,6 @@ const mainTabs = () => {
 }
 
 
-
-
-
-
-const onBoardingStack = () => (
-    <Stack.Navigator>
-        <Stack.Screen name="onboarding" component={OnBoardingScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="PasswordResetVerification" component={PasswordResetVerification} options={{ headerShown: false }} />
-        <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
-    </Stack.Navigator>
-);
-
 const ExploreStack = () => (
     <Stack.Navigator>
         <Stack.Screen name="ExploreScreen" component={ExploreScreen} options={{ headerShown: false }} />
@@ -77,9 +63,18 @@ const MainNavigation = () => {
             <Stack.Screen name="onboarding" component={OnBoardingScreen} options={{ headerShown: false }} />
             <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
             <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
-            <Stack.Screen name="PasswordResetVerification" component={PasswordResetVerification} options={{ headerShown: false }} />
+            <Stack.Screen name="PassswordResetVerification" component={PasswordResetVerification} options={{ headerShown: false }} />
             <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
-            <Stack.Screen name="tabs" component={mainTabs} options={{ headerShown: false }} />
+
+            <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} />
+
+            <Stack.Screen name="SingleChat" component={SingleChat} options={{ headerShown: false }} />
+            <Stack.Screen name="ExploreScreen" component={ExploreScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="Inbox" component={InboxScreen} options={{ headerShown: false }} />
+
+
+            <Stack.Screen name="FullCatalog" component={FullCatalog} options={{ headerShown: false }} />
+            <Stack.Screen name="ItemScreen" component={ItemScreen} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
 };

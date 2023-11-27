@@ -7,7 +7,7 @@ import styles from '../assets/Styles/style';
 const ProfileScreen = ({ navigation }) => {
 
     const {
-        currentUser, otherUsers, users } = useContext(UserContext);
+        currentUser, otherUsers, users, email } = useContext(UserContext);
 
     const other = users.filter(user => user.id !== currentUser.id)
 
@@ -37,7 +37,7 @@ const ProfileScreen = ({ navigation }) => {
 
                     <Text style={styles.userDetailsText}>Name         {currentUser.firstName} {currentUser.lastName} </Text>
                     <Text style={styles.userDetailsText}>Email           {currentUser.email}</Text>
-                    <Text style={styles.userDetailsText}>City              {currentUser.adress.city}, {currentUser.adress.street}</Text>
+                    <Text style={styles.userDetailsText}>City            </Text>
                     <Text style={styles.userDetailsText}>Payment        {currentUser.crreditCard === null ? <Text>(N-Verified)</Text> : <Text>(Verified)</Text>}  </Text>
                 </View>
 

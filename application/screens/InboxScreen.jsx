@@ -7,7 +7,6 @@ import SearchBar from '../assets/components/SearchBar';
 import { ScrollView } from 'react-native';
 
 
-import users from '../data/users.json'
 
 
 const InboxScreen = ({ navigation }) => {

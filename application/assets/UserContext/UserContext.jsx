@@ -1,15 +1,16 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { API_BASE_URL } from '../../data/api';
+import axios from 'axios';
 
 export const UserContext = createContext();
 
 export default function UserContextProvider({ children }) {
 
     //user
-    const [users, setUsers] = useState([]);
+
     const [currentUser, setCurrentUser] = useState(null);
     const [otherUsers, setOtherUsers] = useState([]);
-    const [loginTxtErr, setLoginTxt] = useState("");
+    const [loginTxtErr, setLoginTxtErr] = useState('');
 
 
     //form
@@ -23,13 +24,26 @@ export default function UserContextProvider({ children }) {
     const [country, setCountry] = useState('');
     const [city, setCity] = useState('');
     const [street, setStreet] = useState('');
+    const [users, setUsers] = useState([]);
 
 
-    //users
-    const FindOtherUsers = async (currentUser) => {
-        const data = users.filter((currentUser) => currentUser.id !== currentUser.id);
-        setOtherUsers(data);
-    };
+
+    axios.get('http://192.168.1.207:5500/api/users')
+        .then((response) => {
+            setUsers(response.data);
+
+        })
+        .catch((error) => {
+            console.error('Error fetching users:', error);
+        });
+
+
+
+
+
+
+
+
 
 
 
@@ -91,25 +105,26 @@ export default function UserContextProvider({ children }) {
 
 
 
-    const LoginUser = async (email, password) => {
-        let result = await fetch(`${API_BASE_URL}/login`, {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email, password })
-        });
+    const LoginUser = async () => {
+        try {
+            console.log("in")
+            let result = await fetch(`${API_BASE_URL}/login`, {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
 
-        let data = await result.json();
-        console.log(data);
-        // if (!data || data == null) {
-        //     setLoginTxt("incorrent email/password.")
-        //     return false;
-        // }
-        // setCurrentUser(data);
-        // FindOtherUsers(data);
-        // return data;
-    }
+            let data = await result.json();
+            console.log(data)
+            return data;  // Return the parsed JSON data
+        } catch (error) {
+            console.error('Error during login:', error);
+            throw new Error('Login failed');
+        }
+
+    };
 
 
 
@@ -129,16 +144,21 @@ export default function UserContextProvider({ children }) {
 
     }
 
-    const values = {
+    const value = {
         email,
+        users,
+        password,
         loginTxtErr,
         currentUser,
+        setLoginTxtErr,
         LoginUser,
-        Register
+        setPassword,
+        setCurrentUser,
+        setEmail,
     }
 
     return (
-        <UserContext.Provider value={values}>
+        <UserContext.Provider value={value}>
             {children}
         </UserContext.Provider>
     )

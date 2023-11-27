@@ -2,19 +2,17 @@ import React, { useState } from 'react';
 import { View, TextInput, Text, StyleSheet, Button, Image, ImageBackground, TouchableOpacity } from 'react-native';
 import styles from '../assets/Styles/style';
 import { useContext } from 'react';
-import { UserContext } from '../assets/UserContext/UserContext';
-
-
+import { UserContext } from '../../application/assets/UserContext/UserContext'
 
 
 const LoginScreen = ({ navigation }) => {
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState(0);
 
 
 
-    const { LoginUser, setCurrentUser, loginTxtErr } = useContext(UserContext);
+
+    const { users, currentUser, setCurrentUser, loginTxtErr, setLoginTxtErr, LoginUser, setEmail, email, setPassword, password } = useContext(UserContext);
+
 
     const clearForm = () => {
 
@@ -25,21 +23,21 @@ const LoginScreen = ({ navigation }) => {
 
     }
     const handleSubmit = async () => {
+        try {
+            console.log("in handle")
+            const user = await LoginUser();
 
-        const user = LoginUser(email, password)
-        if (user) {
-            setCurrentUser(user);
-            navigation.navigate('Profile');
-            clearForm();
+            if (user) {
+                setCurrentUser(user);
+                // navigation.navigate('Profile'); 
+                clearForm();
+            } else {
+                setLoginTxtErr('Invalid email/password');
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
         }
-        else setErrors('invalid email/password')
-
-    }
-
-
-
-
-
+    };
 
     return (
         <View style={styles.containerLogin}>
@@ -81,7 +79,7 @@ const LoginScreen = ({ navigation }) => {
             </View>
 
             <TouchableOpacity style={styles.twoOptions} onPress={() => navigation.navigate('Register')}>
-                <Text style={styles.twoOptionsTxt}>{console.log(users)}</Text>
+                <Text style={styles.twoOptionsTxt}></Text>
             </TouchableOpacity>
 
         </View>

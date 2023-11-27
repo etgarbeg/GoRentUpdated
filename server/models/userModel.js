@@ -40,6 +40,8 @@ class UserModel {
         return await new DB().Insert('users', user);
     }
 
+
+
     static async Login(email, password) {
         const user = await new DB().FindOne("users", { email: email });
 
@@ -70,7 +72,9 @@ class UserModel {
 
 
 
-
+    static async FindAll() {
+        return await new DB().FindAll('users');
+    }
 
 
     static async FindById(userId) {
