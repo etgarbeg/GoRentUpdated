@@ -110,7 +110,7 @@ export default function UserContextProvider({ children }) {
 
     const LoginUser = async () => {
         try {
-            const response = await axios.post(`http://192.168.1.207:5500/api/users/login`, {
+            const response = await axios.post(`${API_BASE_URL}/login`, {
                 email,
                 password
             }, {
