@@ -38,16 +38,17 @@ userRouter.post('/login', async (req, res) => {
         let { email, password } = req.body;
         console.log(email, password);
         let user = await UserModel.Login(email, password);
-        if (!user) // if(user == null || user == undefined)
-            res.status(401).json({ msg: "incorrect details" });
+        if (!user)
+            res.status(401).json({ msg: "Incorrect details" });
         else
             res.status(200).json(user);
     } catch (error) {
         console.error('Error during login:', error);
         res.status(500).json({ error: error.message }); // Send a more descriptive error message to the client
     }
-
 });
+
+
 
 ///messeges between two users 
 userRouter.post('/messages', async (req, res) => {
