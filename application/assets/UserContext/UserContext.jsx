@@ -28,14 +28,17 @@ export default function UserContextProvider({ children }) {
 
 
 
-    axios.get('https://gorentapp.onrender.com/api/users/')
-        .then((response) => {
-            setUsers(response.data);
-
-        })
-        .catch((error) => {
-            console.error('Error fetching users:', error);
-        });
+    useEffect(() => {
+        // This will run once when the component mounts
+        axios.get('http://192.168.1.207:5500/api/users')
+            .then((response) => {
+                setUsers(response.data);
+                console.log("our users ", response.data);
+            })
+            .catch((error) => {
+                console.error('Error fetching users:', error);
+            });
+    }, []);
 
 
 
