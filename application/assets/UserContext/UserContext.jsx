@@ -28,7 +28,7 @@ export default function UserContextProvider({ children }) {
 
 
 
-    axios.get('http://192.168.1.207:5500/api/users')
+    axios.get('https://gorentapp.onrender.com/api/users/')
         .then((response) => {
             setUsers(response.data);
 
@@ -103,30 +103,25 @@ export default function UserContextProvider({ children }) {
 
     };
 
-
-
     const LoginUser = async () => {
         try {
-            console.log("in")
-            let result = await fetch(`${API_BASE_URL}/login`, {
-                method: 'post',
+            console.log("in Login user");
+            const response = await axios.post(`${API_BASE_URL}/login`, {
+                email,
+                password
+            }, {
                 headers: {
                     'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
+                }
             });
 
-            let data = await result.json();
-            console.log(data)
-            return data;  // Return the parsed JSON data
+            const data = response.data;
+            return data;
         } catch (error) {
             console.error('Error during login:', error);
             throw new Error('Login failed');
         }
-
     };
-
-
 
 
     const RegisterUser = async (user) => {

@@ -24,9 +24,10 @@ const LoginScreen = ({ navigation }) => {
     }
     const handleSubmit = async () => {
         try {
-            console.log("in handle")
-            const user = await LoginUser();
 
+            console.log("in handle sumbit")
+            const user = await LoginUser();
+            console.log("the user recieved in handel", user)
             if (user) {
                 setCurrentUser(user);
                 // navigation.navigate('Profile'); 
