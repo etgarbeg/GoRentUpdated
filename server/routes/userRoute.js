@@ -4,7 +4,7 @@ const UserModel = require('../models/userModel');
 const userRouter = express.Router();
 const UploadImage = require('../utils/upload');
 
-userRouter.get('/all', async (req, res) => {
+userRouter.get('/', async (req, res) => {
     try {
         const users = await UserModel.FindAll();
         res.status(200).json(users);
