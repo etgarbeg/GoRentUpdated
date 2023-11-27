@@ -109,7 +109,7 @@ export default function UserContextProvider({ children }) {
     const LoginUser = async () => {
         try {
             console.log("in Login user");
-            const response = await axios.post(`/login`, {
+            const response = await axios.post(`${API_BASE_URL}/register`, {
                 email,
                 password
             }, {
