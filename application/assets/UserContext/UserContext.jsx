@@ -12,6 +12,9 @@ export default function UserContextProvider({ children }) {
     const [otherUsers, setOtherUsers] = useState([]);
     const [loginTxtErr, setLoginTxtErr] = useState('');
 
+    const [allmessegesArray, setAllmessegesArray] = useState(null);
+
+
 
     //form
 
