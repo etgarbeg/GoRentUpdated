@@ -35,6 +35,7 @@ userRouter.post('/register', UploadImage, async (req, res) => {
 
 userRouter.post('/login', async (req, res) => {
     try {
+        console.log("in login user route")
         let { email, password } = req.body;
         console.log(email, password);
         let user = await UserModel.Login(email, password);

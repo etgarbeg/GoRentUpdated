@@ -43,6 +43,7 @@ class UserModel {
 
 
     static async Login(email, password) {
+        console.log("in login userModal")
         const user = await new DB().FindOne("users", { email: email });
 
         if (!user || !(await bcrypt.compare(password, user.password))) {

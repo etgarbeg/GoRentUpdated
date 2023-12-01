@@ -4,7 +4,6 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-
     "start": "node server.js",
     "dev": "nodemon server.js",
     "build": "npm install"
@@ -12,8 +11,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "cloudinary": "^1.41.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",

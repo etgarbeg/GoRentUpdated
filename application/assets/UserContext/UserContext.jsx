@@ -2,6 +2,7 @@ import { createContext, useState, useEffect } from 'react';
 import { API_BASE_URL } from '../../data/api';
 import axios from 'axios';
 
+
 export const UserContext = createContext();
 
 export default function UserContextProvider({ children }) {
@@ -112,6 +113,7 @@ export default function UserContextProvider({ children }) {
 
 
     const LoginUser = async () => {
+        console.log("in login usercontext")
         try {
             const response = await axios.post(`${API_BASE_URL}/login`, {
                 email,
@@ -124,14 +126,23 @@ export default function UserContextProvider({ children }) {
 
             console.log('Server Response:', response.data);
         } catch (error) {
-            console.error('Error during login:', error);
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.error('Server responded with an error:', error.response.data);
+                console.error('Status code:', error.response.status);
+                console.error('Headers:', error.response.headers);
+            } else if (error.request) {
+                // The request was made but no response was received
+                console.error('No response received from the server:', error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.error('Error setting up the request:', error.message);
+            }
             throw new Error('Login failed');
         }
-    };
 
-
-
-
+    }
 
 
 
