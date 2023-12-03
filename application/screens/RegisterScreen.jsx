@@ -203,7 +203,8 @@ const RegisterScreen = ({ navigation }) => {
                         />
                     )}
                 </View>
-                {err ? <Text style={styles.ErrorTxt}>*{err}</Text> : <Text></Text>}
+                <Text style={styles.ErrorTxt}>{err ? `*${err}` : ''}</Text>
+
 
                 <TouchableOpacity style={styles.buttonRegister} onPress={handleSubmit}>
                     <Text style={styles.buttonTextRegister}>Register</Text>
