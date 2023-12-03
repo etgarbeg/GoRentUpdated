@@ -182,6 +182,7 @@ export default function UserContextProvider({ children }) {
         setPassword,
         setCurrentUser,
         setEmail,
+        validateFormRegister
     }
 
     return (

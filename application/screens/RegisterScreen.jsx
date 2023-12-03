@@ -55,7 +55,7 @@ const RegisterScreen = ({ navigation }) => {
 
 
     const handleCitySelect = (cityName) => {
-        setCity(cityName);
+        setSelectedCity(cityName);
         toggleCityPicker();
     };
 
