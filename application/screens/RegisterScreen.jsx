@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { View, TextInput, Text, Modal, FlatList, Image, ImageBackground, TouchableOpacity } from 'react-native';
+import { View, TextInput, Text, TouchableOpacity, FlatList, Image } from 'react-native';
 import styles from '../assets/Styles/style';
 import { UserContext } from '../assets/UserContext/UserContext';
 
@@ -9,15 +9,16 @@ const RegisterScreen = ({ navigation }) => {
     const [AllCities, setAllCities] = useState([{}]);
     const [isCityPickerVisible, setCityPickerVisible] = useState(false);
     const [selectedCity, setSelectedCity] = useState('');
+    const [searchInput, setSearchInput] = useState('');
 
-    const { firstName,
+    const {
+        firstName,
         lastName,
         email,
         password,
         username,
         country,
         city,
-
         setFirstName,
         setLastName,
         setEmail,
@@ -25,9 +26,8 @@ const RegisterScreen = ({ navigation }) => {
         setCountry,
         setCity,
         setPassword,
-
-
-        validateFormRegister } = useContext(UserContext);
+        validateFormRegister
+    } = useContext(UserContext);
 
     const clearForm = () => {
         setCity('');
@@ -38,59 +38,40 @@ const RegisterScreen = ({ navigation }) => {
         setPassword('');
         setUsername('');
         setEmail('');
+    };
 
-
-    }
     const handleSubmit = () => {
+        setErrors(validateFormRegister(firstName, lastName, username, email, password, Validpassword, country, city));
 
-        setErrors(validateFormRegister(firstName, lastName, username, email, password, Validpassword, country, city))
-
-        if (err == 'complited') {
-
+        if (err === 'completed') {
             clearForm();
-            navigation.navigate('Login')
+            navigation.navigate('Login');
         }
-    }
-
-
+    };
 
     const handleCitySelect = (cityName) => {
         setSelectedCity(cityName);
         toggleCityPicker();
     };
 
-
     const toggleCityPicker = () => {
         setCityPickerVisible(!isCityPickerVisible);
     };
-
-
-
 
     useEffect(() => {
         fetch("https://data.gov.il/api/3/action/datastore_search?resource_id=1b14e41c-85b3-4c21-bdce-9fe48185ffca")
             .then(response => response.json())
             .then(data => {
                 if (data.result && data.result.records && data.result.records.length > 0) {
-
                     setAllCities(data.result.records);
-                    console.log(data.result.records);
-                    // Log city names individually
-                    data.result.records.forEach(record => {
-                        console.log('City Name:', record.city_name);
-                    });
                 } else {
                     console.log('No city records found.');
                 }
             })
             .catch(error => {
-                // Handle the error here (e.g., show an error message).
                 console.log("Error fetching data:", error);
             });
-    }, []); // Empty dependency array means this effect runs only once
-
-    // Log AllCities here after the state has been updated
-    console.log("AllCities:", AllCities);
+    }, []);
 
     return (
 
@@ -152,30 +133,78 @@ const RegisterScreen = ({ navigation }) => {
                 </View>
 
 
+
+
                 <View style={styles.inputContainerRegisterCityPIcker}>
                     <TouchableOpacity style={styles.pickerLine} onPress={toggleCityPicker}>
-                        <Text>{city || 'Select a Adress'}</Text>
+                        <Text>{city ? city : 'Select an Address'}</Text>
                     </TouchableOpacity>
-
                 </View>
+                <TextInput
+                    placeholder="Search for a city"
+                    value={searchInput}
+                    onChangeText={(text) => setSearchInput(text)}
+                    style={styles.searchInput}
+                />
+                <View style={styles.inputContainerRegisterCityPIcker}>
+                    <TouchableOpacity style={styles.pickerLine} onPress={toggleCityPicker}>
+                        <Text>{city ? city : 'Select an Address'}</Text>
+                    </TouchableOpacity>
+                </View>
+                <TextInput
+                    placeholder="Search for a city"
+                    value={searchInput}
+                    onChangeText={(text) => setSearchInput(text)}
+                    style={styles.searchInput}
+                />
                 <View style={styles.inputContainerRegisterCityPIckerIn}>
                     {isCityPickerVisible && (
                         <FlatList
                             style={styles.flatlistCities}
-                            data={AllCities}
+                            data={searchInput ? AllCities.filter((item) =>
+                                item.city_name.toLowerCase().includes(searchInput.toLowerCase())
+                            ) : AllCities}
                             keyExtractor={(item) => item.city_name}
                             renderItem={({ item }) => (
                                 <TouchableOpacity
                                     onPress={() => handleCitySelect(item.city_name)}
                                     style={styles.pickerOption}
                                 >
-                                    <Text>{item.city_name},{item.street_name},{item.region_name}</Text>
+                                    <Text>{item.city_name}, {item.street_name}, {item.region_name}</Text>
+                                </TouchableOpacity>
+                            )}
+                        />
+                    )}
+                </View> <View style={styles.inputContainerRegisterCityPIcker}>
+                    <TouchableOpacity style={styles.pickerLine} onPress={toggleCityPicker}>
+                        <Text>{city ? city : 'Select an Address'}</Text>
+                    </TouchableOpacity>
+                </View>
+                <TextInput
+                    placeholder="Search for a city"
+                    value={searchInput}
+                    onChangeText={(text) => setSearchInput(text)}
+                    style={styles.searchInput}
+                />
+                <View style={styles.inputContainerRegisterCityPIckerIn}>
+                    {isCityPickerVisible && (
+                        <FlatList
+                            style={styles.flatlistCities}
+                            data={searchInput ? sortedCities : AllCities} // Use sortedCities when there is a search input, else use AllCities
+                            keyExtractor={(item) => item.city_name}
+                            renderItem={({ item }) => (
+                                <TouchableOpacity
+                                    onPress={() => handleCitySelect(item.city_name)}
+                                    style={styles.pickerOption}
+                                >
+                                    <Text>{item.city_name}, {item.street_name}, {item.region_name}</Text>
                                 </TouchableOpacity>
                             )}
                         />
                     )}
                 </View>
                 {err ? <Text style={styles.ErrorTxt}>*{err}</Text> : <Text></Text>}
+
                 <TouchableOpacity style={styles.buttonRegister} onPress={handleSubmit}>
                     <Text style={styles.buttonTextRegister}>Register</Text>
                 </TouchableOpacity>
