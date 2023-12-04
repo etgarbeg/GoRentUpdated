@@ -30,10 +30,9 @@ const LoginScreen = ({ navigation }) => {
             console.log("the user recieved in handel", user)
             if (user) {
                 setCurrentUser(user);
-                const other = users.filter(user => user.id !== currentUser.id)
-                setOtherUsers(other);
+                console.log("allUsers", users)
                 navigation.navigate('Profile');
-                console.log("current user", currentUser, "other users", otherUsers)
+
                 clearForm();
             } else {
                 setLoginTxtErr('Invalid email/password');
