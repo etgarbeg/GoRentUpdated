@@ -39,7 +39,7 @@ class UserModel {
         let user = { id, username, password, firstName, lastName, email, adress, creditCard, products, image }
 
         return await new DB().Insert('users', user);
-    }
+    } x
 
 
 
