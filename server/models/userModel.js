@@ -1,4 +1,5 @@
 const DB = require('../utils/db');
+const bcrypt = require('bcrypt');
 class UserModel {
 
 
@@ -46,7 +47,11 @@ class UserModel {
         console.log("in login userModal")
         const user = await new DB().FindOne("users", { email: email });
 
-        if (!user || !(await bcrypt.compare(password, user.password))) {
+        // if (!user || !(await bcrypt.compare(password, user.password))) {
+        //     return null;
+        // }
+
+        if (!user || user.password != password) {
             return null;
         }
 
