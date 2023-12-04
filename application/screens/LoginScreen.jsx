@@ -11,7 +11,7 @@ const LoginScreen = ({ navigation }) => {
 
 
 
-    const { users, currentUser, setCurrentUser, loginTxtErr, setLoginTxtErr, LoginUser, setEmail, email, setPassword, password } = useContext(UserContext);
+    const { otherUsers, users, currentUser, setCurrentUser, setOtherUsers, loginTxtErr, setLoginTxtErr, LoginUser, setEmail, email, setPassword, password } = useContext(UserContext);
 
 
     const clearForm = () => {
@@ -30,7 +30,10 @@ const LoginScreen = ({ navigation }) => {
             console.log("the user recieved in handel", user)
             if (user) {
                 setCurrentUser(user);
-                // navigation.navigate('Profile'); 
+                const other = users.filter(user => user.id !== currentUser.id)
+                setOtherUsers(other);
+                navigation.navigate('Profile');
+                console.log("current user", currentUser, "other users", otherUsers)
                 clearForm();
             } else {
                 setLoginTxtErr('Invalid email/password');

@@ -126,6 +126,15 @@ export default function UserContextProvider({ children }) {
             });
 
             console.log('Server Response:', response.data);
+            const user = response.data.user;
+
+            // Check if the user object exists
+            if (user) {
+                return user;  // Return the user object
+            } else {
+                console.error('Login failed. Please try again.');
+                throw new Error('Login failed');
+            }
         } catch (error) {
             console.error('Login failed. Please try again.'); // Simplified error message
             throw new Error('Login failed');
@@ -177,6 +186,8 @@ export default function UserContextProvider({ children }) {
         password,
         loginTxtErr,
         currentUser,
+        otherUsers,
+        setOtherUsers,
         setLoginTxtErr,
         LoginUser,
         setPassword,
