@@ -30,7 +30,8 @@ const LoginScreen = ({ navigation }) => {
             console.log("the user recieved in handel", user)
             if (user) {
                 setCurrentUser(user);
-                console.log("allUsers", users)
+                const otherUsers = users.filter(user => user.email !== currentUser.email);
+                console.log("other", otherUsers)
                 navigation.navigate('Profile');
 
                 clearForm();
