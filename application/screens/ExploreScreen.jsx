@@ -14,10 +14,8 @@ const ExploreScreen = ({ navigation }) => {
 
 
     const {
-        currentUser, users } = useContext(UserContext);
+        currentUser, otherUsers } = useContext(UserContext);
 
-    const other = users.filter(user => user.id !== currentUser.id)
-    const data = other; // Example data array, replace with your actual data
     return (
 
         <View style={styles.containerHome}>
