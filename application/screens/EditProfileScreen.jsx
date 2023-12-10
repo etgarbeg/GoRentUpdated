@@ -27,7 +27,7 @@ const EditProfileScreen = ({ navigation }) => {
 
 
         const ans = validateEmailEdit(editedEmail);
-        if (!ans) { setErrorsEdit("please assign correct email address") }
+        if (!ans && editedEmail != '') { setErrorsEdit("please assign correct email address") }
         else navigation.goBack();
     }
 
