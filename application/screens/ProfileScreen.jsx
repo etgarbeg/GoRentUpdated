@@ -67,7 +67,7 @@ const ProfileScreen = ({ navigation }) => {
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.actionButton}>
-                    <Text style={styles.actionButtonText}>Rent history</Text>
+                    <Text style={styles.actionButtonText}>Requests</Text>
                     <Image source={require('../assets/images/categories/misc.png')} style={styles.Imagsbox} />
                 </TouchableOpacity>
 
