@@ -50,14 +50,14 @@ const ItemScreen = ({ route }) => {
                 </View>
 
                 <View style={styles.itemInfoItem}>
-                    <Text style={styles.categorySmall}>{product.productCategory}</Text>
+                    <Text style={styles.categorySmall}>{product.category}</Text>
                     <Text style={styles.titleItem}>{product.productName}</Text>
 
 
 
 
                     <Text style={styles.singleLines}>____________</Text>
-                    <Text style={styles.valueItem}>{currentUser.products[0].productDetails}</Text>
+                    <Text style={styles.valueItem}>{product.productDetails}</Text>
                     <Text></Text>
 
                 </View>

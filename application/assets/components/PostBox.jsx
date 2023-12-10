@@ -22,8 +22,7 @@ const PostBox = ({ navigation, product }) => {
 
 
             <TouchableOpacity onPress={() =>
-                navigation.navigate('ItemScreen')
-            } style={styles.middleSection}
+                navigation.navigate('ItemScreen', { product })} style={styles.middleSection}
 
             >
 
