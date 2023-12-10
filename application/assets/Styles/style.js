@@ -1346,7 +1346,42 @@ const styles = StyleSheet.create({
     titlee: {
         textAlign: 'center', marginTop: -10,
         fontSize: 12
-    }
+    },
+    titleee: {
+        position: 'absolute',
+        top: 50,
+        textAlign: 'center', marginTop: 10,
+        fontSize: 15,
+
+    },
+    containerEditProfile: {
+        flex: 1,
+        backgroundColor: '#F8F8F8', // Light grey background color
+        padding: 20,
+    },
+    formSectionEditProfile: {
+        flex: 1,
+        justifyContent: 'center',
+    },
+    inputEditProfile: {
+        height: 40,
+        borderColor: '#DDD', // Light grey border color
+        borderWidth: 1,
+        marginBottom: 10,
+        paddingLeft: 10,
+        borderRadius: 30, // Rounded corners
+        backgroundColor: '#FFF', // White background color
+    },
+    buttonEditProfile: {
+        backgroundColor: '#4c4c4c',
+        padding: 10,
+        borderRadius: 50,
+        alignItems: 'center',
+    },
+    buttonTextEditProfile: {
+        color: '#fff',
+        fontWeight: 'bold',
+    },
 }
 );
 

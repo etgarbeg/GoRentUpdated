@@ -2,9 +2,12 @@ import React, { useContext, useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ImageBackground } from 'react-native';
 import { UserContext } from '../assets/UserContext/UserContext';
 import styles from '../assets/Styles/style';
-
+import EditProfileScreen from './EditProfileScreen';
 
 const ProfileScreen = ({ navigation }) => {
+    const handleEditProfile = () => {
+        navigation.navigate('EditProfile');
+    };
 
     const {
         currentUser, otherUsers, users, email } = useContext(UserContext);
@@ -43,9 +46,8 @@ const ProfileScreen = ({ navigation }) => {
 
                 <View style={styles.catalogSection}>
                     <TouchableOpacity
-                        onPress={() => {
-                            //navigation.navigate('EditProfile'); // Change this to your edit profile screen
-                        }}
+                        onPress={handleEditProfile}
+
                         style={styles.editButton}
                     >
                         <Image source={require('../assets/images/icon/forms/edit.png')} style={styles.editIcon} />

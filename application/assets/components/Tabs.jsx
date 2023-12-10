@@ -14,6 +14,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import OnBoardingScreen from '../../screens/OnBoarding';
+import EditProfileScreen from '../../screens/EditProfileScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -71,6 +72,7 @@ const MainNavigation = () => {
             <Stack.Screen name="SingleChat" component={SingleChat} options={{ headerShown: false }} />
             <Stack.Screen name="ExploreScreen" component={ExploreScreen} options={{ headerShown: false }} />
             <Stack.Screen name="Inbox" component={InboxScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="EditProfile" component={EditProfileScreen} options={{ headerShown: false }} />
 
 
             <Stack.Screen name="FullCatalog" component={FullCatalog} options={{ headerShown: false }} />

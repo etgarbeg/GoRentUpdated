@@ -48,7 +48,14 @@ export default function UserContextProvider({ children }) {
 
 
 
+    const validateEmailEdit = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return false;
 
+        }
+        else return true;
+    }
 
 
 
@@ -197,7 +204,8 @@ export default function UserContextProvider({ children }) {
         setPassword,
         setCurrentUser,
         setEmail,
-        validateFormRegister
+        validateFormRegister,
+        validateEmailEdit
     }
 
     return (
