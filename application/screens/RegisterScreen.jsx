@@ -137,7 +137,7 @@ const RegisterScreen = ({ navigation }) => {
 
                 <View style={styles.inputContainerRegisterCityPIcker}>
                     <TouchableOpacity style={styles.pickerLine} onPress={toggleCityPicker}>
-                        <Text>{city ? city : 'Select an Address'}</Text>
+                        <Text>Select an Address</Text>
                     </TouchableOpacity>
                 </View>
                 <TextInput
@@ -148,7 +148,7 @@ const RegisterScreen = ({ navigation }) => {
                 />
                 <View style={styles.inputContainerRegisterCityPIcker}>
                     <TouchableOpacity style={styles.pickerLine} onPress={toggleCityPicker}>
-                        <Text>{city ? city : 'Select an Address'}</Text>
+                        <Text>Select an Address</Text>
                     </TouchableOpacity>
                 </View>
                 <TextInput
