@@ -23,10 +23,16 @@ const EditProfileScreen = ({ navigation }) => {
 
         // Update the user data
         updateUserData(editedUser);
-        const ans = validateEmailEdit(editedEmail);
-        if (!ans) { setErrorsEdit("please assign correct email address") }
+        if (editedEmail == '') {
+            navigation.goBack();
+        }
+        else {
+            const ans = validateEmailEdit(editedEmail);
+            if (!ans) { setErrorsEdit("please assign correct email address") }
+        }
+
         // Navigate back to the profile screen
-        else navigation.goBack();
+
     };
 
     return (
