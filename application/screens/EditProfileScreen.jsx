@@ -62,7 +62,7 @@ const EditProfileScreen = ({ navigation }) => {
                     style={styles.inputEditProfile}
                     placeholder="Email"
                     value={editedUser.email}
-                    onChangeText={(text) => { setEditedUser({ ...editedUser, email: text }), setEditedEmail(editedUser.email) }}
+                    onChangeText={(text) => { setEditedUser({ ...editedUser, email: text }), setEditedEmail(text) }}
                 />
 
                 <Text>{errorsEdit}</Text>
