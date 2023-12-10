@@ -11,6 +11,8 @@ const RegisterScreen = ({ navigation }) => {
     const [selectedCity, setSelectedCity] = useState('');
     const [searchInput, setSearchInput] = useState('');
 
+    const [sortedCities, setSortedCities] = useState('');
+
     const {
         firstName,
         lastName,
