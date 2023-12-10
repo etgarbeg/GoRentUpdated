@@ -41,14 +41,14 @@ const PostBox = ({ navigation, product }) => {
 
                 </View>
 
-
-                <TouchableOpacity onPress={() => {
-                    navigation.navigate('ItemScreen')
-                }} style={styles.bottomSection} activeOpacity={0.5}>
-
-
-
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('ItemScreen', { product })}
+                    style={styles.bottomSection}
+                    activeOpacity={0.5}
+                >
+                    {/* Your TouchableOpacity content */}
                 </TouchableOpacity>
+
 
             </View>
         </View >

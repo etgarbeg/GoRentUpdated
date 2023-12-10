@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import styles from '../assets/Styles/style';
-import { Icon } from '@expo/vector-icons';
+
 import { UserContext } from '../assets/UserContext/UserContext';
 import { useContext } from 'react';
 
 
 
-const ItemScreen = ({ navigation }) => {
+
+const ItemScreen = ({ route }) => {
+    const { product } = route.params;
+
 
     const [isLiked, setIsLiked] = useState(false);
     const [isRented, setIsRented] = useState(false);
@@ -47,8 +50,8 @@ const ItemScreen = ({ navigation }) => {
                 </View>
 
                 <View style={styles.itemInfoItem}>
-                    <Text style={styles.categorySmall}>{currentUser.products[0].category}</Text>
-                    <Text style={styles.titleItem}>{currentUser.products[0].productName}</Text>
+                    <Text style={styles.categorySmall}>{product.productCategory}</Text>
+                    <Text style={styles.titleItem}>{product.productName}</Text>
 
 
 

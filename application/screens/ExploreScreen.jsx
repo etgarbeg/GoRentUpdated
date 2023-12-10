@@ -33,12 +33,12 @@ const ExploreScreen = ({ navigation }) => {
 
                 </View>
 
-
-                <View style={styles.containerAllFavor} >
+                <View style={styles.containerAllFavor}>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                        {data.map((user, userIndex) => (
+                        {otherUsers.map((user, userIndex) => (
                             <View key={userIndex} style={styles.sectionContainer}>
-                                {user.products.map((item, index) => (
+                                {/* Check if user.products exists and is an array before mapping */}
+                                {Array.isArray(user.products) && user.products.map((item, index) => (
                                     <View key={index} style={styles.itemContainer}>
                                         <PostBox navigation={navigation} product={item} />
                                     </View>
@@ -46,11 +46,11 @@ const ExploreScreen = ({ navigation }) => {
                             </View>
                         ))}
                     </ScrollView>
-
-
-
                 </View>
-            </View >
+
+
+
+            </View>
 
         </View >
 
