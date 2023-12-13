@@ -49,6 +49,9 @@ const RegisterScreen = ({ navigation }) => {
             clearForm();
             navigation.navigate('Login');
         }
+        else {
+
+        }
     };
 
     const handleCitySelect = (cityName) => {
@@ -133,8 +136,18 @@ const RegisterScreen = ({ navigation }) => {
                         placeholderTextColor="#555" value={Validpassword}
                         onChangeText={setValidPassword} />
                 </View>
+                <View style={styles.inputContainerRegister}>
 
+                    <TextInput style={styles.inputRegister} secureTextEntry={true} placeholder="City"
+                        placeholderTextColor="#555" value={city}
+                        onChangeText={setCity} />
+                </View>
 
+                <View style={styles}>
+
+                    <Text style={styles.inputRegister}>
+                        {err}</Text>
+                </View>
 
 
                 <TouchableOpacity style={styles.buttonRegister} onPress={handleSubmit}>
