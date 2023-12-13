@@ -46,6 +46,7 @@ const RegisterScreen = ({ navigation }) => {
         setErrors(validateFormRegister(firstName, lastName, username, email, password, Validpassword, country, city));
 
         if (err === 'completed') {
+            setErrors('')
             clearForm();
             navigation.navigate('Login');
         }
@@ -138,7 +139,13 @@ const RegisterScreen = ({ navigation }) => {
                 </View>
                 <View style={styles.inputContainerRegister}>
 
-                    <TextInput style={styles.inputRegister} secureTextEntry={true} placeholder="City"
+                    <TextInput style={styles.inputRegister} secureTextEntry={true} placeholder="country"
+                        placeholderTextColor="#555" value={country}
+                        onChangeText={setCountry} />
+                </View>
+                <View style={styles.inputContainerRegister}>
+
+                    <TextInput style={styles.inputRegister} secureTextEntry={true} placeholder="city"
                         placeholderTextColor="#555" value={city}
                         onChangeText={setCity} />
                 </View>
