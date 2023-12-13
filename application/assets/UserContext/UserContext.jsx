@@ -68,7 +68,9 @@ export default function UserContextProvider({ children }) {
         console.log(firstName, lastName, username, email, password, Validpassword, country, city)
         const StringRegex = /^[a-zA-Z0-9]/;
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (firstName == '' || lastName == '' || username == '' || email == '' || password == '' || country == '' || city == '') {
+        if (!firstName ||
+            !lastName || !username || !email || !password ||
+            !country || !city) {
             return 'missing details'
         }
 
@@ -91,7 +93,7 @@ export default function UserContextProvider({ children }) {
 
         // Validate username using regex
 
-        else if (!username || !StringRegex.test(username)) {
+        else if (!StringRegex.test(username)) {
             return 'Username is not Valid';
         }
         else if (!StringRegex.test(password)) {
@@ -200,6 +202,14 @@ export default function UserContextProvider({ children }) {
         loginTxtErr,
         currentUser,
         otherUsers,
+        firstName,
+        lastName,
+        email,
+        password,
+        username,
+        country,
+        city,
+
         setOtherUsers,
         setLoginTxtErr,
         LoginUser,
@@ -207,7 +217,9 @@ export default function UserContextProvider({ children }) {
         setCurrentUser,
         setEmail,
         validateFormRegister,
-        validateEmailEdit
+        validateEmailEdit,
+        setCity,
+        setCountry
     }
 
     return (

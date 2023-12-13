@@ -7,11 +7,7 @@ const RegisterScreen = ({ navigation }) => {
     const [err, setErrors] = useState('');
     const [Validpassword, setValidPassword] = useState('');
     const [AllCities, setAllCities] = useState([{}]);
-    const [isCityPickerVisible, setCityPickerVisible] = useState(false);
-    const [selectedCity, setSelectedCity] = useState('');
-    const [searchInput, setSearchInput] = useState('');
 
-    const [sortedCities, setSortedCities] = useState('');
 
     const {
         firstName,
@@ -55,14 +51,7 @@ const RegisterScreen = ({ navigation }) => {
         }
     };
 
-    const handleCitySelect = (cityName) => {
-        setSelectedCity(cityName);
-        toggleCityPicker();
-    };
 
-    const toggleCityPicker = () => {
-        setCityPickerVisible(!isCityPickerVisible);
-    };
 
     useEffect(() => {
         fetch("https://data.gov.il/api/3/action/datastore_search?resource_id=1b14e41c-85b3-4c21-bdce-9fe48185ffca")
@@ -139,13 +128,13 @@ const RegisterScreen = ({ navigation }) => {
                 </View>
                 <View style={styles.inputContainerRegister}>
 
-                    <TextInput style={styles.inputRegister} secureTextEntry={true} placeholder="country"
+                    <TextInput style={styles.inputRegister} placeholder="country"
                         placeholderTextColor="#555" value={country}
                         onChangeText={setCountry} />
                 </View>
                 <View style={styles.inputContainerRegister}>
 
-                    <TextInput style={styles.inputRegister} secureTextEntry={true} placeholder="city"
+                    <TextInput style={styles.inputRegister} placeholder="city"
                         placeholderTextColor="#555" value={city}
                         onChangeText={setCity} />
                 </View>
