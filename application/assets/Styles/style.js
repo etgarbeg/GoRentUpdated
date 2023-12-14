@@ -219,8 +219,9 @@ const styles = StyleSheet.create({
 
 
     postImage: {
-        height: 5,
-        width: 5
+        resizeMode: 'cover',
+
+
     },
     //icon
     heartIconContainer: {
