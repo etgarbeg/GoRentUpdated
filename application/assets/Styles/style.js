@@ -223,6 +223,14 @@ const styles = StyleSheet.create({
 
 
     },
+
+    squareImage: {
+
+        width: 100,  // Adjust the width as needed
+        height: 100, // Make the height the same as the width to create a square
+        borderRadius: 8, // Optional: Add borderRadius for rounded corners
+    },
+
     //icon
     heartIconContainer: {
         position: 'absolute',
