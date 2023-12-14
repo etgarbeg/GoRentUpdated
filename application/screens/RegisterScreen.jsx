@@ -39,10 +39,15 @@ const RegisterScreen = ({ navigation }) => {
     };
 
     const handleSubmit = () => {
-        setErrors(validateFormRegister(firstName, lastName, username, email, password, Validpassword, country, city));
 
-        if (err === 'completed') {
+
+
+
+        const ans = validateFormRegister(firstName, lastName, username, email, password, Validpassword, country, city);
+        console.log(ans);
+        if (err == '') {
             setErrors('')
+            alert("you need to log in")
             clearForm();
             navigation.navigate('Login');
         }

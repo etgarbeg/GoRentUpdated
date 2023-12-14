@@ -117,7 +117,7 @@ export default function UserContextProvider({ children }) {
         }
 
         else
-            return 'complited'
+            return ''
 
     };
 
@@ -213,6 +213,9 @@ export default function UserContextProvider({ children }) {
         setOtherUsers,
         setLoginTxtErr,
         LoginUser,
+        setFirstName,
+        setLastName,
+        setUsername,
         setPassword,
         setCurrentUser,
         setEmail,
