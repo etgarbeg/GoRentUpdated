@@ -28,7 +28,7 @@ const PostBox = ({ navigation, product }) => {
 
 
 
-                <Image style={styles.squareImage} source={{ uri: product.productImage }} />
+                <Image style={styles.squareImage} source={{ uri: product.productImage }} onError={(error) => console.error("Image error:", error)} />
             </TouchableOpacity>
             <View style={[styles.ShadowContainer, styles.conatinerBoxRowB]}>
                 <View style={styles.container5}>

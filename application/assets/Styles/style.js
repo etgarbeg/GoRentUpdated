@@ -478,6 +478,7 @@ const styles = StyleSheet.create({
         borderColor: 'rgba(0,0,0,0.2)',
         borderRadius: 30,
         padding: 20,
+
         backgroundColor: 'white'
     },
     container5: {
@@ -1390,7 +1391,7 @@ const styles = StyleSheet.create({
     buttonTextEditProfile: {
         color: '#fff',
         fontWeight: 'bold',
-    },
+    }
 }
 );
 
