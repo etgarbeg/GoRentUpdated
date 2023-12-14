@@ -45,6 +45,7 @@ const RegisterScreen = ({ navigation }) => {
 
         const ans = validateFormRegister(firstName, lastName, username, email, password, Validpassword, country, city);
         console.log(ans);
+        setErrors(ans);
         if (err == '') {
             setErrors('')
             alert("you need to log in")
