@@ -18,13 +18,13 @@ userRouter.get('/', async (req, res) => {
 userRouter.post('/register', UploadImage, async (req, res) => {
     try {
         //create user
-        let { username, password, firstName, lastName, email, adress, creditCard, products } = req.body;
+        let { id, username, password, firstName, lastName, email, country, city } = req.body;
         //save image
         let { cloudinaryRes } = req;
         console.log("2");
         console.log(cloudinaryRes);
         let imageUrl = cloudinaryRes != undefined ? cloudinaryRes.secure_url : '';
-        let user = await UserModel.Register(username, password, firstName, lastName, email, adress, creditCard, products, imageUrl);
+        let user = await UserModel.Register(username, password, firstName, lastName, email, country, city, imageUrl);
         res.status(201).json({ user });
     }
     catch (error) {

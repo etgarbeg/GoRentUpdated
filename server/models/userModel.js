@@ -33,10 +33,10 @@ class UserModel {
     }
     //functions 
 
-    static async Register(id, username, password, firstName, lastName, email, adress, creditCard, products, image)//all props of register
+    static async Register(username, password, firstName, lastName, email, country, city)//all props of register
     {
 
-        let user = { id, username, password, firstName, lastName, email, adress, creditCard, products, image }
+        let user = { username, password, firstName, lastName, email, country, city }
 
         return await new DB().Insert('users', user);
     } x

@@ -63,9 +63,9 @@ export default function UserContextProvider({ children }) {
 
     //formValidTION
 
-    const validateFormRegister = (firstName, lastName, username, email, password, Validpassword, country, city) => {
+    const validateFormRegister = (username, password, firstName, lastName, email, country, city, Validpassword) => {
 
-        console.log(firstName, lastName, username, email, password, Validpassword, country, city)
+        console.log(username, password, firstName, lastName, email, country, city)
         const StringRegex = /^[a-zA-Z0-9]/;
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!firstName ||
@@ -117,7 +117,7 @@ export default function UserContextProvider({ children }) {
         }
 
         else
-            return ''
+            return 'complited'
 
     };
 
@@ -180,14 +180,14 @@ export default function UserContextProvider({ children }) {
     // };
 
 
-    const RegisterUser = async (user) => {
+    const RegisterUser = async (username, password, firstName, lastName, email, country, city) => {
         let result = await fetch(`${API_BASE_URL}/register`,
             {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(user)
+                body: JSON.stringify(username, password, firstName, lastName, email, country, city)
             });
 
         let data = await result.json();
@@ -222,7 +222,9 @@ export default function UserContextProvider({ children }) {
         validateFormRegister,
         validateEmailEdit,
         setCity,
-        setCountry
+        setCountry,
+        RegisterUser,
+
     }
 
     return (

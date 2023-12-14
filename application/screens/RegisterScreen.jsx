@@ -7,7 +7,7 @@ const RegisterScreen = ({ navigation }) => {
     const [err, setErrors] = useState('');
     const [Validpassword, setValidPassword] = useState('');
     const [AllCities, setAllCities] = useState([{}]);
-
+    const [id, setId] = useState(3);
 
     const {
         firstName,
@@ -24,7 +24,8 @@ const RegisterScreen = ({ navigation }) => {
         setCountry,
         setCity,
         setPassword,
-        validateFormRegister
+        validateFormRegister,
+        RegisterUser
     } = useContext(UserContext);
 
     const clearForm = () => {
@@ -43,18 +44,20 @@ const RegisterScreen = ({ navigation }) => {
 
 
 
-        const ans = validateFormRegister(firstName, lastName, username, email, password, Validpassword, country, city);
-        console.log(ans);
+        const ans = validateFormRegister(username, password, firstName, lastName, email, country, city, Validpassword);
         setErrors(ans);
-        if (err == '') {
-            setErrors('')
+        setId(id + 1);
+        if (ans == 'complited') {
+
+            RegisterUser(username, password, firstName, lastName, email, country, city);
+            setErrors('');
             alert("you need to log in")
             clearForm();
             navigation.navigate('Login');
         }
-        else {
+        console.log("err", err);
+        console.log("ans", ans);
 
-        }
     };
 
 
