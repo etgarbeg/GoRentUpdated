@@ -18,7 +18,7 @@ userRouter.get('/', async (req, res) => {
 userRouter.post('/register', UploadImage, async (req, res) => {
     try {
         //create user
-        let { id, username, password, firstName, lastName, email, country, city } = req.body;
+        let { username, password, firstName, lastName, email, country, city } = req.body;
         //save image
         let { cloudinaryRes } = req;
         console.log("2");

@@ -35,7 +35,7 @@ class UserModel {
 
     static async Register(username, password, firstName, lastName, email, country, city)//all props of register
     {
-
+        console.log("hereeeee")
         let user = { username, password, firstName, lastName, email, country, city }
 
         return await new DB().Insert('users', user);
