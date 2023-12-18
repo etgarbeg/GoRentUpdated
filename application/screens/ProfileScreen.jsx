@@ -38,10 +38,10 @@ const ProfileScreen = ({ navigation }) => {
                 <View>
 
 
-                    <Text style={styles.userDetailsText}>Name          {currentUser.lastName} </Text>
-                    <Text style={styles.userDetailsText}>Email           {currentUser.email}</Text>
-                    <Text style={styles.userDetailsText}>City            {currentUser.adress.city} </Text>
-                    <Text style={styles.userDetailsText}>Payment        {currentUser.crreditCard === null ? <Text>(N-Verified)</Text> : <Text>(Verified)</Text>}  </Text>
+                    <Text style={styles.userDetailsText}>Name       {currentUser.firstName} {currentUser.lastName} </Text>
+                    <Text style={styles.userDetailsText}>Email        {currentUser.email}</Text>
+                    <Text style={styles.userDetailsText}>City           {currentUser.adress.city} </Text>
+                    <Text style={styles.userDetailsText}>Payment  {currentUser.crreditCard === null ? <Text>(N-Verified)</Text> : <Text>(Verified)</Text>}  </Text>
                 </View>
 
                 <View style={styles.catalogSection}>

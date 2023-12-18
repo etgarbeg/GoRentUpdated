@@ -17,13 +17,15 @@ const ItemScreen = ({ route }) => {
 
 
     const {
-        currentUser } = useContext(UserContext);
-    const handleRentPress = () => {
-        setIsRented(!isRented);
+        currentUser, rentProduct } = useContext(UserContext);
 
-        if (isRented) alert('removed from cart');
-        else { isRented == false; alert('added to cart'); }
+
+    const handleRentPress = () => {
+        const message = rentProduct({ product, currentUser, setIsRented });
+        alert(message);
+        alert(JSON.stringify(currentUser.requested));
     };
+
 
 
 
@@ -40,13 +42,19 @@ const ItemScreen = ({ route }) => {
         <View style={styles.containerItem}>
             <View style={styles.conatinerInner1Item} >
 
-
-                <Image style={styles.SingleImageProductScreenItem} source={require('../assets/images/exmpleProducts/books/book1.jpg')} />
+                <Image style={styles.SingleImageProductScreenItem} source={{ uri: product.productImage }} onError={(error) => console.error("Image error:", error)} />
                 <View style={styles.container6}>
 
                     <TouchableOpacity style={styles.reviewButtonItemClicked} onPress={writeReview}>
                         <Text style={styles.reviewButtonTextItemClicked}>review</Text>
                     </TouchableOpacity>
+                </View>
+
+                <View style={styles.container6}>
+
+
+
+
                 </View>
 
                 <View style={styles.itemInfoItem}>

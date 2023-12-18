@@ -195,6 +195,54 @@ export default function UserContextProvider({ children }) {
 
     }
 
+
+
+    const rentProduct = ({ product, currentUser, setIsRented }) => {
+        // Check if the product is already in the cart
+        const isProductInCart = currentUser.requested.includes(product);
+
+        if (isProductInCart) {
+            // If the product is in the cart, remove it
+            currentUser.requested = currentUser.requested.filter(item => item !== product);
+            setIsRented(false);
+            return 'Product removed from the cart';
+        } else {
+            // If the product is not in the cart, add it
+            currentUser.requested.push(product);
+            setIsRented(true);
+            return 'Product added to the cart';
+        }
+    };
+
+
+
+
+    const UnRentProduct = ({ product }) => {
+        const stack = currentUser.requested;
+        const temp = [];
+        alert("entered")
+
+        while (stack.length !== 0) {
+            if (stack[stack.length - 1] !== product) {
+                temp.push(stack.pop());
+            } else {
+                // If the top element matches the product, remove it
+                stack.pop();
+                alert("Item removed from the list");
+
+            }
+        }
+
+
+        // Restore the original order of elements
+        while (temp.length !== 0) {
+            stack.push(temp.pop());
+        }
+        alert((JSON.stringify(stack)));
+    };
+
+
+
     const value = {
         email,
         users,
@@ -224,6 +272,7 @@ export default function UserContextProvider({ children }) {
         setCity,
         setCountry,
         RegisterUser,
+        rentProduct
 
     }
 
