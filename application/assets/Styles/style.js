@@ -774,9 +774,27 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start', padding: 10, borderRadius: 10,
         backgroundColor: 'white'
     },
+    actionButtonWide: {
+        width: '50%',
+        height: 80,
+        backgroundColor: '#EEE',
+
+        justifyContent: 'center', padding: 10, borderRadius: 10,
+        backgroundColor: 'white'
+    },
+    buttomMyRequest: {
+        width: '100%',
+        textAlign: 'center',
+        justifyContent: 'center',
+        margin: 15,
+
+
+    },
+
     actionButtonText: {
         fontSize: 20,
         fontWeight: 400,
+
 
     },
 
@@ -1391,7 +1409,42 @@ const styles = StyleSheet.create({
     buttonTextEditProfile: {
         color: '#fff',
         fontWeight: 'bold',
-    }
+    },
+    buttomMyRequest: {
+        width: '80%',
+        height: 60,
+        backgroundColor: '#EEE',
+        alignItems: 'center',
+        justifyContent: 'space-around', padding: 10, borderRadius: 10,
+        backgroundColor: 'rgba(06,100,100,0.1)',
+        marginLeft: 35, flexDirection: 'row',
+
+
+
+    },
+    actionButtonWide: {
+        flexDirection: 'row', // Align items in a row
+        alignItems: 'center', // Center items vertically
+        // Other styles for the button
+
+    },
+    actionButtonText: {
+        // Styles for the text
+    },
+    notificationLogoGreen: {
+        width: 10, // Adjust the width
+        height: 10, // Adjust the height
+        backgroundColor: 'rgba(200, 200, 200, 1)',
+        marginRight: 5, // Adjust spacing
+        borderRadius: 5, // Adjust border radius for a circular shape
+    },
+    notificationLogoGrey: {
+        width: 10, // Adjust the width
+        height: 10, // Adjust the height
+        backgroundColor: 'grey', // Grey color for notification when there are no requests
+        marginRight: 5, // Adjust spacing
+        borderRadius: 5, // Adjust border radius for a circular shape
+    },
 }
 );
 

@@ -32,7 +32,7 @@ const LoginScreen = ({ navigation }) => {
                 setCurrentUser(user);
 
                 console.log("other", otherUsers)
-                navigation.navigate('Profile');
+                navigation.replace('Profile');
 
                 clearForm();
             } else {
