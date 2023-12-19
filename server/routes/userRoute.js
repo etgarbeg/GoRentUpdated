@@ -49,6 +49,28 @@ userRouter.post('/login', async (req, res) => {
     }
 });
 
+userRouter.post('/rent', async (req, res) => {
+    try {
+        const { userId, product } = req.body;
+
+        // Find the user by userId
+        const user = await UserModel.FindById(userId);
+
+        if (!user) {
+            return res.status(404).json({ msg: 'User not found' });
+        }
+
+        // Call the rentProduct function from your user context
+        const result = rentProduct({ product, currentUser: user, setIsRented: true });
+
+        return res.status(200).json({ msg: result });
+    } catch (error) {
+        console.error('Error during rent operation:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
 
 
 ///messeges between two users 
