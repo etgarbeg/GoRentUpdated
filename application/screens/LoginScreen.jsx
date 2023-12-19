@@ -36,10 +36,11 @@ const LoginScreen = ({ navigation }) => {
 
                 clearForm();
             } else {
-                setLoginTxtErr('Invalid email/password');
+
             }
         } catch (error) {
             console.error('Error during login:', error);
+            setLoginTxtErr('Invalid email/password');
         }
     };
 
