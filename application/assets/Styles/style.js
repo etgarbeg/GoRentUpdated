@@ -769,18 +769,19 @@ const styles = StyleSheet.create({
     actionButton: {
         width: '48%',
         height: 120,
-        backgroundColor: '#EEE',
         alignItems: 'left',
         justifyContent: 'flex-start', padding: 10, borderRadius: 10,
         backgroundColor: 'white'
     },
     actionButtonWide: {
-        width: '50%',
-        height: 80,
-        backgroundColor: '#EEE',
 
-        justifyContent: 'center', padding: 10, borderRadius: 10,
-        backgroundColor: 'white'
+        height: 30,
+        width: 30,
+        paddingRight: 5,
+        backgroundColor: '#EEE',
+        alignItems: 'center',
+        justifyContent: 'center', padding: 10, borderRadius: 50,
+
     },
     buttomMyRequest: {
         width: '100%',
@@ -1411,23 +1412,18 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     buttomMyRequest: {
-        width: '80%',
+        width: '90%',
         height: 60,
-        backgroundColor: '#EEE',
+        backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'space-around', padding: 10, borderRadius: 10,
-        backgroundColor: 'rgba(06,100,100,0.1)',
-        marginLeft: 35, flexDirection: 'row',
+
+        marginLeft: 20, flexDirection: 'row',
 
 
 
     },
-    actionButtonWide: {
-        flexDirection: 'row', // Align items in a row
-        alignItems: 'center', // Center items vertically
-        // Other styles for the button
 
-    },
     actionButtonText: {
         // Styles for the text
     },
