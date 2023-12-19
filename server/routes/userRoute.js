@@ -61,7 +61,7 @@ userRouter.post('/rent', async (req, res) => {
         }
 
         // Call the rentProduct function from your user context
-        const result = rentProduct({ product, currentUser: user, setIsRented: true });
+        const result = rentProduct({ product, currentUser: user, setIsRented });
 
         return res.status(200).json({ msg: result });
     } catch (error) {
