@@ -17,16 +17,25 @@ const ItemScreen = ({ route }) => {
 
 
     const {
-        currentUser, sendRentRequest, users, findUserByProduct } = useContext(UserContext);
+        currentUser, sendRentRequest, users, findUserByOwnerId } = useContext(UserContext);
 
     const handleRentPress = () => {
-        const userWithProduct = findUserByProduct(allUsers, product);
+        if (!isAvToRented) {
+            alert('Product is not available for rent');
+            return;
+        }
 
-        const message = sendRentRequest({ currentUser, otherUser, product });
+        const userWithProduct = findUserByOwnerId(users, product.ownerId);
+
+        if (!userWithProduct) {
+            alert('Second user not found');
+            return;
+        }
+
+        const message = sendRentRequest({ currentUser, userWithProduct, product });
         alert(message);
         alert(JSON.stringify(currentUser.requested));
     };
-
 
 
 

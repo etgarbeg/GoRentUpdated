@@ -48,23 +48,20 @@ userRouter.post('/login', async (req, res) => {
         res.status(500).json({ error: error.message }); // Send a more descriptive error message to the client
     }
 });
-
 userRouter.post('/sendRentRequest', async (req, res) => {
-
-
-    console.log("entring UserRoute")
+    console.log("entering UserRoute")
     try {
-        const { currentUser, secondUser, product } = req.body;
+        const { currentUser, userWithProduct, product } = req.body;
 
         // Find the second user by ID
-        const foundSecondUser = await UserModel.FindById(secondUser._id);
+        // (You might want to add a proper user search here)
 
-        if (!foundSecondUser) {
+        if (!userWithProduct) {
             return res.status(404).json({ msg: 'Second user not found' });
         }
 
         // Call the sendRentRequest function from your user model
-        const result = await UserModel.sendRentRequest(currentUser, foundSecondUser, product);
+        const result = await UserModel.sendRentRequest(currentUser, userWithProduct, product);
 
         return res.status(200).json({ msg: result });
     } catch (error) {

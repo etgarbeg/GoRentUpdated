@@ -174,19 +174,15 @@ export default function UserContextProvider({ children }) {
 
     }
 
-    const findUserBySimilarProduct = (users, product) => {
+    const findUserByOwnerId = (users, ownerId) => {
         for (const user of users) {
-            if (user.products.some(userProduct =>
-                userProduct.productName === product.productName &&
-                userProduct.productDetails === product.productDetails &&
-                userProduct.category === product.category
-                // Add more conditions if needed
-            )) {
+            if (user.products.some(userProduct => userProduct.ownerId === ownerId)) {
                 return user;
             }
         }
         return null; // User not found
     };
+
 
     const sendRentRequest = async ({ currentUser, secondUser, product }) => {
         try {
@@ -242,7 +238,7 @@ export default function UserContextProvider({ children }) {
         setCity,
         setCountry,
         RegisterUser,
-        sendRentRequest, findUserByProduct
+        sendRentRequest, findUserByOwnerId
 
     }
 
