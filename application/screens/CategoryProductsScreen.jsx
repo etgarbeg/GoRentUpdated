@@ -3,8 +3,6 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import PostBox from '../assets/components/PostBox';
 import { UserContext } from '../assets/UserContext/UserContext';
 import styles from '../assets/Styles/style';
-
-
 const CategoryProductsScreen = ({ route, navigation }) => {
     const { otherUsers } = useContext(UserContext);
     const { category } = route.params;
@@ -33,26 +31,26 @@ const CategoryProductsScreen = ({ route, navigation }) => {
     const thirdSection = shuffledProducts.slice(sectionSize * 2);
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>{category} Collection</Text>
-            <ScrollView>
-                <View style={styles.sectionContainer}>
+        <View style={styles.categoryproductContainer}>
+            <Text style={styles.categoryproductTitle}>{category} Collection</Text>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                <View style={styles.categoryproductSectionContainer}>
                     {firstSection.map((product, index) => (
-                        <View key={index} style={styles.itemContainer}>
+                        <View key={index} style={styles.categoryproductItemContainer}>
                             <PostBox navigation={navigation} product={product} />
                         </View>
                     ))}
                 </View>
-                <View style={styles.sectionContainer}>
+                <View style={styles.categoryproductSectionContainer}>
                     {secondSection.map((product, index) => (
-                        <View key={index} style={styles.itemContainer}>
+                        <View key={index} style={styles.categoryproductItemContainer}>
                             <PostBox navigation={navigation} product={product} />
                         </View>
                     ))}
                 </View>
-                <View style={styles.sectionContainer}>
+                <View style={styles.categoryproductSectionContainer}>
                     {thirdSection.map((product, index) => (
-                        <View key={index} style={styles.itemContainer}>
+                        <View key={index} style={styles.categoryproductItemContainer}>
                             <PostBox navigation={navigation} product={product} />
                         </View>
                     ))}

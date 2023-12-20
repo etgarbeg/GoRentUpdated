@@ -1448,16 +1448,14 @@ const styles = StyleSheet.create({
     },
     categoryproductTitle: {
         fontSize: 24,
+        marginTop: 50,
         fontWeight: 'bold',
         marginBottom: 16,
     },
     categoryproductSectionContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginBottom: 16,
     },
     categoryproductItemContainer: {
-        flex: 1,
         marginRight: 8,
     },
 }
