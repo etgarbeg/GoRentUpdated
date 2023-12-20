@@ -49,23 +49,26 @@ userRouter.post('/login', async (req, res) => {
     }
 });
 
-userRouter.post('/rent', async (req, res) => {
+userRouter.post('/sendRentRequest', async (req, res) => {
+
+
+    console.log("entring UserRoute")
     try {
-        const { userId, product } = req.body;
+        const { currentUser, secondUser, product } = req.body;
 
-        // Find the user by userId
-        const user = await UserModel.FindById(userId);
+        // Find the second user by ID
+        const foundSecondUser = await UserModel.FindById(secondUser._id);
 
-        if (!user) {
-            return res.status(404).json({ msg: 'User not found' });
+        if (!foundSecondUser) {
+            return res.status(404).json({ msg: 'Second user not found' });
         }
 
-        // Call the rentProduct function from your user context
-        const result = await UserModel.rentProduct(user, currentUser._id, product._id);
+        // Call the sendRentRequest function from your user model
+        const result = await UserModel.sendRentRequest(currentUser, foundSecondUser, product);
 
-        return res.status(200).json({ msg: result.message, success: result.success });
+        return res.status(200).json({ msg: result });
     } catch (error) {
-        console.error('Error during rent operation:', error);
+        console.error('Error during sending rent request:', error);
         res.status(500).json({ error: error.message });
     }
 });

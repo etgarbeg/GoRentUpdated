@@ -175,23 +175,23 @@ export default function UserContextProvider({ children }) {
     }
 
 
-    const RentProduct = async (userId, product) => {
+    const sendRentRequest = async ({ currentUser, secondUser, product }) => {
         try {
-            const currentUser = await fetchCurrentUser(); // Fetch the current user (you need to implement this function)
 
-            const result = await fetch(`${API_BASE_URL}/rent`, {
+            console.log("entring usecontext")
+            const response = await fetch(`${API_BASE_URL}/sendRentRequest`, {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ userId: currentUser._id, product }),
+                body: JSON.stringify({ currentUser, secondUser, product }),
             });
 
-            const data = await result.json();
+            const data = await response.json();
             return data;
         } catch (error) {
-            console.error('Error during rent operation:', error);
-            throw new Error('Rent failed');
+            console.error('Error during sending rent request:', error);
+            throw new Error('Rent request failed');
         }
     };
 

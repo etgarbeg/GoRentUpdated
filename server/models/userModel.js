@@ -55,53 +55,24 @@ class UserModel {
 
         return { user };
     }
-    static async rentProduct(currentUser, otherUserId, productId) {
+
+    static async sendRentRequest(currentUser, secondUser, product) {
+        console.log("entring usermodel")
         try {
+            const productToRequest = { ...product, requester: currentUser.email };
 
-            const user = await new DB().FindOne("users", { _id: currentUser._id });
+            // Add the product to the second user's requested items
+            secondUser.requested.push(productToRequest);
 
-            if (!user) {
-                return { success: false, message: 'User not found' };
-            }
+            // Save updated second user data to the database
+            await new DB().Update("users", { _id: secondUser._id }, secondUser);
 
-            const otherUser = await new DB().FindOne("users", { _id: otherUserId });
-
-            if (!otherUser) {
-                return { success: false, message: 'Other user not found' };
-            }
-
-            const product = await new DB().FindOne("products", { _id: productId });
-
-            if (!product) {
-                return { success: false, message: 'Product not found' };
-            }
-
-            // Check if the product is already rented
-            if (user.requested.some(item => item._id.toString() === productId)) {
-                return { success: false, message: 'Product is already in the requested items' };
-            }
-
-
-            user.requested.push(product);
-
-            // Save the updated current user data to the database
-            await new DB().Update("users", { _id: currentUser._id }, user);
-
-            // Add the product to the other user's cart
-            otherUser.cart.push(product);
-
-            // Save the updated other user data to the database
-            await new DB().Update("users", { _id: otherUserId }, otherUser);
-
-            return { success: true, message: 'Product rented successfully' };
+            return `${currentUser.email} sent a rent request for ${product.productName} to ${secondUser.email}.`;
         } catch (error) {
-            console.error('Error during rent operation:', error);
-            return { success: false, message: 'An error occurred during the rent operation' };
+            console.error('Error during sending rent request:', error);
+            throw new Error('Rent request failed');
         }
     }
-
-
-
 
 
 
