@@ -55,9 +55,8 @@ class UserModel {
 
         return { user };
     }
-
     static async sendRentRequest(currentUser, userWithProduct, product) {
-        console.log("entring usermodel")
+        console.log("entering usermodel");
         try {
             const productToRequest = { ...product, requester: currentUser.email };
 
@@ -65,7 +64,7 @@ class UserModel {
             userWithProduct.requested.push(productToRequest);
 
             // Save updated second user data to the database
-            await new DB().Update("users", { _id: userWithProduct._id }, secondUser);
+            await new DB().Update("users", { _id: userWithProduct._id }, userWithProduct);
 
             return `${currentUser.email} sent a rent request for ${product.productName} to ${userWithProduct.email}.`;
         } catch (error) {
@@ -73,7 +72,6 @@ class UserModel {
             throw new Error('Rent request failed');
         }
     }
-
 
 
     static async FindAll() {

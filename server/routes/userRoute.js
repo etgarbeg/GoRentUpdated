@@ -53,13 +53,6 @@ userRouter.post('/sendRentRequest', async (req, res) => {
     try {
         const { currentUser, userWithProduct, product } = req.body;
 
-        // Find the second user by ID
-        // (You might want to add a proper user search here)
-
-        if (!userWithProduct) {
-            return res.status(404).json({ msg: 'Second user not found' });
-        }
-
         // Call the sendRentRequest function from your user model
         const result = await UserModel.sendRentRequest(currentUser, userWithProduct, product);
 
@@ -68,6 +61,7 @@ userRouter.post('/sendRentRequest', async (req, res) => {
         console.error('Error during sending rent request:', error);
         res.status(500).json({ error: error.message });
     }
+
 });
 
 
