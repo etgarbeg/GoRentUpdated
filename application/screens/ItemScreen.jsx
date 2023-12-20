@@ -13,15 +13,16 @@ const ItemScreen = ({ route }) => {
 
 
     const [isLiked, setIsLiked] = useState(false);
-    const [isRented, setIsRented] = useState(false);
+    const [isAvToRented, setisAvToRented] = useState(product.productAvaliable);
 
 
     const {
-        currentUser, rentProduct } = useContext(UserContext);
-
+        currentUser, sendRentRequest, users, findUserByProduct } = useContext(UserContext);
 
     const handleRentPress = () => {
-        const message = rent({ product, currentUser, setIsRented });
+        const userWithProduct = findUserByProduct(allUsers, product);
+
+        const message = sendRentRequest({ currentUser, otherUser, product });
         alert(message);
         alert(JSON.stringify(currentUser.requested));
     };
@@ -73,21 +74,21 @@ const ItemScreen = ({ route }) => {
 
             </View>
             {
-                isRented ? <View style={styles.container6}>
+                isAvToRented ? <View style={styles.container6}>
+
+                    <TouchableOpacity style={styles.rentButtonItem} onPress={handleRentPress}>
+                        <Text style={styles.rentButtonTextItem}>Rent</Text>
+                    </TouchableOpacity>
+                </View> : <View style={styles.container6}>
 
 
 
                     <TouchableOpacity style={styles.rentButtonItemClicked} onPress={handleRentPress}>
                         <Text style={styles.rentButtonTextItemClicked}>unRent</Text>
                     </TouchableOpacity>
-                </View> :
+                </View>
 
-                    <View style={styles.container6}>
 
-                        <TouchableOpacity style={styles.rentButtonItem} onPress={handleRentPress}>
-                            <Text style={styles.rentButtonTextItem}>Rent</Text>
-                        </TouchableOpacity>
-                    </View>
 
 
 

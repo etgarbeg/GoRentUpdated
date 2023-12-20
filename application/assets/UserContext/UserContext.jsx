@@ -174,6 +174,19 @@ export default function UserContextProvider({ children }) {
 
     }
 
+    const findUserBySimilarProduct = (users, product) => {
+        for (const user of users) {
+            if (user.products.some(userProduct =>
+                userProduct.productName === product.productName &&
+                userProduct.productDetails === product.productDetails &&
+                userProduct.category === product.category
+                // Add more conditions if needed
+            )) {
+                return user;
+            }
+        }
+        return null; // User not found
+    };
 
     const sendRentRequest = async ({ currentUser, secondUser, product }) => {
         try {
@@ -196,29 +209,7 @@ export default function UserContextProvider({ children }) {
     };
 
 
-    const UnRentProduct = ({ product }) => {
-        const stack = currentUser.requested;
-        const temp = [];
-        alert("entered")
 
-        while (stack.length !== 0) {
-            if (stack[stack.length - 1] !== product) {
-                temp.push(stack.pop());
-            } else {
-                // If the top element matches the product, remove it
-                stack.pop();
-                alert("Item removed from the list");
-
-            }
-        }
-
-
-        // Restore the original order of elements
-        while (temp.length !== 0) {
-            stack.push(temp.pop());
-        }
-        alert((JSON.stringify(stack)));
-    };
 
 
 
@@ -251,7 +242,7 @@ export default function UserContextProvider({ children }) {
         setCity,
         setCountry,
         RegisterUser,
-        sendRentRequest
+        sendRentRequest, findUserByProduct
 
     }
 
