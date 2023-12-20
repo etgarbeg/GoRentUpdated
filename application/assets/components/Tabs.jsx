@@ -15,7 +15,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import OnBoardingScreen from '../../screens/OnBoarding';
 import EditProfileScreen from '../../screens/EditProfileScreen';
-
+import CategoryProductsScreen from '../../screens/CategoryProductsScreen'
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -74,8 +74,10 @@ const MainNavigation = () => {
             <Stack.Screen name="Inbox" component={InboxScreen} options={{ headerShown: false }} />
             <Stack.Screen name="EditProfile" component={EditProfileScreen} options={{ headerShown: false }} />
 
+            <Stack.Screen name="CategoryProducts" component={CategoryProducts} options={{ headerShown: false }} />
 
             <Stack.Screen name="FullCatalog" component={FullCatalog} options={{ headerShown: false }} />
+
             <Stack.Screen name="ItemScreen" component={ItemScreen} options={{ headerShown: false }} />
         </Stack.Navigator>
     )

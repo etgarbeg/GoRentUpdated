@@ -27,14 +27,14 @@ const Categories = ({ navigation }) => {
 
 
                         key={index} style={styles.containerCatagoryBox}
-                        onPress={() => { navigation.navigate('FullCatalog') }}>
+                        onPress={() => { navigation.navigate('CategoryProducts', { category: category.name }) }}>
                         <Text style={styles.title1}>{category.name}</Text>
                         <Image style={styles.imageCtagory} source={images[index]} />
 
                     </TouchableOpacity>
                 ))}
             </ScrollView>
-        </View>
+        </View >
     );
 };
 
