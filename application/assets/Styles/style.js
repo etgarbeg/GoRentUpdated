@@ -1441,6 +1441,25 @@ const styles = StyleSheet.create({
         marginRight: 5, // Adjust spacing
         borderRadius: 5, // Adjust border radius for a circular shape
     },
+    categoryproductContainer: {
+        flex: 1,
+        padding: 16,
+        backgroundColor: '#f8f8f8',
+    },
+    categoryproductTitle: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 16,
+    },
+    categoryproductSectionContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 16,
+    },
+    categoryproductItemContainer: {
+        flex: 1,
+        marginRight: 8,
+    },
 }
 );
 
