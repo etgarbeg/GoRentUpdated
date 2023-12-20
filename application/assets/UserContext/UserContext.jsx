@@ -197,6 +197,7 @@ export default function UserContextProvider({ children }) {
             });
 
             const data = await response.json();
+            alert(data);
             return data;
         } catch (error) {
             console.error('Error during sending rent request:', error);
