@@ -32,8 +32,8 @@ const ItemScreen = ({ route }) => {
             return;
         }
 
-        const message = sendRentRequest({ currentUser, userWithProduct, product });
-        alert(message);
+        const message = sendRentRequest(currentUser, userWithProduct, { product });
+        alert("in item screen");
         alert(JSON.stringify(currentUser.requested));
     };
 
