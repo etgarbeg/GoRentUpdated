@@ -21,7 +21,7 @@ const ItemScreen = ({ route }) => {
 
 
     const handleRentPress = () => {
-        const message = rentProduct({ product, currentUser, setIsRented });
+        const message = rent({ product, currentUser, setIsRented });
         alert(message);
         alert(JSON.stringify(currentUser.requested));
     };

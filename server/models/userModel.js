@@ -47,9 +47,7 @@ class UserModel {
         console.log("in login userModal")
         const user = await new DB().FindOne("users", { email: email });
 
-        // if (!user || !(await bcrypt.compare(password, user.password))) {
-        //     return null;
-        // }
+
 
         if (!user || user.password != password) {
             return null;
@@ -57,24 +55,53 @@ class UserModel {
 
         return { user };
     }
+    static async rentProduct(currentUser, otherUserId, productId) {
+        try {
+
+            const user = await new DB().FindOne("users", { _id: currentUser._id });
+
+            if (!user) {
+                return { success: false, message: 'User not found' };
+            }
+
+            const otherUser = await new DB().FindOne("users", { _id: otherUserId });
+
+            if (!otherUser) {
+                return { success: false, message: 'Other user not found' };
+            }
+
+            const product = await new DB().FindOne("products", { _id: productId });
+
+            if (!product) {
+                return { success: false, message: 'Product not found' };
+            }
+
+            // Check if the product is already rented
+            if (user.requested.some(item => item._id.toString() === productId)) {
+                return { success: false, message: 'Product is already in the requested items' };
+            }
 
 
+            user.requested.push(product);
 
-    static async requestProduct(user1, user2, product) {
-        const productToRequest = { ...product, requester: user1.email };
+            // Save the updated current user data to the database
+            await new DB().Update("users", { _id: currentUser._id }, user);
 
-        // Add product to user1's cart (assuming 'cart' is an array in the user's properties)
-        user1.cart.push(productToRequest);
+            // Add the product to the other user's cart
+            otherUser.cart.push(product);
 
-        // Add product to user2's requested items (assuming 'requested' is an array in the user's properties)
-        user2.requested.push(productToRequest);
+            // Save the updated other user data to the database
+            await new DB().Update("users", { _id: otherUserId }, otherUser);
 
-        // Save updated user data to the database
-        await new DB().Update("users", { email: user1.email }, user1);
-        await new DB().Update("users", { email: user2.email }, user2);
-
-        return `${user1.email} requested ${product.productName} from ${user2.email}.`;
+            return { success: true, message: 'Product rented successfully' };
+        } catch (error) {
+            console.error('Error during rent operation:', error);
+            return { success: false, message: 'An error occurred during the rent operation' };
+        }
     }
+
+
+
 
 
 

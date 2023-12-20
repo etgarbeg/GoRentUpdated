@@ -61,16 +61,14 @@ userRouter.post('/rent', async (req, res) => {
         }
 
         // Call the rentProduct function from your user context
-        const result = rentProduct({ product, currentUser: user, setIsRented });
+        const result = await UserModel.rentProduct(user, currentUser._id, product._id);
 
-        return res.status(200).json({ msg: result });
+        return res.status(200).json({ msg: result.message, success: result.success });
     } catch (error) {
         console.error('Error during rent operation:', error);
         res.status(500).json({ error: error.message });
     }
 });
-
-
 
 
 ///messeges between two users 

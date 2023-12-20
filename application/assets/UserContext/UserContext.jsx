@@ -175,25 +175,25 @@ export default function UserContextProvider({ children }) {
     }
 
 
+    const RentProduct = async (userId, product) => {
+        try {
+            const currentUser = await fetchCurrentUser(); // Fetch the current user (you need to implement this function)
 
-    const rentProduct = ({ product, currentUser, setIsRented }) => {
-        // Check if the product is already in the cart
-        const isProductInCart = currentUser.requested.includes(product);
+            const result = await fetch(`${API_BASE_URL}/rent`, {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ userId: currentUser._id, product }),
+            });
 
-        if (isProductInCart) {
-            // If the product is in the cart, remove it
-            currentUser.requested = currentUser.requested.filter(item => item !== product);
-            setIsRented(false);
-            return 'Product removed from the cart';
-        } else {
-            // If the product is not in the cart, add it
-            currentUser.requested.push(product);
-            setIsRented(true);
-            return 'Product added to the cart';
+            const data = await result.json();
+            return data;
+        } catch (error) {
+            console.error('Error during rent operation:', error);
+            throw new Error('Rent failed');
         }
     };
-
-
 
 
     const UnRentProduct = ({ product }) => {
