@@ -184,27 +184,29 @@ export default function UserContextProvider({ children }) {
     };
 
 
-    const sendRentRequest = async ({ currentUser, secondUser, product }) => {
+    const sendRentRequest = async ({ currentUser, userWithProduct, product }) => {
         try {
-
-            console.log("entring usecontext")
+            console.log("entering usecontext");
             const response = await fetch(`${API_BASE_URL}/sendRentRequest`, {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ currentUser, secondUser, product }),
+                body: JSON.stringify({ currentUser, userWithProduct, product }),
             });
 
             const data = await response.json();
-            alert(data);
+            console.log(data); // Log the entire data object to inspect its properties
+
+            // Alert the entire data object for inspection
+            alert(JSON.stringify(data));
+
             return data;
         } catch (error) {
             console.error('Error during sending rent request:', error);
             throw new Error('Rent request failed');
         }
     };
-
 
 
 

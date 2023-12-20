@@ -31,10 +31,11 @@ const ItemScreen = ({ route }) => {
             alert('Second user not found');
             return;
         }
+        alert(product.ownerId);
 
-        const message = sendRentRequest(currentUser, userWithProduct, { product });
-        alert("in item screen");
-        alert(JSON.stringify(currentUser.requested));
+        const message = sendRentRequest(currentUser, userWithProduct, product);
+
+
     };
 
 
