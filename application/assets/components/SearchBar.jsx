@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, TouchableOpacity, Text, Modal, FlatList } from 'react-native';
+import { View, TextInput, StyleSheet, TouchableOpacity, Text, Modal, FlatList, Dimensions } from 'react-native'; // Import Dimensions
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../Styles/style';
 
 const SearchBar = () => {
     const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
-    const [selectedCategory, setSelectedCategory] = useState(null);
-    const filterOptions = ['none', 'Category 1', 'Category 2', 'Category 3']; // Replace with your actual filter options
+    const [selectedAvailability, setSelectedAvailability] = useState(null);
+    const [isFilterOpen, setIsFilterOpen] = useState(false); // New state to track filter modal open/close
+    const filterOptions = {
+        availability: ['Available', 'Not Available'], // Updated options
+    };
 
     const handleCityFilterPress = () => {
-        setIsFilterModalVisible(!isFilterModalVisible);
+        setIsFilterOpen(!isFilterOpen); // Toggle the filter modal state
     };
 
-    const handleCategorySelect = (category) => {
-        setSelectedCategory(category);
-        setIsFilterModalVisible(false);
-        // You can perform actions based on the selected category here
+    const handleFilterSelect = (value) => {
+        setSelectedAvailability(selectedAvailability === value ? null : value);
+        // Don't close the modal here; let the user close it manually
     };
+
+    const { height } = Dimensions.get('window'); // Get the height of the window
 
     return (
         <View style={styles.containerSearchBar}>
@@ -40,34 +44,40 @@ const SearchBar = () => {
                     <Icon
                         name="filter"
                         size={20}
-                        color={selectedCategory ? 'black' : '#888'}
+                        color={selectedAvailability ? 'black' : '#888'}
                     />
                 </TouchableOpacity>
             </View>
 
-            {isFilterModalVisible && (
-                <View style={styles.filterOptionsContainer}>
-                    <Text style={styles.modalTitle}>Category</Text>
+            {isFilterOpen && (
+                <View style={[styles.filterOptionsContainer, { width: height * 0.4 }]}>
+                    {/* Set the height of the filter options container to 50% of the screen height */}
+                    <Text style={styles.modalTitle}>Availability</Text>
                     <FlatList
-                        data={filterOptions}
+                        data={filterOptions.availability}
                         keyExtractor={(item) => item}
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
                         renderItem={({ item }) => (
                             <TouchableOpacity
                                 style={[
                                     styles.filterOption,
+                                    styles.roundedFilterOption,
                                     {
                                         backgroundColor:
-                                            selectedCategory === item
+                                            selectedAvailability === item
                                                 ? 'black'
                                                 : 'white',
                                     },
                                 ]}
-                                onPress={() => handleCategorySelect(item)}
+                                onPress={() => handleFilterSelect(item)}
                             >
                                 <Text
                                     style={{
+                                        fontWeight:
+                                            selectedAvailability === item ? 'bold' : 'normal',
                                         color:
-                                            selectedCategory === item
+                                            selectedAvailability === item
                                                 ? 'white'
                                                 : 'black',
                                     }}

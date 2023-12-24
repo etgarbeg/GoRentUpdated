@@ -452,15 +452,15 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 30,
         borderColor: '#ccc',
-        borderRadius: 5,
+        borderRadius: 25,
+        padding: 10,
         zIndex: 2,
         elevation: 5, zIndex: 9999
     },
     filterOption: {
         paddingVertical: 10,
         paddingHorizontal: 15,
-        borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
+
     },
     modalTitle: {
         fontWeight: 'bold',
@@ -1458,6 +1458,11 @@ const styles = StyleSheet.create({
     categoryproductItemContainer: {
         marginRight: 8,
     },
+    topSecSearch: {
+        marginTop: 20
+    }, containerTop: {
+        marginTop: 30
+    }
 }
 );
 
