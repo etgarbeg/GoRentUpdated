@@ -6,10 +6,13 @@ import SearchBar from '../assets/components/SearchBar';
 
 import { ScrollView } from 'react-native';
 
-
+import { UserContext } from '../../application/assets/UserContext/UserContext'
 
 
 const InboxScreen = ({ navigation }) => {
+
+    const {
+        currentUser, otherUsers, users } = useContext(UserContext);
 
     return (
         <View style={styles.containerInbox}>
