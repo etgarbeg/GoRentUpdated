@@ -15,7 +15,7 @@ const ItemScreen = ({ route }) => {
     const [productInMyCart, setProductInMyCart] = useState(currentUser.cart.some(item => item.productId === product._id));
 
     // Check if the product is in currentUser.products
-    const isInCurrentUserProducts = currentUser.products.some(item => item.productId === product._id);
+    const isInCurrentUserProducts = currentUser.products.some(item => item.ownerId === currentUser._id);
 
     const handleRentPress = () => {
         if (isInCurrentUserProducts) {
