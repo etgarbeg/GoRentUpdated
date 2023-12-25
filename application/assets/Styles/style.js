@@ -467,8 +467,16 @@ const styles = StyleSheet.create({
         fontSize: 16,
         padding: 10,
     },
+    iconContainer: {
+        margin: 10,
+        padding: 5, // Adjust the padding as needed
+        borderRadius: 20, // Make it half of the desired circle size
+        backgroundColor: 'white', // Set the background color to match your container's background
+        borderWidth: 1, // Border width
+        borderColor: 'grey', // Border color
+    }
 
-
+    ,
 
     //PostBox
     container4: {
