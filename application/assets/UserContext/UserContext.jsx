@@ -241,7 +241,8 @@ export default function UserContextProvider({ children }) {
         setCity,
         setCountry,
         RegisterUser,
-        sendRentRequest, findUserByOwnerId
+        sendRentRequest, findUserByOwnerId,
+        setCurrentUser
 
     }
 

@@ -10,31 +10,38 @@ import { useContext } from 'react';
 
 const ItemScreen = ({ route }) => {
     const { product } = route.params;
-
+    const { currentUser, setCurrentUser, sendRentRequest, users, findUserByOwnerId } = useContext(UserContext);
 
     const [isLiked, setIsLiked] = useState(false);
     const [isAvToRented, setisAvToRented] = useState(product.productAvaliable);
+    const [productInMyCart, setProductInMyCart] = useState(currentUser.cart.some(item => item.productId === product._id));
 
 
-    const {
-        currentUser, sendRentRequest, users, findUserByOwnerId } = useContext(UserContext);
+
 
     const handleRentPress = () => {
-        if (!isAvToRented) {
-            alert('Product is not available for rent');
-            return;
+        if (productInMyCart) {
+            alert('Removed from rent requests');
+
+            const updatedCart = currentUser.cart.filter(item => item.productId !== product._id);
+            setCurrentUser(prevUser => ({ ...prevUser, cart: updatedCart }));
+
+
+        } else if (!product.productAvailable) {
+
+            alert('Item is taken');
+        } else {
+            const userWithProduct = findUserByOwnerId(users, product.ownerId);
+
+            if (!userWithProduct) {
+                alert('Second user not found');
+                return;
+            }
+
+
+            const message = sendRentRequest(currentUser, userWithProduct, product);
+            alert('Rent request sent');
         }
-
-        const userWithProduct = findUserByOwnerId(users, product.ownerId);
-
-        if (!userWithProduct) {
-            alert('Second user not found');
-            return;
-        }
-        alert(product.ownerId);
-
-        const message = sendRentRequest(currentUser, userWithProduct, product);
-
 
     };
 
@@ -84,7 +91,7 @@ const ItemScreen = ({ route }) => {
 
             </View>
             {
-                isAvToRented ? <View style={styles.container6}>
+                isAvToRented && productInMyCart ? <View style={styles.container6}>
 
                     <TouchableOpacity style={styles.rentButtonItem} onPress={handleRentPress}>
                         <Text style={styles.rentButtonTextItem}>Rent</Text>
