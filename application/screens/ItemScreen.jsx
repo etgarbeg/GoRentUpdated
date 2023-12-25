@@ -10,9 +10,9 @@ const ItemScreen = ({ route }) => {
     const { product } = route.params;
     const { currentUser, setCurrentUser, sendRentRequest, users, findUserByOwnerId } = useContext(UserContext);
 
-    const [isLiked, setIsLiked] = useState(false);
+
     const [isAvToRented, setisAvToRented] = useState(product.productAvaliable);
-    const [productInMyCart, setProductInMyCart] = useState(currentUser.cart.some(item => item.productId === product._id));
+    const [productInMyCart, setProductInMyCart] = useState(currentUser.cart.some(item => item.ownerId === currentUser._id));
 
     // Check if the product is in currentUser.products
     const isInCurrentUserProducts = currentUser.products.some(item => item.ownerId === currentUser._id);
