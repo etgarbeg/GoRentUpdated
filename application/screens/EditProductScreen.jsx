@@ -3,7 +3,7 @@ import { View, TextInput, Text, TouchableOpacity } from 'react-native';
 import styles from '../assets/Styles/style';
 import { UserContext } from '../assets/UserContext/UserContext';
 
-const EditProductScreen = ({ route, navigation }) => {
+const EditProductScreen = ({ navigation, route }) => {
     const { currentUser, setCurrentUser } = useContext(UserContext);
     const { product } = route.params;
     const [editedProduct, setEditedProduct] = useState(product);
