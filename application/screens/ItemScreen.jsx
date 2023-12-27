@@ -42,10 +42,17 @@ const ItemScreen = ({ route, navigation }) => {
     };
 
     const handleEdit = () => {
-        // Implement your edit logic here
-        // You might want to navigate to an edit screen with the product details
-        // For simplicity, we'll just show an alert for now
         alert('Edit product details');
+        navigation.navigate('EditProduct', {
+            product,
+            onEdit: (editedProduct) => {
+                // Update the product in your data context or storage
+                console.log('Product Edited:', editedProduct);
+                // You may want to update the product details in your currentUser.products
+                // setCurrentUser((prevUser) => ({ ...prevUser, products: updatedProducts }));
+            },
+        });
+
     };
 
     const handleDelete = () => {
@@ -59,32 +66,6 @@ const ItemScreen = ({ route, navigation }) => {
             <View style={styles.conatinerInner1Item} >
                 <Image style={styles.SingleImageProductScreenItem} source={{ uri: product.productImage }} onError={(error) => console.error("Image error:", error)} />
 
-                {isInCurrentUserProducts ? (
-                    <View style={styles.editDeleteButtonsContainer}>
-                        <TouchableOpacity style={styles.editDeleteButton} onPress={handleEdit}>
-                            <Icon name="edit" size={20} color="white" />
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.editDeleteButton} onPress={handleDelete}>
-                            <Icon name="trash" size={20} color="white" />
-                        </TouchableOpacity>
-                    </View>
-                ) : (
-                    <View style={[styles.container6, { alignItems: 'center' }]}>
-                        <View style={styles.iconContainer}>
-                            {isAvToRented ? (
-                                <Icon name="check" size={20} color="grey" />
-                            ) : (
-                                <Icon name="times" size={20} color="grey" />
-                            )}
-                        </View>
-                    </View>
-                )}
-
-
-                <View style={styles.container6}>
-                    {/* Indicator for currentUser.products */}
-                    {isInCurrentUserProducts && <Icon name="star" size={12} color="yellow" />}
-                </View>
 
                 <View style={styles.itemInfoItem}>
                     <Text style={styles.categorySmall}>{product.category}</Text>
@@ -96,6 +77,20 @@ const ItemScreen = ({ route, navigation }) => {
                     <Text></Text>
                 </View>
             </View>
+
+
+            {isInCurrentUserProducts ? (
+                <View style={styles.editDeleteButtonsContainer}>
+                    <TouchableOpacity style={styles.editDeleteButton} onPress={handleEdit}>
+                        <Icon name="edit" size={20} color="grey" />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.editDeleteButton} onPress={handleDelete}>
+                        <Icon name="trash" size={20} color="grey" />
+                    </TouchableOpacity>
+                </View>
+            ) : (
+                <View></View>
+            )}
 
             {!isInCurrentUserProducts && (
                 <View style={[styles.container6, { alignItems: 'center' }]}>

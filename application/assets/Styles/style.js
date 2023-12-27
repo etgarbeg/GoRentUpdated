@@ -477,7 +477,20 @@ const styles = StyleSheet.create({
     }
 
     ,
+    editDeleteButtonsContainer: {
+        flexDirection: 'row',
+        padding: 10,
+        marginLeft: -25,
 
+
+    },
+    editDeleteButton: {
+        padding: 10,
+        borderRadius: 5,
+        marginLeft: 25,
+        borderWidth: 1,
+        borderRadius: 50,
+    },
     //PostBox
     container4: {
         margin: 3,
@@ -1470,7 +1483,37 @@ const styles = StyleSheet.create({
         marginTop: 20
     }, containerTop: {
         marginTop: 30
-    }
+
+    }, containerEditProduct: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    formSectionEditProduct: {
+        width: '80%',
+    },
+    titleee: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
+        textAlign: 'center',
+    },
+    inputEditProduct: {
+        height: 40,
+        borderColor: 'gray',
+        borderWidth: 1,
+        marginBottom: 20,
+        padding: 10,
+    },
+    buttonEditProduct: {
+        backgroundColor: 'blue',
+        padding: 10,
+        borderRadius: 5,
+        alignItems: 'center',
+    },
+    buttonTextEditProduct: {
+        color: 'white',
+    },
 }
 );
 
