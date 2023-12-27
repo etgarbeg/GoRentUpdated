@@ -15,18 +15,6 @@ const ExploreScreen = ({ navigation }) => {
 
     const {
         currentUser, otherUsers } = useContext(UserContext);
-    const fadeAnim = useRef(new Animated.Value(0)).current;
-
-    useEffect(() => {
-        Animated.timing(
-            fadeAnim,
-            {
-                toValue: 1,
-                duration: 1000, // Adjust the duration as needed
-                useNativeDriver: true,
-            }
-        ).start();
-    }, [fadeAnim]);
 
     return (
 
@@ -37,12 +25,12 @@ const ExploreScreen = ({ navigation }) => {
 
 
             <View style={styles.myFavoritesContainer}>
-                <View style={styles.bannerContainer}>
-                    <Animated.View style={{ opacity: fadeAnim }}>
-                        <View style={styles.banner}>
-                            <Text style={styles.bannerText}>GoRent</Text>
-                        </View>
-                    </Animated.View>
+                <View style={styles.topTitleFavor}>
+                    <Text style={styles.textExploreTitle}>explore</Text>
+                    <TouchableOpacity style={styles.seeAllButton} >
+                        <Text style={styles.seeAllButtonText}>See All </Text>
+                    </TouchableOpacity>
+
                 </View>
 
                 <View style={styles.containerAllFavor}>

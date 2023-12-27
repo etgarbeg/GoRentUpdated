@@ -1532,6 +1532,29 @@ const styles = StyleSheet.create({
     buttonUploadText: {
         color: 'grey'
     },
+    bannerContainer: {
+        alignItems: 'center',
+        marginTop: 20,
+    },
+
+    banner: {
+        backgroundColor: '#3498db', // Adjust the background color as needed
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 8,
+        elevation: 5, // For Android shadow
+        shadowColor: '#000', // For iOS shadow
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+    },
+
+    bannerText: {
+        color: '#fff', // Adjust the text color as needed
+        fontSize: 24,
+        fontWeight: 'bold',
+    },
+
 
 }
 );
