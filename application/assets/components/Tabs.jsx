@@ -16,6 +16,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import OnBoardingScreen from '../../screens/OnBoarding';
 import EditProfileScreen from '../../screens/EditProfileScreen';
 import CategoryProductsScreen from '../../screens/CategoryProductsScreen';
+import EditProductScreen from '../../screens/EditProductScreen';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -52,6 +53,7 @@ const ProfileStack = () => (
         <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} />
         <Stack.Screen name="FullCatalog" component={FullCatalog} options={{ headerShown: false }} />
         <Stack.Screen name="ItemScreen" component={ItemScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="EditProduct" component={EditProductScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Inbox" component={InboxScreen} options={{ headerShown: false }} />
         <Stack.Screen name="SingleChat" component={SingleChat} options={{ headerShown: false }} />
         <Stack.Screen name="ExploreScreen" component={ExploreScreen} options={{ headerShown: false }} />
@@ -79,6 +81,9 @@ const MainNavigation = () => {
             <Stack.Screen name="FullCatalog" component={FullCatalog} options={{ headerShown: false }} />
 
             <Stack.Screen name="ItemScreen" component={ItemScreen} options={{ headerShown: false }} />
+
+            <Stack.Screen name="EditProduct" component={EditProductScreen} options={{ headerShown: false }} />
+
         </Stack.Navigator>
     )
 };
