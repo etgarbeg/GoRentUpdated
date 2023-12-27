@@ -1496,24 +1496,43 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 20,
-        textAlign: 'center',
+        textAlign: 'left',
     },
     inputEditProduct: {
         height: 40,
+        borderRadius: 20,
         borderColor: 'gray',
         borderWidth: 1,
         marginBottom: 20,
         padding: 10,
     },
     buttonEditProduct: {
-        backgroundColor: 'blue',
+        backgroundColor: 'grey',
         padding: 10,
-        borderRadius: 5,
+        borderRadius: 25,
         alignItems: 'center',
     },
     buttonTextEditProduct: {
         color: 'white',
     },
+    buttonUploadText: { padding: 10 },
+    buttonUpload: {
+        backgroundColor: 'rgba(0,0,0,0.05)',
+        width: '40%',
+        borderRadius: 30,
+        height: 30,
+        alignContent: 'center',
+        justifyContent: 'center',
+        paddingLeft: 12,
+        marginBottom: 15
+
+
+    }
+    ,
+    buttonUploadText: {
+        color: 'grey'
+    },
+
 }
 );
 
