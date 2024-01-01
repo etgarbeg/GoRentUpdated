@@ -28,9 +28,7 @@ const ExploreScreen = ({ navigation }) => {
             <View style={styles.myFavoritesContainer}>
                 <View style={styles.topTitleFavor}>
                     <Text style={styles.textExploreTitle}>explore</Text>
-                    <TouchableOpacity style={styles.seeAllButton} >
-                        <Text style={styles.seeAllButtonText}>See All </Text>
-                    </TouchableOpacity>
+
 
                 </View>
 

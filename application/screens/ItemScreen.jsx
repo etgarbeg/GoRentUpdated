@@ -92,14 +92,7 @@ const ItemScreen = ({ route, navigation }) => {
         < View style={styles.containerItem} >
             <View style={styles.conatinerInner1Item} >
                 <Image style={styles.SingleImageProductScreenItem} source={{ uri: product.productImage }} onError={(error) => console.error("Image error:", error)} />
-                {currentUser.image && (
-                    <View style={styles.profilePictureContainer}>
-                        <Image
-                            source={{ uri: currentUser.image }}
-                            style={{ width: 30, height: 30, borderRadius: 15, position: 'absolute', top: 10, right: 10 }}
-                        />
-                    </View>
-                )}
+
 
                 <View style={styles.itemInfoItem}>
                     <Text style={styles.categorySmall}>{product.category}</Text>

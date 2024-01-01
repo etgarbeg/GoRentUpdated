@@ -14,21 +14,21 @@ const FullCatalog = ({ navigation }) => {
 
     // Initially, show all items
     useEffect(() => {
-        setFilteredAvailableItems(data.filter(item => item.productAvailable));
-        setFilteredRentedItems(data.filter(item => !item.productAvailable));
+        setFilteredAvailableItems(data.filter(item => item.productAvaliable));
+        setFilteredRentedItems(data.filter(item => !item.productAvaliable));
     }, [data]);
 
     const handleSearch = (query) => {
         // Filter available items based on search query
         const filteredAvailable = data.filter(item =>
             item.productName.toLowerCase().includes(query.toLowerCase()) &&
-            item.productAvailable
+            item.productAvaliable
         );
 
         // Filter rented items based on search query
         const filteredRented = data.filter(item =>
             item.productName.toLowerCase().includes(query.toLowerCase()) &&
-            !item.productAvailable
+            !item.productAvaliable
         );
 
         setFilteredAvailableItems(filteredAvailable);
@@ -46,22 +46,30 @@ const FullCatalog = ({ navigation }) => {
                     <Text style={styles.CatalogTitle}>Available Now</Text>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                         <View style={styles.sectionContainer}>
-                            {filteredAvailableItems.map((item, index) => (
-                                <View key={index} style={styles.itemContainer}>
-                                    <PostBox navigation={navigation} product={item} />
-                                </View>
-                            ))}
+                            {filteredAvailableItems.length > 0 ? (
+                                filteredAvailableItems.map((item, index) => (
+                                    <View key={index} style={styles.itemContainer}>
+                                        <PostBox navigation={navigation} product={item} />
+                                    </View>
+                                ))
+                            ) : (
+                                <Text style={styles.noItemsMessage}>No items</Text>
+                            )}
                         </View>
                     </ScrollView>
 
                     <Text style={styles.CatalogTitle}>Currently Rented</Text>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                         <View style={styles.sectionContainer}>
-                            {filteredRentedItems.map((item, index) => (
-                                <View key={index} style={styles.itemContainer}>
-                                    <PostBox navigation={navigation} product={item} />
-                                </View>
-                            ))}
+                            {filteredRentedItems.length > 0 ? (
+                                filteredRentedItems.map((item, index) => (
+                                    <View key={index} style={styles.itemContainer}>
+                                        <PostBox navigation={navigation} product={item} />
+                                    </View>
+                                ))
+                            ) : (
+                                <Text style={styles.noItemsMessage}>No rented items</Text>
+                            )}
                         </View>
                     </ScrollView>
                 </ScrollView>
@@ -69,5 +77,6 @@ const FullCatalog = ({ navigation }) => {
         </ScrollView>
     );
 };
+
 
 export default FullCatalog;

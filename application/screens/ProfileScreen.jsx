@@ -24,7 +24,7 @@ const ProfileScreen = ({ navigation }) => {
             <View style={styles.overlay} />
             <View style={styles.profilePictureContainer}>
                 <Image
-                    source={{ uri: currentUser.image }}
+                    source={{ uri: `${currentUser.image}.jpg` }}
                     style={{ width: '100%', height: '100%', resizeMode: 'cover' }}
                 />
                 <Text style={styles.title}>{currentUser.username}</Text>

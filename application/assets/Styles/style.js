@@ -1554,7 +1554,13 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
     },
-
+    noItemsMessage: {
+        width: '150%',
+        height: 300,
+        alignItems: 'center',
+        textAlign: 'center',
+        paddingTop: 90
+    }
 
 }
 );
