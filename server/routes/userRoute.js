@@ -49,7 +49,9 @@ userRouter.post('/login', async (req, res) => {
     }
 });
 userRouter.post('/sendRentRequest', async (req, res) => {
-    console.log("entering UserRoute")
+    console.log("entering UserRoute");
+    console.log("Entering sendRentRequest function", currentUser, userWithProduct, product);
+
     try {
         const { currentUser, userWithProduct, product } = req.body;
 
@@ -124,6 +126,7 @@ userRouter.get('/search', async (req, res) => {
     }
 });
 
+userRouter.delete('/products/:productId', deleteProduct);
 
 
 module.exports = userRouter;

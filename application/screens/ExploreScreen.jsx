@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
 import PostBox from '../assets/components/PostBox';
 
@@ -11,7 +11,8 @@ import { UserContext } from '../assets/UserContext/UserContext';
 
 
 const ExploreScreen = ({ navigation }) => {
-
+    const [searchQuery, setSearchQuery] = useState('');
+    const [selectedAvailability, setSelectedAvailability] = useState(null);
 
     const {
         currentUser, otherUsers } = useContext(UserContext);

@@ -26,7 +26,7 @@ const ItemScreen = ({ route, navigation }) => {
             alert('Removed from rent requests');
             const updatedCart = currentUser.cart.filter(item => item.productName !== product.productName);
             setCurrentUser(prevUser => ({ ...prevUser, cart: updatedCart }));
-        } else if (!product.productAvailable) {
+        } else if (!product.productAvaliable) {
             alert('Item is taken');
         } else {
             const userWithProduct = findUserByOwnerId(users, product.ownerId);
@@ -37,7 +37,8 @@ const ItemScreen = ({ route, navigation }) => {
             }
 
             const message = sendRentRequest(currentUser, userWithProduct, product);
-            alert('Rent request sent');
+
+            alert("Rent request sent ");
         }
     };
 
@@ -56,13 +57,39 @@ const ItemScreen = ({ route, navigation }) => {
     };
 
     const handleDelete = () => {
-        // Implement your delete logic here
-        // For simplicity, we'll just show an alert for now
-        alert('Delete product');
+        // Show a confirmation dialog or directly delete the product
+        // For simplicity, let's show a confirmation alert
+        Alert.alert(
+            'Delete Product',
+            'Are you sure you want to delete this product?',
+            [
+                {
+                    text: 'Cancel',
+                    style: 'cancel',
+                },
+                {
+                    text: 'Delete',
+                    onPress: () => {
+                        // Implement your delete logic here
+                        // For now, we'll just log a message
+                        console.log('Product Deleted:', product);
+
+                        // You may want to update the product details in your currentUser.products
+                        // setCurrentUser((prevUser) => ({ ...prevUser, products: updatedProducts }));
+
+                        // Navigate back or perform other actions after deletion
+                        navigation.goBack();
+                    },
+                },
+            ],
+            { cancelable: true }
+        );
     };
 
+
     return (
-        <View style={styles.containerItem}>
+
+        < View style={styles.containerItem} >
             <View style={styles.conatinerInner1Item} >
                 <Image style={styles.SingleImageProductScreenItem} source={{ uri: product.productImage }} onError={(error) => console.error("Image error:", error)} />
 
@@ -79,29 +106,33 @@ const ItemScreen = ({ route, navigation }) => {
             </View>
 
 
-            {isInCurrentUserProducts ? (
-                <View style={styles.editDeleteButtonsContainer}>
-                    <TouchableOpacity style={styles.editDeleteButton} onPress={handleEdit}>
-                        <Icon name="edit" size={20} color="grey" />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.editDeleteButton} onPress={handleDelete}>
-                        <Icon name="trash" size={20} color="grey" />
-                    </TouchableOpacity>
-                </View>
-            ) : (
-                <View></View>
-            )}
+            {
+                isInCurrentUserProducts ? (
+                    <View style={styles.editDeleteButtonsContainer}>
+                        <TouchableOpacity style={styles.editDeleteButton} onPress={handleEdit}>
+                            <Icon name="edit" size={20} color="grey" />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.editDeleteButton} onPress={handleDelete}>
+                            <Icon name="trash" size={20} color="grey" />
+                        </TouchableOpacity>
+                    </View>
+                ) : (
+                    <View></View>
+                )
+            }
 
-            {!isInCurrentUserProducts && (
-                <View style={[styles.container6, { alignItems: 'center' }]}>
-                    <TouchableOpacity style={styles.rentButtonItem} onPress={handleRentPress}>
-                        <Text style={styles.rentButtonTextItem}>
-                            {productInMyCart ? 'Unrent' : 'Rent'}
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-            )}
-        </View>
+            {
+                !isInCurrentUserProducts && (
+                    <View style={[styles.container6, { alignItems: 'center' }]}>
+                        <TouchableOpacity style={styles.rentButtonItem} onPress={handleRentPress}>
+                            <Text style={styles.rentButtonTextItem}>
+                                {productInMyCart ? 'Unrent' : 'Rent'}
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                )
+            }
+        </View >
     );
 };
 
