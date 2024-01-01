@@ -17,6 +17,7 @@ import OnBoardingScreen from '../../screens/OnBoarding';
 import EditProfileScreen from '../../screens/EditProfileScreen';
 import CategoryProductsScreen from '../../screens/CategoryProductsScreen';
 import EditProductScreen from '../../screens/EditProductScreen';
+import RequestedScreen from '../../screens/RequestedScreen';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -51,6 +52,8 @@ const InboxStack = () => (
 const ProfileStack = () => (
     <Stack.Navigator>
         <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="RequestedScreen" component={RequestedScreen} options={{ headerShown: false }} />
+
         <Stack.Screen name="FullCatalog" component={FullCatalog} options={{ headerShown: false }} />
         <Stack.Screen name="ItemScreen" component={ItemScreen} options={{ headerShown: false }} />
         <Stack.Screen name="EditProduct" component={EditProductScreen} options={{ headerShown: false }} />
@@ -83,6 +86,7 @@ const MainNavigation = () => {
             <Stack.Screen name="ItemScreen" component={ItemScreen} options={{ headerShown: false }} />
 
             <Stack.Screen name="EditProduct" component={EditProductScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="RequestedScreen" component={RequestedScreen} options={{ headerShown: false }} />
 
         </Stack.Navigator>
     )

@@ -1560,7 +1560,48 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         textAlign: 'center',
         paddingTop: 90
-    }
+    },
+    requestedItemContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: '#ddd',
+    },
+
+    requestedItemText: {
+        fontSize: 16,
+    },
+
+    requestedItemButtonsContainer: {
+        flexDirection: 'row',
+    },
+
+    requestedConfirmButton: {
+        backgroundColor: 'green',
+        padding: 5,
+        marginHorizontal: 5,
+    },
+
+    requestedDeclineButton: {
+        backgroundColor: 'red',
+        padding: 5,
+        marginHorizontal: 5,
+    },
+
+    requestedButtonText: {
+        color: 'white',
+        fontWeight: 'bold',
+    },
+
+    requestedNoItemsText: {
+        textAlign: 'center',
+        marginTop: 20,
+        fontSize: 18,
+        color: 'gray',
+    },
+
 
 }
 );
