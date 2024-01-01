@@ -63,7 +63,9 @@ const ProfileScreen = ({ navigation }) => {
 
             <View style={styles.line1Section}><Text style={styles.line1}></Text></View>
 
-            <View style={styles.buttomMyRequest}>
+            <TouchableOpacity style={styles.buttomMyRequest} onPress={() => {
+                navigation.navigate('RequestedScreen')
+            }}>
                 <Text style={styles.actionButtonText}>My Rent request</Text>
 
                 <TouchableOpacity style={styles.actionButtonWide}>
@@ -74,7 +76,7 @@ const ProfileScreen = ({ navigation }) => {
                     )}
 
                 </TouchableOpacity>
-            </View>
+            </TouchableOpacity>
             <View style={styles.actionButtonsContainer}>
                 <TouchableOpacity onPress={() => {
                     navigation.navigate('FullCatalog')
@@ -83,7 +85,7 @@ const ProfileScreen = ({ navigation }) => {
                     <Image source={require('../assets/images/home/add.png')} style={styles.Imagsbox} />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.actionButton}>
+                <TouchableOpacity style={styles.actionButton} >
                     <Text style={styles.actionButtonText}>Requests</Text>
                     <Image source={require('../assets/images/categories/misc.png')} style={styles.Imagsbox} />
                 </TouchableOpacity>

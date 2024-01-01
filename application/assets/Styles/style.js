@@ -1565,13 +1565,19 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: '#ddd',
+        padding: 15,
+        backgroundColor: '#ffffff',
+        borderRadius: 10,
+        marginBottom: 10,
+        elevation: 2, // For Android shadow
+        shadowColor: '#000', // For iOS shadow
+        shadowOffset: { width: 0, height: 2 }, // For iOS shadow
+        shadowOpacity: 0.2, // For iOS shadow
     },
 
     requestedItemText: {
         fontSize: 16,
+        color: '#333',
     },
 
     requestedItemButtonsContainer: {
