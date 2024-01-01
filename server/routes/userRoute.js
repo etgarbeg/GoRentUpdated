@@ -126,7 +126,5 @@ userRouter.get('/search', async (req, res) => {
     }
 });
 
-userRouter.delete('/products/:productId', deleteProduct);
-
 
 module.exports = userRouter;
