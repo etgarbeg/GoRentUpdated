@@ -14,6 +14,9 @@ const InboxScreen = ({ navigation }) => {
     const {
         currentUser, otherUsers, users } = useContext(UserContext);
 
+
+    const messages = currentUser.messages;
+
     return (
         <View style={styles.containerInbox}>
 
@@ -48,94 +51,27 @@ const InboxScreen = ({ navigation }) => {
 
 
             <View style={styles.ChatSectionInbox}>
-                <ScrollView verticaly={true} showsVerticalScrollIndicator={false}>
+                <ScrollView vertical={true} showsVerticalScrollIndicator={false}>
+                    <View style={styles.containerCollectionRow}>
+                        {messages.map((message, index) => (
+                            <View key={index} style={styles.useMessageContainerInbox}>
+                                <Image
+                                    style={styles.profilePictureContainerInbox}
+                                    source={require('../assets/images/icon/navbar/profile.png')}
+                                />
+                                <TouchableOpacity
+                                    onPress={() => navigation.navigate('SingleChat')}
+                                    style={styles.itemBoxInbox}
+                                >
 
-                    <View style={styles.containeCollectionRow}>
-
-
-
-                        <View style={styles.useMessegeContainerInbox}>
-                            <Image
-                                style={styles.profilePictureContainerInbox}
-                                source={require('../assets/images/icon/navbar/profile.png')}
-                            />
-
-                            <TouchableOpacity onPress={() => { navigation.navigate('SingleChat') }} style={styles.itemBoxInbox} >
-
-
-                                <Text style={styles.usernameTitleInbox}>Username</Text>
-
-                                <Text style={styles.messengeTextInbox}>details</Text>
-
-                            </TouchableOpacity>
-
-
-
-                        </View>
-                        <View style={styles.useMessegeContainerInbox}>
-                            <Image
-                                style={styles.profilePictureContainerInbox}
-                                source={require('../assets/images/icon/navbar/profile.png')}
-                            />
-
-                            <TouchableOpacity onPress={() => { navigation.navigate('SingleChat') }} style={styles.itemBoxInbox} >
-
-
-                                <Text style={styles.usernameTitleInbox}>Username</Text>
-
-                                <Text style={styles.messengeTextInbox}>details</Text>
-
-                            </TouchableOpacity>
-
-
-                        </View>
-
-                        <View style={styles.useMessegeContainerInbox}>
-                            <Image
-                                style={styles.profilePictureContainerInbox}
-                                source={require('../assets/images/icon/navbar/profile.png')}
-                            />
-
-                            <TouchableOpacity onPress={() => { navigation.navigate('SingleChat') }} style={styles.itemBoxInbox} >
-
-
-                                <Text style={styles.usernameTitleInbox}>Username</Text>
-
-                                <Text style={styles.messengeTextInbox}>details</Text>
-
-                            </TouchableOpacity>
-
-
-                        </View>
-
-                        <View style={styles.useMessegeContainerInbox}>
-                            <Image
-                                style={styles.profilePictureContainerInbox}
-                                source={require('../assets/images/icon/navbar/profile.png')}
-                            />
-
-                            <TouchableOpacity onPress={() => { navigation.navigate('SingleChat') }} style={styles.itemBoxInbox} >
-
-
-                                <Text style={styles.usernameTitleInbox}>Username</Text>
-
-                                <Text style={styles.messengeTextInbox}>details</Text>
-
-                            </TouchableOpacity>
-
-
-
-
-
-
-                        </View>
-
+                                    <Text style={styles.usernameTitleInbox}>{message.senderID}</Text>
+                                    <Text style={styles.messageTextInbox}>{message.txt}</Text>
+                                </TouchableOpacity>
+                            </View>
+                        ))}
                     </View>
-
                 </ScrollView>
-            </View >
-
-
+            </View>
 
         </View >
 
