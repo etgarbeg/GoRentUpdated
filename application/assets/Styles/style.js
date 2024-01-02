@@ -1628,7 +1628,86 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     }, containerCollectionRow: {
         flexDirection: 'row'
-    }
+    },
+    containerInbox: {
+        flex: 1,
+        marginTop: 60,
+        borderRadius: 30,
+        padding: 0,
+        backgroundColor: 'white',
+        borderWidth: 1,
+        borderColor: 'transparent'
+    },
+    chatContainer: {
+        paddingHorizontal: 20,
+        paddingVertical: 40,
+    },
+    messageContainer: {
+        flexDirection: 'row',
+        marginBottom: 16,
+        width: '100%',
+        height: '200%',
+
+    },
+    senderImage: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        marginRight: 12,
+    },
+    messageContent: {
+        flex: 1,
+
+
+    },
+    senderName: {
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    messageText: {
+        fontSize: 14,
+        alignItems: 'center'
+        , marginTop: 10,
+        padding: 20,
+        borderColor: 'rgba(0,0,0,0.5)',
+        borderWidth: 1,
+        borderRadius: 30,
+        color: 'rgba(0,0,0,0.7)'
+
+
+
+    },
+    productText: {
+        fontWeight: 'bold',
+        color: 'black',
+    },
+    messageInputContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 12,
+        borderTopWidth: 1,
+        borderTopColor: '#ccc',
+        marginBottom: 50
+    },
+    messageInput: {
+        flex: 1,
+        height: 40,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 20,
+        paddingHorizontal: 12,
+        marginRight: 12,
+    },
+    sendMessageButton: {
+        backgroundColor: 'grey',
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        borderRadius: 20,
+    },
+    sendMessageButtonText: {
+        color: 'white',
+        fontWeight: 'bold',
+    },
 
 }
 );

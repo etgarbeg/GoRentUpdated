@@ -7,7 +7,7 @@ import SearchBar from '../assets/components/SearchBar';
 import { UserContext } from '../../application/assets/UserContext/UserContext';
 
 const InboxScreen = ({ navigation }) => {
-    const { currentUser, otherUsers, users } = useContext(UserContext);
+    const { currentUser, users } = useContext(UserContext);
     const messages = currentUser.messages;
 
     const findProductById = (productId) => {
@@ -27,7 +27,7 @@ const InboxScreen = ({ navigation }) => {
                     style={{ width: '100%', height: '100%', resizeMode: 'cover' }}
                 />
             </View>
-            <Text style={styles.titlee}>{users[0].username}</Text>
+            <Text style={styles.titlee}>{currentUser.username}</Text>
             <SearchBar />
 
             <View style={styles.MainSectionInbox}>
@@ -39,41 +39,37 @@ const InboxScreen = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
 
-            <View style={styles.ChatSectionInbox}>
-                <ScrollView vertical={true} showsVerticalScrollIndicator={false}>
-                    <View style={styles.containerCollectionRow}>
-                        {messages.map((message, index) => (
-                            <View key={index} style={styles.useMessageContainerInbox}>
-                                <Image
-                                    style={styles.profilePictureContainerInbox}
-                                    source={{ uri: findUserById(message.senderID)?.image }}
-                                />
+            <ScrollView vertical={true} showsVerticalScrollIndicator={false}>
+                <View style={styles.containerCollectionRow}>
+                    {messages.map((message, index) => (
+                        <TouchableOpacity
+                            key={index}
+                            style={styles.useMessageContainerInbox}
+                            onPress={() => navigation.navigate('SingleChat', { senderID: message.senderID, productRequestedID: message.productRequestedID })}
 
-                                <TouchableOpacity
-                                    onPress={() => navigation.navigate('SingleChat')}
-                                    style={styles.itemBoxInbox}
-                                >
-                                    <Text style={styles.usernameTitleInbox}>{message.senderUserName}</Text>
-                                    {message.senderID && (
-                                        <Text style={styles.userText}>
-                                            {findUserById(message.senderId)?.username}
+                        >
+                            <Image
+                                style={styles.profilePictureContainerInbox}
+                                source={{ uri: findUserById(message.senderID)?.image }}
+                            />
+
+                            <View style={styles.itemBoxInbox}>
+                                <Text style={styles.usernameTitleInbox}>
+                                    {findUserById(message.senderID)?.username}
+                                </Text>
+                                <Text style={styles.messageTextInbox}>
+                                    {message.txt} {' '}
+                                    {message.productRequestedID && (
+                                        <Text style={styles.productText}>
+                                            - {findProductById(message.productRequestedID)?.productName}
                                         </Text>
                                     )}
-                                    <Text style={styles.messageTextInbox}>
-                                        {message.txt} {' '}
-                                        {message.productRequestedID && (
-                                            <Text style={styles.productText}>
-                                                - {findProductById(message.productRequestedID)?.productName}
-                                            </Text>
-                                        )}
-
-                                    </Text>
-                                </TouchableOpacity>
+                                </Text>
                             </View>
-                        ))}
-                    </View>
-                </ScrollView>
-            </View>
+                        </TouchableOpacity>
+                    ))}
+                </View>
+            </ScrollView>
         </View>
     );
 };
