@@ -15,7 +15,7 @@ const InboxScreen = ({ navigation }) => {
     };
 
     const findUserById = (userId) => {
-        return users.find(user => user.id === userId);
+        return users.find(user => user._id === userId);
     };
 
     return (

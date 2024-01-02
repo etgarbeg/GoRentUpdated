@@ -1124,7 +1124,8 @@ const styles = StyleSheet.create({
     usernameTitleInbox: {
         fontSize: 16,
         fontWeight: 'bold',
-        marginTop: 10,
+        marginBottom: 10,
+        color: 'black',
         alignItems: 'center',
     }
     ,
@@ -1647,6 +1648,7 @@ const styles = StyleSheet.create({
         marginBottom: 16,
         width: '100%',
         height: '200%',
+        overflow: 'hidden'
 
     },
     senderImage: {
@@ -1672,11 +1674,19 @@ const styles = StyleSheet.create({
         borderColor: 'rgba(0,0,0,0.5)',
         borderWidth: 1,
         borderRadius: 30,
-        color: 'rgba(0,0,0,0.7)'
+        color: 'rgba(0,0,0,0.5)'
 
 
 
     },
+    messageTextInbox: {
+        fontSize: 14,
+        alignItems: 'center'
+        , marginTop: 10,
+        color: 'rgba(0,0,0,0.5)',
+        overflow: 'hidden'
+    },
+
     productText: {
         fontWeight: 'bold',
         color: 'black',
