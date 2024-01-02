@@ -51,7 +51,7 @@ const InboxScreen = ({ navigation }) => {
                             key={message.senderID}
                             style={styles.useMessageContainerInbox}
                             onPress={() => navigation.navigate('SingleChat', { senderID: message.senderID, productRequestedID: message.productRequestedID })}
-                        >
+                        >{alert(message.senderID)}
                             <Image
                                 style={styles.profilePictureContainerInbox}
                                 source={{ uri: findUserById(message.senderID)?.image }}
