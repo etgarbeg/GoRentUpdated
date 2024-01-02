@@ -815,7 +815,7 @@ const styles = StyleSheet.create({
 
     actionButtonText: {
         fontSize: 20,
-        fontWeight: 400,
+        fontWeight: 600,
 
 
     },
@@ -1607,6 +1607,19 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: 'gray',
     },
+    actionButtonwide: {
+        width: '98%',
+        height: 80,
+
+        flexDirection: 'row',
+
+        alignItems: 'center',
+        justifyContent: 'space-between', padding: 10, borderRadius: 10,
+        backgroundColor: 'white'
+    }, actionButtonTextWide: {
+        paddingRight: 0,
+        fontSize: 30
+    }
 
 
 }

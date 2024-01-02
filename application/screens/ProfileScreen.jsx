@@ -84,13 +84,10 @@ const ProfileScreen = ({ navigation }) => {
                     <Text style={styles.actionButtonText}>My Catalog</Text>
                     <Image source={require('../assets/images/home/add.png')} style={styles.Imagsbox} />
                 </TouchableOpacity>
-
-                <TouchableOpacity style={styles.actionButton} >
-                    <Text style={styles.actionButtonText}>Requests</Text>
-                    <Image source={require('../assets/images/categories/misc.png')} style={styles.Imagsbox} />
+                <TouchableOpacity onPress={() => navigation.navigate('ExploreScreen')} style={styles.actionButton}>
+                    <Text style={styles.actionButtonText}>Explore</Text>
+                    <Image source={require('../assets/images/categories/books.png')} style={styles.Imagsbox} />
                 </TouchableOpacity>
-
-
 
 
 
@@ -99,12 +96,19 @@ const ProfileScreen = ({ navigation }) => {
             <View style={styles.actionButtonsContainer}>
 
 
-                <TouchableOpacity onPress={() => navigation.navigate('ExploreScreen')} style={styles.actionButton}>
-                    <Text style={styles.actionButtonText}>Explore</Text>
-                    <Image source={require('../assets/images/categories/books.png')} style={styles.Imagsbox} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Inbox')} style={styles.actionButton}>
-                    <Text style={styles.actionButtonText}>Inbox</Text>
+
+                <TouchableOpacity onPress={() => navigation.navigate('Inbox')} style={styles.actionButtonwide}>
+                    <Text style={styles.actionButtonTextWide}>Inbox</Text>
+
+
+                    <TouchableOpacity style={styles.actionButtonWide}>
+                        {hasRentRequests ? (
+                            <View style={styles.notificationLogoGreen}></View>
+                        ) : (
+                            <View style={styles.notificationLogoGrey}></View>
+                        )}
+
+                    </TouchableOpacity>
                     <Image source={require('../assets/images/home/inbox.png')} style={styles.Imagsbox} />
                 </TouchableOpacity>
 
