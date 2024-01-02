@@ -1718,7 +1718,29 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
     },
+    productRequestButtons: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginTop: 8, // Adjust as needed
+    },
 
+    acceptButton: {
+        backgroundColor: '#E0E0E0', // Grey color
+        padding: 8,
+        borderRadius: 8,
+        marginRight: 8, // Adjust spacing as needed
+    },
+
+    declineButton: {
+        backgroundColor: '#E0E0E0', // Grey color
+        padding: 8,
+        borderRadius: 8,
+    },
+
+    buttonText: {
+        color: '#424242', // Dark grey color
+        fontWeight: 'bold', // Adjust as needed
+    },
 }
 );
 

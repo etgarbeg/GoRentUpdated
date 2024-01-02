@@ -8,7 +8,9 @@ import { UserContext } from '../../application/assets/UserContext/UserContext';
 
 const InboxScreen = ({ navigation }) => {
     const { currentUser, users } = useContext(UserContext);
-    const messages = currentUser.messages;
+
+    // Create a copy of messages and sort them by senderID
+    const sortedMessages = [...currentUser.messages].sort((a, b) => a.senderID.localeCompare(b.senderID));
 
     const findProductById = (productId) => {
         return currentUser.products.find(product => product.productId === productId);
@@ -26,6 +28,7 @@ const InboxScreen = ({ navigation }) => {
                     source={require('../assets/images/icon/navbar/profile.png')}
                     style={{ width: '100%', height: '100%', resizeMode: 'cover' }}
                 />
+
             </View>
             <Text style={styles.titlee}>{currentUser.username}</Text>
             <SearchBar />
@@ -41,12 +44,11 @@ const InboxScreen = ({ navigation }) => {
 
             <ScrollView vertical={true} showsVerticalScrollIndicator={false}>
                 <View style={styles.containerCollectionRow}>
-                    {messages.map((message, index) => (
+                    {sortedMessages.map((message, index) => (
                         <TouchableOpacity
                             key={index}
                             style={styles.useMessageContainerInbox}
                             onPress={() => navigation.navigate('SingleChat', { senderID: message.senderID, productRequestedID: message.productRequestedID })}
-
                         >
                             <Image
                                 style={styles.profilePictureContainerInbox}
@@ -64,7 +66,6 @@ const InboxScreen = ({ navigation }) => {
                                             - {findProductById(message.productRequestedID)?.productName}
                                         </Text>
                                     )}
-
                                 </Text>
                             </View>
                         </TouchableOpacity>

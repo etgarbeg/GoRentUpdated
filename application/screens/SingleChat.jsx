@@ -14,46 +14,47 @@ const SingleChat = ({ route }) => {
     };
 
     const findProductById = (productId) => {
-        // Create a variable to store the found product
         let foundProduct = null;
-
-        // Iterate through all users
         users.forEach(user => {
-            // Try to find the product in the current user's products
             const product = user.products.find(product => product.productId === productId);
-
-            // If the product is found, assign it to the foundProduct variable and break the loop
             if (product) {
                 foundProduct = product;
                 return;
             }
         });
-
-        // Return the found product (or null if not found)
         return foundProduct;
     };
-
 
     const messagesFromSender = currentUser.messages.filter(message => message.senderID === senderID);
 
     const handleSendMessage = () => {
-        // Create a new message object
         const newMessageObj = {
             senderID: currentUser._id,
             txt: newMessage,
-            productRequestedID: productRequestedID,  // Add the productRequestedID if needed
+            productRequestedID: productRequestedID,
         };
 
-        // Update currentUser's messages
         currentUser.messages.push(newMessageObj);
 
-        // Update the recipient's messages
         const recipient = users.find(user => user._id === senderID);
         if (recipient) {
             recipient.messages.push(newMessageObj);
         }
 
-        // Clear the message input
+        if (message.productRequestedID) {
+            // If productRequestedID exists, send an additional message about accepting the request
+            const acceptMessage = {
+                senderID: currentUser._id,
+                txt: `I accept the request for the item ${findProductById(productRequestedID)?.productName}`,
+            };
+
+            currentUser.messages.push(acceptMessage);
+
+            if (recipient) {
+                recipient.messages.push(acceptMessage);
+            }
+        }
+
         setNewMessage('');
     };
 
@@ -78,6 +79,16 @@ const SingleChat = ({ route }) => {
                                     </Text>
                                 )}
                             </Text>
+                            {message.productRequestedID && (
+                                <View style={styles.productRequestButtons}>
+                                    <TouchableOpacity style={styles.acceptButton}>
+                                        <Text style={styles.buttonText}>Accept</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styles.declineButton}>
+                                        <Text style={styles.buttonText}>Decline</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            )}
                         </View>
                     </View>
                 ))}
