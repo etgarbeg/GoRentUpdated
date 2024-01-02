@@ -8,6 +8,8 @@ import { UserContext } from '../../application/assets/UserContext/UserContext';
 
 const InboxScreen = ({ navigation }) => {
     const { currentUser, users } = useContext(UserContext);
+    const currentTime = new Date();
+    const formattedTimestamp = currentTime.toISOString(); // ISO format: "2022-01-01T12:30:00.000Z"
 
     // Create a copy of messages and sort them by senderID
     const sortedMessages = [...currentUser.messages].sort((a, b) => a.senderID.localeCompare(b.senderID));

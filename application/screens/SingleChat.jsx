@@ -6,8 +6,9 @@ import { UserContext } from '../../application/assets/UserContext/UserContext';
 
 const SingleChat = ({ route }) => {
     const { senderID, productRequestedID } = route.params;
-    const { currentUser, users } = useContext(UserContext);
+    const { currentUser, users, setUsers } = useContext(UserContext);
     const [newMessage, setNewMessage] = useState('');
+
 
     const findUserById = (userId) => {
         return users.find(user => user._id === userId);
@@ -25,7 +26,10 @@ const SingleChat = ({ route }) => {
         return foundProduct;
     };
 
-    const messagesFromSender = currentUser.messages.filter(message => message.senderID === senderID);
+    // Filter messages sent by either the specified senderID or the current user
+    const messagesFromSender = currentUser.messages.filter(message =>
+        (message.senderID === senderID || message.senderID === currentUser._id)
+    );
 
     const handleSendMessage = () => {
         const newMessageObj = {
@@ -41,10 +45,11 @@ const SingleChat = ({ route }) => {
             recipient.messages.push(newMessageObj);
         }
 
-        if (message.productRequestedID) {
+        if (productRequestedID) {
             // If productRequestedID exists, send an additional message about accepting the request
             const acceptMessage = {
                 senderID: currentUser._id,
+                timeStamp: new Date().toISOString(),
                 txt: `I accept the request for the item ${findProductById(productRequestedID)?.productName}`,
             };
 
@@ -54,6 +59,9 @@ const SingleChat = ({ route }) => {
                 recipient.messages.push(acceptMessage);
             }
         }
+
+        // Update the state to trigger re-render
+        setUsers([...users]);
 
         setNewMessage('');
     };
@@ -70,6 +78,9 @@ const SingleChat = ({ route }) => {
                         <View style={styles.messageContent}>
                             <Text style={styles.senderName}>
                                 {findUserById(message.senderID)?.username}
+                            </Text>
+                            <Text style={styles.timestempMessege}>
+                                {(message.timeStemp)}
                             </Text>
                             <Text style={styles.messageText}>
                                 {message.txt} {' '}

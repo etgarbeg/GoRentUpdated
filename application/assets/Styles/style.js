@@ -1666,6 +1666,10 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
+    timestempMessege: {
+        fontSize: 16,
+    },
+
     messageText: {
         fontSize: 14,
         alignItems: 'center'
