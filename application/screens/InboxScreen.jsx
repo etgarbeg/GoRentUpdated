@@ -48,7 +48,7 @@ const InboxScreen = ({ navigation }) => {
                 <View style={styles.containerCollectionRow}>
                     {sortedMessages.map((message, index) => (
                         <TouchableOpacity
-                            key={`${message.senderID}-${message.productRequestedID}-${index}`}
+                            key={message.senderID}
                             style={styles.useMessageContainerInbox}
                             onPress={() => navigation.navigate('SingleChat', { senderID: message.senderID, productRequestedID: message.productRequestedID })}
                         >
