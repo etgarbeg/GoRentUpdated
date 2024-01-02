@@ -61,6 +61,14 @@ const InboxScreen = ({ navigation }) => {
                                 <Text style={styles.usernameTitleInbox}>
                                     {findUserById(message.senderID)?.username}
                                 </Text>
+                                <Text style={styles.timestampText}>
+                                    {new Date(message.timeStemp).toLocaleString('en-US', {
+                                        hour: 'numeric',
+                                        minute: 'numeric',
+                                        month: 'numeric',
+                                        day: 'numeric',
+                                    })}
+                                </Text>
                                 <Text style={styles.messageTextInbox}>
                                     {message.txt} {' '}
                                     {message.productRequestedID && (
@@ -69,10 +77,12 @@ const InboxScreen = ({ navigation }) => {
                                         </Text>
                                     )}
                                 </Text>
+
                             </View>
                         </TouchableOpacity>
                     ))}
                 </View>
+
             </ScrollView>
         </View>
     );

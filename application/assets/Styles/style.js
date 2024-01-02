@@ -1669,6 +1669,10 @@ const styles = StyleSheet.create({
     timestempMessege: {
         fontSize: 16,
     },
+    timestampText: {
+        fontSize: 10,
+        color: 'grey'
+    },
 
     messageText: {
         fontSize: 14,
