@@ -1620,7 +1620,12 @@ const styles = StyleSheet.create({
         paddingRight: 0,
         fontSize: 30
     }
-
+    , userText: {
+        fontSize: 20,
+    }
+    , useMessageContainerInbox: {
+        width: '100%'
+    }
 
 }
 );
