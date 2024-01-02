@@ -64,6 +64,7 @@ const InboxScreen = ({ navigation }) => {
                                             - {findProductById(message.productRequestedID)?.productName}
                                         </Text>
                                     )}
+
                                 </Text>
                             </View>
                         </TouchableOpacity>
