@@ -46,8 +46,9 @@ const InboxScreen = ({ navigation }) => {
                             <View key={index} style={styles.useMessageContainerInbox}>
                                 <Image
                                     style={styles.profilePictureContainerInbox}
-                                    source={require('../assets/images/icon/navbar/profile.png')}
+                                    source={{ uri: findUserById(message.senderID)?.image }}
                                 />
+
                                 <TouchableOpacity
                                     onPress={() => navigation.navigate('SingleChat')}
                                     style={styles.itemBoxInbox}

@@ -1624,7 +1624,10 @@ const styles = StyleSheet.create({
         fontSize: 20,
     }
     , useMessageContainerInbox: {
-        width: '100%'
+        width: '100%',
+        flexDirection: 'row'
+    }, containerCollectionRow: {
+        flexDirection: 'row'
     }
 
 }
