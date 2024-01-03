@@ -227,6 +227,7 @@ export default function UserContextProvider({ children }) {
         country,
         city,
 
+        setUsers,
         setOtherUsers,
         setLoginTxtErr,
         LoginUser,

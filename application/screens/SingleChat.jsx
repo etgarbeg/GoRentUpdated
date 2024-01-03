@@ -1,14 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 
 import styles from '../assets/Styles/style';
 import { UserContext } from '../../application/assets/UserContext/UserContext';
 
-const SingleChat = ({ route }) => {
+const SingleChat = ({ route, navigation }) => {
     const { senderID, productRequestedID } = route.params;
     const { currentUser, users, setUsers } = useContext(UserContext);
     const [newMessage, setNewMessage] = useState('');
-
 
     const findUserById = (userId) => {
         return users.find(user => user._id === userId);
@@ -36,6 +35,7 @@ const SingleChat = ({ route }) => {
             senderID: currentUser._id,
             txt: newMessage,
             productRequestedID: productRequestedID,
+            timeStemp: new Date().toISOString(),
         };
 
         currentUser.messages.push(newMessageObj);
@@ -49,8 +49,8 @@ const SingleChat = ({ route }) => {
             // If productRequestedID exists, send an additional message about accepting the request
             const acceptMessage = {
                 senderID: currentUser._id,
-                timeStamp: new Date().toISOString(),
                 txt: `I accept the request for the item ${findProductById(productRequestedID)?.productName}`,
+                timeStemp: new Date().toISOString(),
             };
 
             currentUser.messages.push(acceptMessage);
@@ -66,11 +66,24 @@ const SingleChat = ({ route }) => {
         setNewMessage('');
     };
 
+    // Use useEffect to re-render messages when the component mounts or when newMessage changes
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            // Update the state to trigger re-render
+            setUsers([...users]);
+        });
+
+        return () => {
+            // Clean up the listener when the component is unmounted
+            unsubscribe();
+        };
+    }, [newMessage, navigation, setUsers, users]);
+
     return (
         <View style={styles.containerInbox}>
             <ScrollView style={styles.chatContainer}>
-                {messagesFromSender.map((message, index) => (
-                    <View key={index} style={styles.messageContainer}>
+                {messagesFromSender.map((message) => (
+                    <View key={message.senderID} style={styles.messageContainer}>
                         <Image
                             style={styles.senderImage}
                             source={{ uri: findUserById(message.senderID)?.image }}
