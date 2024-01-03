@@ -40,23 +40,32 @@ const SingleChat = ({ route, navigation }) => {
 
         currentUser.messages.push(newMessageObj);
 
+        // Find the recipient user
         const recipient = users.find(user => user._id === senderID);
+
         if (recipient) {
             recipient.messages.push(newMessageObj);
-        }
 
-        if (productRequestedID) {
-            // If productRequestedID exists, send an additional message about accepting the request
-            const acceptMessage = {
-                senderID: currentUser._id,
-                txt: `I accept the request for the item ${findProductById(productRequestedID)?.productName}`,
-                timeStemp: new Date().toISOString(),
-            };
+            if (currentUser._id === senderID) {
+                // If the currentUser is equal to senderID, add the message to the current chat
+                messagesFromSender.push(newMessageObj);
+            }
 
-            currentUser.messages.push(acceptMessage);
+            if (productRequestedID) {
+                // If productRequestedID exists, send an additional message about accepting the request
+                const acceptMessage = {
+                    senderID: currentUser._id,
+                    txt: `I accept the request for the item ${findProductById(productRequestedID)?.productName}`,
+                    timeStemp: new Date().toISOString(),
+                };
 
-            if (recipient) {
+                currentUser.messages.push(acceptMessage);
                 recipient.messages.push(acceptMessage);
+
+                if (currentUser._id === senderID) {
+                    // If the currentUser is equal to senderID, add the accept message to the current chat
+                    messagesFromSender.push(acceptMessage);
+                }
             }
         }
 
@@ -82,8 +91,8 @@ const SingleChat = ({ route, navigation }) => {
     return (
         <View style={styles.containerInbox}>
             <ScrollView style={styles.chatContainer}>
-                {messagesFromSender.map((message) => (
-                    <View key={message.senderID} style={styles.messageContainer}>
+                {messagesFromSender.map((message, index) => (
+                    <View key={index + 1} style={styles.messageContainer}>
                         <Image
                             style={styles.senderImage}
                             source={{ uri: findUserById(message.senderID)?.image }}
@@ -97,13 +106,13 @@ const SingleChat = ({ route, navigation }) => {
                             </Text>
                             <Text style={styles.messageText}>
                                 {message.txt} {' '}
-                                {message.productRequestedID && (
+                                {message.productRequestedID && currentUser._id !== senderID && (
                                     <Text style={styles.productText}>
                                         -{findProductById(message.productRequestedID)?.productName}
                                     </Text>
                                 )}
                             </Text>
-                            {message.productRequestedID && (
+                            {message.productRequestedID && currentUser._id !== senderID && (
                                 <View style={styles.productRequestButtons}>
                                     <TouchableOpacity style={styles.acceptButton}>
                                         <Text style={styles.buttonText}>Accept</Text>
@@ -117,6 +126,7 @@ const SingleChat = ({ route, navigation }) => {
                     </View>
                 ))}
             </ScrollView>
+
 
             <View style={styles.messageInputContainer}>
                 <TextInput
