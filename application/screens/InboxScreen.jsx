@@ -8,18 +8,28 @@ import { UserContext } from '../../application/assets/UserContext/UserContext';
 
 const InboxScreen = ({ navigation }) => {
     const { currentUser, users } = useContext(UserContext);
-    const currentTime = new Date();
-
-    // Create a copy of messages and sort them by senderID
-    const sortedMessages = [...currentUser.messages].sort((a, b) => a.senderID.localeCompare(b.senderID));
 
     const findProductById = (productId) => {
-        return currentUser.products.find(product => product.productId === productId);
+        return currentUser.products.find((product) => product.productId === productId);
     };
 
     const findUserById = (userId) => {
-        return users.find(user => user._id === userId);
+        return users.find((user) => user._id === userId);
     };
+
+    // Group messages by senderID and receiverID
+    const groupedMessages = currentUser.messages.reduce((acc, message) => {
+        const otherUserId = message.senderID === currentUser._id ? message.receiverID : message.senderID;
+
+        if (!acc[otherUserId]) {
+            acc[otherUserId] = [];
+        }
+
+        acc[otherUserId].push(message);
+
+        return acc;
+    }, {});
+
 
     return (
         <View style={styles.containerInbox}>
@@ -41,45 +51,50 @@ const InboxScreen = ({ navigation }) => {
                     <Text style={styles.newMessageTextInbox}>Archive</Text>
                 </TouchableOpacity>
             </View>
-
             <FlatList
-                data={sortedMessages}
-                keyExtractor={(item) => item.senderID}
-                renderItem={({ item }) => (
-                    <TouchableOpacity
-                        style={styles.useMessageContainerInbox}
-                        onPress={() => navigation.navigate('SingleChat', { senderID: item.senderID, productRequestedID: item.productRequestedID })}
-                    >
-                        <Image
-                            style={styles.profilePictureContainerInbox}
-                            source={{ uri: findUserById(item.senderID)?.image }}
-                        />
-
-                        <View style={styles.itemBoxInbox}>
-                            <Text style={styles.usernameTitleInbox}>
-                                {findUserById(item.senderID)?.username}
-                            </Text>
-                            <Text style={styles.timestampText}>
-                                {new Date(item.timeStemp).toLocaleString('en-US', {
-                                    hour: 'numeric',
-                                    minute: 'numeric',
-                                    month: 'numeric',
-                                    day: 'numeric',
-                                })}
-                            </Text>
-                            <Text style={styles.messageTextInbox}>
-                                {item.txt} {' '}
-                                {item.productRequestedID && (
-                                    <Text style={styles.productText}>
-                                        - {findProductById(item.productRequestedID)?.productName}
-                                    </Text>
-                                )}
-                            </Text>
-                        </View>
-                    </TouchableOpacity>
-                )}
+                data={Object.keys(groupedMessages)}
+                keyExtractor={(userId) => userId}
+                renderItem={({ item: otherUserId }) => {
+                    const otherUser = findUserById(otherUserId);
+                    const lastMessage = groupedMessages[otherUserId][0];
+                    return (
+                        <TouchableOpacity
+                            style={styles.useMessageContainerInbox}
+                            onPress={() =>
+                                navigation.navigate('SingleChat', {
+                                    senderID: currentUser._id,
+                                    receiverID: otherUserId,
+                                    productRequestedID: lastMessage.productRequestedID,
+                                })
+                            }
+                        >
+                            <Image
+                                style={styles.profilePictureContainerInbox}
+                                source={{ uri: otherUser?.image }}
+                            />
+                            <View style={styles.itemBoxInbox}>
+                                <Text style={styles.usernameTitleInbox}>{otherUser?.username}</Text>
+                                <Text style={styles.timestampText}>
+                                    {new Date(lastMessage.timeStemp).toLocaleString('en-US', {
+                                        hour: 'numeric',
+                                        minute: 'numeric',
+                                        month: 'numeric',
+                                        day: 'numeric',
+                                    })}
+                                </Text>
+                                <Text style={styles.messageTextInbox}>
+                                    {lastMessage.txt}{' '}
+                                    {lastMessage.productRequestedID && (
+                                        <Text style={styles.productText}>
+                                            - {findProductById(lastMessage.productRequestedID)?.productName}
+                                        </Text>
+                                    )}
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
+                    );
+                }}
             />
-
         </View>
     );
 };
