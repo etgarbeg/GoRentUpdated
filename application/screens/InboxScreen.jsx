@@ -30,6 +30,15 @@ const InboxScreen = ({ navigation }) => {
         return acc;
     }, {});
 
+    // Find users with whom currentUser has messages as sender but not as receiver
+    const unsavedChats = users.filter((user) => {
+        const hasUnsavedChat = currentUser.messages.some(
+            (message) =>
+                (message.senderID === currentUser._id && message.receiverID === user._id) &&
+                !groupedMessages[user._id]
+        );
+        return hasUnsavedChat;
+    });
 
     return (
         <View style={styles.containerInbox}>
@@ -51,12 +60,14 @@ const InboxScreen = ({ navigation }) => {
                     <Text style={styles.newMessageTextInbox}>Archive</Text>
                 </TouchableOpacity>
             </View>
+
             <FlatList
-                data={Object.keys(groupedMessages)}
+                data={Object.keys(groupedMessages).concat(unsavedChats.map((user) => user._id))}
                 keyExtractor={(userId) => userId}
                 renderItem={({ item: otherUserId }) => {
                     const otherUser = findUserById(otherUserId);
-                    const lastMessage = groupedMessages[otherUserId][0];
+                    const lastMessage = groupedMessages[otherUserId]?.[0];
+
                     return (
                         <TouchableOpacity
                             style={styles.useMessageContainerInbox}
@@ -64,7 +75,7 @@ const InboxScreen = ({ navigation }) => {
                                 navigation.navigate('SingleChat', {
                                     senderID: currentUser._id,
                                     receiverID: otherUserId,
-                                    productRequestedID: lastMessage.productRequestedID,
+                                    productRequestedID: lastMessage?.productRequestedID,
                                 })
                             }
                         >
@@ -75,16 +86,18 @@ const InboxScreen = ({ navigation }) => {
                             <View style={styles.itemBoxInbox}>
                                 <Text style={styles.usernameTitleInbox}>{otherUser?.username}</Text>
                                 <Text style={styles.timestampText}>
-                                    {new Date(lastMessage.timeStemp).toLocaleString('en-US', {
-                                        hour: 'numeric',
-                                        minute: 'numeric',
-                                        month: 'numeric',
-                                        day: 'numeric',
-                                    })}
+                                    {lastMessage
+                                        ? new Date(lastMessage.timeStemp).toLocaleString('en-US', {
+                                            hour: 'numeric',
+                                            minute: 'numeric',
+                                            month: 'numeric',
+                                            day: 'numeric',
+                                        })
+                                        : ''}
                                 </Text>
                                 <Text style={styles.messageTextInbox}>
-                                    {lastMessage.txt}{' '}
-                                    {lastMessage.productRequestedID && (
+                                    {lastMessage?.txt}{' '}
+                                    {lastMessage?.productRequestedID && (
                                         <Text style={styles.productText}>
                                             - {findProductById(lastMessage.productRequestedID)?.productName}
                                         </Text>

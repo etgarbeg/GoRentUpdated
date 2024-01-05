@@ -1,17 +1,14 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 
 import styles from '../assets/Styles/style';
 import { UserContext } from '../../application/assets/UserContext/UserContext';
-// SingleChat.js
-
-// ... (existing imports)
 
 const SingleChat = ({ route, navigation }) => {
     const { senderID, receiverID, productRequestedID } = route.params;
     const { currentUser, users, setUsers } = useContext(UserContext);
     const [newMessage, setNewMessage] = useState('');
-
+    const scrollViewRef = useRef();
     const findUserById = (userId) => {
         return users.find((user) => user._id === userId);
     };
@@ -28,17 +25,22 @@ const SingleChat = ({ route, navigation }) => {
         return foundProduct;
     };
 
-    // Filter messages for the current chat (between senderID and receiverID)
-    const currentChatMessages = currentUser.messages.filter(
+    // Determine the other user's ID based on whether currentUser is the sender or receiver
+    const otherUserId = currentUser._id === senderID ? receiverID : senderID;
+
+    // Filter messages for the current chat based on senderID and receiverID
+    const messagesForCurrentChat = currentUser.messages.filter(
         (message) =>
             (message.senderID === senderID && message.receiverID === receiverID) ||
-            (message.senderID === receiverID && message.receiverID === senderID)
+            (message.senderID === receiverID && message.receiverID === senderID) ||
+            (message.senderID === currentUser._id)
+
     );
 
     const handleSendMessage = () => {
         const newMessageObj = {
             senderID: currentUser._id,
-            receiverID: receiverID,
+            receiverID: otherUserId,
             txt: newMessage,
             productRequestedID: productRequestedID,
             timeStemp: new Date().toISOString(),
@@ -47,18 +49,19 @@ const SingleChat = ({ route, navigation }) => {
         currentUser.messages.push(newMessageObj);
 
         // Find the recipient user
-        const recipient = users.find((user) => user._id === receiverID);
+        const recipient = users.find((user) => user._id === otherUserId);
 
         if (recipient) {
             recipient.messages.push(newMessageObj);
-        }
 
-        // Update the state to trigger re-render
-        setUsers([...users]);
+            // Update the state to trigger re-render
+            setUsers([...users]);
+        }
 
         setNewMessage('');
     };
 
+    // Use useEffect to re-render messages when the component mounts or when newMessage changes
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
             // Update the state to trigger re-render
@@ -71,10 +74,15 @@ const SingleChat = ({ route, navigation }) => {
         };
     }, [newMessage, navigation, setUsers, users]);
 
+
+
+
     return (
         <View style={styles.containerInbox}>
-            <ScrollView style={styles.chatContainer}>
-                {currentChatMessages.map((message, index) => (
+            <ScrollView style={styles.chatContainer}
+                contentContainerStyle={{ flexGrow: 1, justifyContent: 'flex-end' }}
+            >
+                {messagesForCurrentChat.map((message, index) => (
                     <View key={index + 1} style={styles.messageContainer}>
                         <Image
                             style={styles.senderImage}
@@ -84,18 +92,25 @@ const SingleChat = ({ route, navigation }) => {
                             <Text style={styles.senderName}>
                                 {findUserById(message.senderID)?.username}
                             </Text>
-                            <Text style={styles.timestempMessege}>{message.timeStemp}</Text>
+                            <Text style={styles.timestempMessege}>
+                                {new Date(message.timeStemp).toLocaleString('en-US', {
+                                    hour: 'numeric',
+                                    minute: 'numeric',
+                                    month: 'numeric',
+                                    day: 'numeric',
+                                })}
+                            </Text>
                             <Text style={styles.messageText}>
                                 {message.txt}{' '}
                                 {message.productRequestedID &&
-                                    currentUser._id !== senderID && (
+                                    currentUser._id !== message.senderID && (
                                         <Text style={styles.productText}>
                                             -{findProductById(message.productRequestedID)?.productName}
                                         </Text>
                                     )}
                             </Text>
                             {message.productRequestedID &&
-                                currentUser._id !== senderID && (
+                                currentUser._id !== message.senderID && (
                                     <View style={styles.productRequestButtons}>
                                         <TouchableOpacity style={styles.acceptButton}>
                                             <Text style={styles.buttonText}>Accept</Text>

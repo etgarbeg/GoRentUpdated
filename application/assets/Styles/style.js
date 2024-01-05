@@ -1642,12 +1642,13 @@ const styles = StyleSheet.create({
     chatContainer: {
         paddingHorizontal: 20,
         paddingVertical: 40,
+
     },
     messageContainer: {
         flexDirection: 'row',
         marginBottom: 16,
         width: '100%',
-        height: '200%',
+        height: 100,
         overflow: 'hidden'
 
     },
@@ -1667,7 +1668,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     timestempMessege: {
-        fontSize: 16,
+        fontSize: 10,
     },
     timestampText: {
         fontSize: 10,
@@ -1677,12 +1678,12 @@ const styles = StyleSheet.create({
     messageText: {
         fontSize: 14,
         alignItems: 'center'
-        , marginTop: 10,
-        padding: 20,
-        borderColor: 'rgba(0,0,0,0.5)',
+        , margin: 10,
+        padding: 10,
+        borderColor: 'rgba(0,0,0,0.2)',
         borderWidth: 1,
-        borderRadius: 30,
-        color: 'rgba(0,0,0,0.5)'
+        borderRadius: 20,
+        color: 'rgba(0,0,0,0.7)'
 
 
 
