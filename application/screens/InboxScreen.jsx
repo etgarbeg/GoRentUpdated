@@ -17,28 +17,8 @@ const InboxScreen = ({ navigation }) => {
         return users.find((user) => user._id === userId);
     };
 
-    // Group messages by senderID and receiverID
-    const groupedMessages = currentUser.messages.reduce((acc, message) => {
-        const otherUserId = message.senderID === currentUser._id ? message.receiverID : message.senderID;
-
-        if (!acc[otherUserId]) {
-            acc[otherUserId] = [];
-        }
-
-        acc[otherUserId].push(message);
-
-        return acc;
-    }, {});
-
-    // Find users with whom currentUser has messages as sender but not as receiver
-    const unsavedChats = users.filter((user) => {
-        const hasUnsavedChat = currentUser.messages.some(
-            (message) =>
-                (message.senderID === currentUser._id && message.receiverID === user._id) &&
-                !groupedMessages[user._id]
-        );
-        return hasUnsavedChat;
-    });
+    // Sort messages by date in descending order
+    const sortedMessages = currentUser.messages.slice().sort((a, b) => new Date(b.timeStemp) - new Date(a.timeStemp));
 
     return (
         <View style={styles.containerInbox}>
@@ -49,7 +29,14 @@ const InboxScreen = ({ navigation }) => {
                     style={{ width: '100%', height: '100%', resizeMode: 'cover' }}
                 />
             </View>
-            <Text style={styles.titlee}>{currentUser.username}</Text>
+            <Text style={styles.titlee}>
+                {sortedMessages.length > 0
+                    ? sortedMessages[0]?.receiverID === currentUser._id
+                        ? findUserById(sortedMessages[0]?.senderID)?.username
+                        : findUserById(sortedMessages[0]?.receiverID)?.username
+                    : ''}
+            </Text>
+
             <SearchBar />
 
             <View style={styles.MainSectionInbox}>
@@ -62,20 +49,20 @@ const InboxScreen = ({ navigation }) => {
             </View>
 
             <FlatList
-                data={Object.keys(groupedMessages).concat(unsavedChats.map((user) => user._id))}
-                keyExtractor={(userId) => userId}
-                renderItem={({ item: otherUserId }) => {
+                data={sortedMessages}
+                keyExtractor={(message) => message.timeStemp}
+                renderItem={({ item: message }) => {
+                    const isCurrentUserSender = message.senderID === currentUser._id;
+                    const otherUserId = isCurrentUserSender ? message.receiverID : message.senderID;
                     const otherUser = findUserById(otherUserId);
-                    const lastMessage = groupedMessages[otherUserId]?.[0];
 
                     return (
                         <TouchableOpacity
                             style={styles.useMessageContainerInbox}
                             onPress={() =>
                                 navigation.navigate('SingleChat', {
-                                    senderID: currentUser._id,
-                                    receiverID: otherUserId,
-                                    productRequestedID: lastMessage?.productRequestedID,
+                                    otherUserId: otherUserId,
+                                    productRequestedID: message.productRequestedID,
                                 })
                             }
                         >
@@ -86,20 +73,18 @@ const InboxScreen = ({ navigation }) => {
                             <View style={styles.itemBoxInbox}>
                                 <Text style={styles.usernameTitleInbox}>{otherUser?.username}</Text>
                                 <Text style={styles.timestampText}>
-                                    {lastMessage
-                                        ? new Date(lastMessage.timeStemp).toLocaleString('en-US', {
-                                            hour: 'numeric',
-                                            minute: 'numeric',
-                                            month: 'numeric',
-                                            day: 'numeric',
-                                        })
-                                        : ''}
+                                    {new Date(message.timeStemp).toLocaleString('en-US', {
+                                        hour: 'numeric',
+                                        minute: 'numeric',
+                                        month: 'numeric',
+                                        day: 'numeric',
+                                    })}
                                 </Text>
                                 <Text style={styles.messageTextInbox}>
-                                    {lastMessage?.txt}{' '}
-                                    {lastMessage?.productRequestedID && (
+                                    {message.txt}{' '}
+                                    {message.productRequestedID && (
                                         <Text style={styles.productText}>
-                                            - {findProductById(lastMessage.productRequestedID)?.productName}
+                                            - {findProductById(message.productRequestedID)?.productName}
                                         </Text>
                                     )}
                                 </Text>

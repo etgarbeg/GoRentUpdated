@@ -1648,10 +1648,24 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginBottom: 16,
         width: '100%',
-        height: 100,
+
         overflow: 'hidden'
 
+
     },
+    wideButton: {
+        backgroundColor: 'grey',
+        padding: 5,
+        borderRadius: 30,
+        alignItems: 'center',
+
+    },
+    wideButtonText: {
+        color: 'white'
+    },
+
+
+
     senderImage: {
         width: 40,
         height: 40,
