@@ -60,16 +60,30 @@ class UserModel {
         try {
             const productToRequest = { ...product, requester: currentUser.email };
 
-            // Add the product to the second user's requested items
+
             userWithProduct.requested.push(productToRequest);
 
-            // Save updated second user data to the database
-            await new DB().Update("users", { _id: userWithProduct._id }, userWithProduct);
 
-            return `${currentUser.email} sent a rent request for ${product.productName} to ${userWithProduct.email}.`;
+            await this.updateUser(userWithProduct);
+
+            return {
+                currentUser: currentUser._id,
+                product: product.productId,
+                userWithProduct: userWithProduct._id,
+            };
         } catch (error) {
             console.error('Error during sending rent request:', error);
             throw new Error('Rent request failed');
+        }
+    }
+
+    static async updateUser(userData) {
+        try {
+            // Database operation to update user
+            await new DB().Update("users", { _id: userData._id }, userData);
+        } catch (dbError) {
+            console.error('Error during database operation:', dbError);
+            throw new Error('Database operation failed');
         }
     }
 

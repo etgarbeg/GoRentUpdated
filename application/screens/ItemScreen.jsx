@@ -18,13 +18,13 @@ const ItemScreen = ({ route, navigation }) => {
 
     const handleRentPress = () => {
         if (isInCurrentUserProducts) {
-            // Product is in currentUser.products, do nothing or show a message
+            alert('In cart, wating to accept')
             return;
         }
 
         if (productInMyCart) {
             alert('Removed from rent requests');
-            const updatedCart = currentUser.cart.filter(item => item.productName !== product.productName);
+            const updatedCart = currentUser.cart.filter(item => item.productId !== product.productId);
             setCurrentUser(prevUser => ({ ...prevUser, cart: updatedCart }));
         } else if (!product.productAvaliable) {
             alert('Item is taken');

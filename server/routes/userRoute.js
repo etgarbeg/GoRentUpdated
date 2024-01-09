@@ -48,9 +48,10 @@ userRouter.post('/login', async (req, res) => {
         res.status(500).json({ error: error.message }); // Send a more descriptive error message to the client
     }
 });
+
 userRouter.post('/sendRentRequest', async (req, res) => {
-    console.log("entering UserRoute");
-    console.log("Entering sendRentRequest function", currentUser, userWithProduct, product);
+
+    console.log("Entering sendRentRequest function", req.body);
 
     try {
         const { currentUser, userWithProduct, product } = req.body;
@@ -58,13 +59,14 @@ userRouter.post('/sendRentRequest', async (req, res) => {
         // Call the sendRentRequest function from your user model
         const result = await UserModel.sendRentRequest(currentUser, userWithProduct, product);
 
-        return res.status(200).json({ msg: result });
+        res.status(200).json({ success: true, message: 'Rent request sent successfully', data: result });
     } catch (error) {
-        console.error('Error during sending rent request:', error);
-        res.status(500).json({ error: error.message });
+        console.error('Error during sending rent request:', error.message);
+        res.status(500).json({ success: false, error: `Rent request failed: ${error.message}` });
     }
-
 });
+
+
 
 
 ///messeges between two users 
@@ -125,6 +127,7 @@ userRouter.get('/search', async (req, res) => {
         res.status(500).json({ error }); s
     }
 });
+
 
 
 module.exports = userRouter;

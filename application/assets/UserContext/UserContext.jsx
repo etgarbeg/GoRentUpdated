@@ -186,7 +186,8 @@ export default function UserContextProvider({ children }) {
 
     const sendRentRequest = async ({ currentUser, userWithProduct, product }) => {
         try {
-            console.log("entering usecontext");
+            console.log("Entering useContext");
+
             const response = await fetch(`${API_BASE_URL}/sendRentRequest`, {
                 method: 'post',
                 headers: {
@@ -195,19 +196,33 @@ export default function UserContextProvider({ children }) {
                 body: JSON.stringify({ currentUser, userWithProduct, product }),
             });
 
-            const data = await response.json();
-            console.log(data); // Log the entire data object to inspect its properties
+            if (!response.ok) {
+                console.error('Server returned an error:', response.status, response.statusText);
+                throw new Error('Rent request failed');
+            }
 
-            // Alert the entire data object for inspection
-            alert(JSON.stringify(data));
+            const text = await response.text().trim();
 
-            return data;
+            // Check if the response is empty
+            if (!text) {
+                console.error('Empty response');
+                throw new Error('Rent request failed');
+            }
+
+            try {
+                // Parse the response as JSON
+                const data = JSON.parse(text);
+                console.log(data); // Log the entire data object to inspect its properties
+                return data;
+            } catch (jsonError) {
+                console.error('Invalid JSON:', jsonError);
+                throw new Error('Rent request failed');
+            }
         } catch (error) {
             console.error('Error during sending rent request:', error);
             throw new Error('Rent request failed');
         }
     };
-
 
 
 
