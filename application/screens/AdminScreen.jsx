@@ -8,3 +8,6 @@ const AdminScreen = () => {
         </View>
     );
 }
+
+
+export default AdminScreen;

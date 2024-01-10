@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -18,10 +18,12 @@ import EditProfileScreen from '../../screens/EditProfileScreen';
 import CategoryProductsScreen from '../../screens/CategoryProductsScreen';
 import EditProductScreen from '../../screens/EditProductScreen';
 import RequestedScreen from '../../screens/RequestedScreen';
+import { UserContext } from '../UserContext/UserContext';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-
+const adminEmail = "admin1111@gmail.com";
+const { currentUser } = useContext(UserContext);
 const ExploreStack = () => (
     <Stack.Navigator>
         <Stack.Screen name="ExploreScreen" component={ExploreScreen} options={{ headerShown: false }} />
@@ -52,9 +54,13 @@ const ProfileStack = () => (
 );
 
 const MainNavigation = () => (
+
     <Stack.Navigator>
         <Stack.Screen name="onboarding" component={OnBoardingScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+        {currentUser.email === adminEmail && (
+            <Stack.Screen name="AdminScreen" component={AdminScreen} options={{ headerShown: false }} />
+        )}
         <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
         <Stack.Screen name="PassswordResetVerification" component={PasswordResetVerification} options={{ headerShown: false }} />
         <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
@@ -68,6 +74,7 @@ const MainNavigation = () => (
         <Stack.Screen name="ItemScreen" component={ItemScreen} options={{ headerShown: false }} />
         <Stack.Screen name="EditProduct" component={EditProductScreen} options={{ headerShown: false }} />
         <Stack.Screen name="RequestedScreen" component={RequestedScreen} options={{ headerShown: false }} />
+
     </Stack.Navigator>
 );
 
