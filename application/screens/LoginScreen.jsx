@@ -71,7 +71,7 @@ const LoginScreen = ({ navigation }) => {
                 <View style={styles.container5}>
                     <Text style={styles.ErrorTxt}>{loginTxtErr}</Text>
                 </View>
-                <TouchableOpacity style={styles.ForgotP} onPress={() => { navigation.navigate('PasswordResetVerification'); }}>
+                <TouchableOpacity style={styles.ForgotP} onPress={() => { navigation.navigate('PassswordResetVerification'); }}>
                     <Text style={styles.twoOptionsTxt}>forgot password</Text>
                 </TouchableOpacity>
 

@@ -38,7 +38,7 @@ class UserModel {
         console.log("hereeeee")
         let user = { username, password, firstName, lastName, email, country, city }
 
-        return await new DB().Insert('users', user);
+        return await new DB().Insert("users", user);
     } x
 
 
