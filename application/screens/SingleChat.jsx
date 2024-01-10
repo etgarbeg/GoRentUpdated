@@ -11,10 +11,13 @@ const SingleChat = ({ route, navigation }) => {
     const scrollViewRef = useRef();
 
     const findUserById = (userId) => {
+
         return users.find((user) => user._id === userId);
+
     };
 
     const findProductById = (productId) => {
+
         let foundProduct = null;
         users.forEach((user) => {
             const product = user.products.find((product) => product.productId === productId);

@@ -32,15 +32,37 @@ class UserModel {
         this.requested = null;//creating new user, no request yet
     }
     //functions 
+    static async Register(username, password, firstName, lastName, email, country, city) {
+        const hashedPassword = await hashPassword(password);
 
-    static async Register(username, password, firstName, lastName, email, country, city)//all props of register
-    {
-        console.log("hereeeee")
-        let user = { username, password, firstName, lastName, email, country, city }
+        const user = {
+            username,
+            password: hashedPassword,
+            firstName,
+            lastName,
+            email,
+            country,
+            city,
+        };
 
-        return await new DB().Insert("users", user);
-    } x
+        try {
+            const insertedUser = await new DB().Insert("users", user);
+            return { user: insertedUser };
+        } catch (error) {
+            console.error('Error during registration:', error);
+            throw new Error('Registration failed');
+        }
+    }
 
+    static async Login(email, password) {
+        const user = await new DB().FindOne("users", { email });
+
+        if (!user || user.password !== await hashPassword(password)) {
+            return null; // User not found or password doesn't match
+        }
+
+        return { user };
+    }
 
 
     static async Login(email, password) {
