@@ -187,11 +187,15 @@ export default function UserContextProvider({ children }) {
     };
 
 
-    const sendRentRequest = async ({ currentUser, userWithProduct, product }) => {
+    const sendRentRequest = async ({ currentUser, product }) => {
         try {
             const response = await axios.post(
                 `${API_BASE_URL}/sendRentRequest`,
-                { currentUser, userWithProduct, product },
+                {
+                    currentUser,
+
+                    product
+                },
                 {
                     headers: {
                         'Content-Type': 'application/json',

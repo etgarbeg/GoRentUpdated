@@ -37,7 +37,7 @@ class UserModel {
 
         const user = {
             username,
-            password: hashedPassword,
+            password,
             firstName,
             lastName,
             email,
@@ -69,18 +69,18 @@ class UserModel {
 
         return { user };
     }
-    static async sendRentRequest(currentUser, userWithProduct, product) {
+    static async sendRentRequest(currentUser, product) {
 
         try {
 
-            userWithProduct.requested.push(product);
+            currentUser.cart.push(product);
 
-            await this.updateUser(userWithProduct);
+            await this.updateUser(currentUser);
 
             return {
-                currentUser: currentUser,
-                product: product,
-                userWithProduct: userWithProduct,
+                currentUser: currentUser._id,
+                product: product.productId,
+
             };
         } catch (error) {
             console.error('Error during sending rent request:', error);
