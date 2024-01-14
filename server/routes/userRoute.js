@@ -50,7 +50,6 @@ userRouter.post('/login', async (req, res) => {
 });
 
 userRouter.post('/sendRentRequest', async (req, res) => {
-
     console.log("Entering sendRentRequest function", req.body);
 
     try {
@@ -61,10 +60,15 @@ userRouter.post('/sendRentRequest', async (req, res) => {
 
         res.status(200).json({ success: true, message: 'Rent request sent successfully', data: result });
     } catch (error) {
-        console.error('Error during sending rent request:', error.message);
+        console.error('Error during sending rent request:', error);
+
+        // Log more information about the error
+        console.error('Detailed error:', error);
+
         res.status(500).json({ success: false, error: `Rent request failed: ${error.message}` });
     }
 });
+
 
 
 
