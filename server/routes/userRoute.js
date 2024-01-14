@@ -15,6 +15,54 @@ userRouter.get('/', async (req, res) => {
 
 
 
+userRouter.post('/login', async (req, res) => {
+    try {
+
+        let { email, password } = req.body;
+
+        let user = await UserModel.Login(email, password);
+        if (!user)
+            res.status(401).json({ msg: "Incorrect details" });
+        else
+            res.status(200).json(user);
+    } catch (error) {
+        console.error('Error during login:', error);
+        res.status(500).json({ error: error.message }); // Send a more descriptive error message to the client
+    }
+});
+
+
+
+userRouter.post('/sendRentRequest', async (req, res) => {
+    console.log("Entering sendRentRequest function", req.body);
+
+    try {
+        const { currentUser, userWithProduct, product } = req.body;
+
+        // Call the sendRentRequest function from your user model
+        const result = await UserModel.sendRentRequest(currentUser, userWithProduct, product);
+
+        res.status(200).json({ success: true, message: 'Rent request sent successfully', data: result });
+    } catch (error) {
+
+
+        res.status(500).json({ success: false, error: `Rent request failed: ${error.message}` });
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 userRouter.post('/register', UploadImage, async (req, res) => {
     try {
         //create user
@@ -33,41 +81,6 @@ userRouter.post('/register', UploadImage, async (req, res) => {
 
 })
 
-userRouter.post('/login', async (req, res) => {
-    try {
-        console.log("in login user route")
-        let { email, password } = req.body;
-        console.log(email, password);
-        let user = await UserModel.Login(email, password);
-        if (!user)
-            res.status(401).json({ msg: "Incorrect details" });
-        else
-            res.status(200).json(user);
-    } catch (error) {
-        console.error('Error during login:', error);
-        res.status(500).json({ error: error.message }); // Send a more descriptive error message to the client
-    }
-});
-
-userRouter.post('/sendRentRequest', async (req, res) => {
-    console.log("Entering sendRentRequest function", req.body);
-
-    try {
-        const { currentUser, userWithProduct, product } = req.body;
-
-        // Call the sendRentRequest function from your user model
-        const result = await UserModel.sendRentRequest(currentUser, userWithProduct, product);
-
-        res.status(200).json({ success: true, message: 'Rent request sent successfully', data: result });
-    } catch (error) {
-        console.error('Error during sending rent request:', error);
-
-        // Log more information about the error
-        console.error('Detailed error:', error);
-
-        res.status(500).json({ success: false, error: `Rent request failed: ${error.message}` });
-    }
-});
 
 
 

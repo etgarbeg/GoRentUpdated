@@ -58,7 +58,7 @@ class UserModel {
 
 
     static async Login(email, password) {
-        console.log("in login userModal")
+
         const user = await new DB().FindOne("users", { email: email });
 
 
@@ -70,20 +70,18 @@ class UserModel {
         return { user };
     }
     static async sendRentRequest(currentUser, userWithProduct, product) {
-        console.log("entering usermodel");
+
         try {
-            const productToRequest = { ...product, requester: currentUser.email };
 
 
-            userWithProduct.requested.push(productToRequest);
-
+            userWithProduct.requested.push(product);
 
             await this.updateUser(userWithProduct);
 
             return {
-                currentUser: currentUser._id,
-                product: product.productId,
-                userWithProduct: userWithProduct._id,
+                currentUser: currentUser,
+                product: product,
+                userWithProduct: userWithProduct,
             };
         } catch (error) {
             console.error('Error during sending rent request:', error);
