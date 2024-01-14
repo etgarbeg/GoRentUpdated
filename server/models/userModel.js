@@ -69,17 +69,16 @@ class UserModel {
 
         return { user };
     }
-    static async sendRentRequest(currentUser, product) {
+    static async sendRentRequest(currentUserId, productId) {
 
         try {
-
-            currentUser.cart.push(product);
+            const currentUser = this.FindById(currentUserId)
+            currentUser.cart.push(productId);
 
             await this.updateUser(currentUser);
 
             return {
-                currentUser: currentUser._id,
-                product: product.productId,
+                productId
 
             };
         } catch (error) {

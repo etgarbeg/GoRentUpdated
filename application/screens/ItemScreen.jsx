@@ -37,7 +37,7 @@ const ItemScreen = ({ route, navigation }) => {
             }
 
             try {
-                const message = await sendRentRequest(currentUser, product);
+                const message = await sendRentRequest(currentUser._id, product.productId);
                 alert("Rent request sent. Awaiting approval from the product owner.");
             } catch (error) {
                 console.error('Error sending rent request:', error.message);

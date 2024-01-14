@@ -124,7 +124,6 @@ export default function UserContextProvider({ children }) {
 
 
     const LoginUser = async () => {
-        console.log("in login usercontext");
 
         try {
             const response = await axios.post(`${API_BASE_URL}/login`, {
@@ -187,14 +186,14 @@ export default function UserContextProvider({ children }) {
     };
 
 
-    const sendRentRequest = async ({ currentUser, product }) => {
+    const sendRentRequest = async ({ currentUserId, productId }) => {
         try {
             const response = await axios.post(
                 `${API_BASE_URL}/sendRentRequest`,
                 {
-                    currentUser,
+                    currentUserId,
 
-                    product
+                    productId
                 },
                 {
                     headers: {
