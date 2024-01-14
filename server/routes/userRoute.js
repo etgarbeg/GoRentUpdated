@@ -37,10 +37,10 @@ userRouter.post('/sendRentRequest', async (req, res) => {
 
 
     try {
-        const { currentUser, product } = req.body;
+        const { currentUserId, productId } = req.body;
 
         // Call the sendRentRequest function from your user model
-        const result = await UserModel.sendRentRequest(currentUser._id, product.productId);
+        const result = await UserModel.sendRentRequest(currentUserId, productId);
 
         res.status(200).json({ success: true, message: 'Rent request sent successfully', data: result });
     } catch (error) {
