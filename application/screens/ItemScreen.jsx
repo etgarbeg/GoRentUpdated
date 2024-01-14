@@ -16,9 +16,9 @@ const ItemScreen = ({ route, navigation }) => {
     // Check if the product is in currentUser.products
     const isInCurrentUserProducts = currentUser.products.some(item => item.ownerId === product.ownerId);
 
-    const handleRentPress = () => {
+    const handleRentPress = async () => {
         if (isInCurrentUserProducts) {
-            alert('In cart, wating to accept')
+            alert('In cart, waiting to accept');
             return;
         }
 
@@ -36,9 +36,13 @@ const ItemScreen = ({ route, navigation }) => {
                 return;
             }
 
-            const message = sendRentRequest(currentUser, userWithProduct, product);
-
-            alert("Rent request sent ");
+            try {
+                const message = await sendRentRequest(currentUser, userWithProduct, product);
+                alert("Rent request sent. Awaiting approval from the product owner.");
+            } catch (error) {
+                console.error('Error sending rent request:', error.message);
+                alert('Error sending rent request');
+            }
         }
     };
 
