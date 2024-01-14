@@ -206,7 +206,7 @@ export default function UserContextProvider({ children }) {
             if (!data) {
                 throw new Error('Rent request failed: Empty response');
             }
-
+            alert(data);
             return data;
         } catch (error) {
             throw new Error(`Rent request failed: ${error.message}`);
