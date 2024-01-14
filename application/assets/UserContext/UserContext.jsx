@@ -158,21 +158,24 @@ export default function UserContextProvider({ children }) {
 
 
 
-
-    const RegisterUser = async (username, password, firstName, lastName, email, country, city) => {
-        let result = await fetch(`${API_BASE_URL}/register`,
-            {
+    const RegisterUser = async (userData) => {
+        try {
+            const result = await fetch(`${API_BASE_URL}/register`, {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(username, password, firstName, lastName, email, country, city)
+                body: JSON.stringify(userData)
             });
 
-        let data = await result.json();
-        return data;
+            const data = await result.json();
+            return data;
+        } catch (error) {
+            console.error('Registration failed. Please try again.', error);
+            throw new Error('Registration failed');
+        }
+    };
 
-    }
 
     const findUserByOwnerId = (users, ownerId) => {
         for (const user of users) {
@@ -186,7 +189,7 @@ export default function UserContextProvider({ children }) {
 
     const sendRentRequest = async ({ currentUser, userWithProduct, product }) => {
         try {
-            console.log("Entering useContext");
+            console.log("Entering sendRentRequest");
 
             const response = await fetch(`${API_BASE_URL}/sendRentRequest`, {
                 method: 'post',
@@ -198,32 +201,29 @@ export default function UserContextProvider({ children }) {
 
             if (!response.ok) {
                 console.error('Server returned an error:', response.status, response.statusText);
-                throw new Error('Rent request failed');
+                throw new Error(`Rent request failed: ${response.statusText}`);
             }
 
             const text = await response.text().trim();
 
-            // Check if the response is empty
             if (!text) {
                 console.error('Empty response');
-                throw new Error('Rent request failed');
+                throw new Error('Rent request failed: Empty response');
             }
 
             try {
-                // Parse the response as JSON
                 const data = JSON.parse(text);
-                console.log(data); // Log the entire data object to inspect its properties
+                console.log('Rent request successful:', data);
                 return data;
             } catch (jsonError) {
                 console.error('Invalid JSON:', jsonError);
-                throw new Error('Rent request failed');
+                throw new Error('Rent request failed: Invalid JSON');
             }
         } catch (error) {
             console.error('Error during sending rent request:', error);
-            throw new Error('Rent request failed');
+            throw new Error(`Rent request failed: ${error.message}`);
         }
     };
-
 
 
 

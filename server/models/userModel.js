@@ -54,15 +54,7 @@ class UserModel {
         }
     }
 
-    static async Login(email, password) {
-        const user = await new DB().FindOne("users", { email });
 
-        if (!user || user.password !== await hashPassword(password)) {
-            return null; // User not found or password doesn't match
-        }
-
-        return { user };
-    }
 
 
     static async Login(email, password) {
