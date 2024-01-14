@@ -73,7 +73,6 @@ class UserModel {
 
         try {
 
-
             userWithProduct.requested.push(product);
 
             await this.updateUser(userWithProduct);
