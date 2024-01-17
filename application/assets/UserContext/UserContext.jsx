@@ -126,6 +126,8 @@ export default function UserContextProvider({ children }) {
     const LoginUser = async () => {
 
         try {
+
+            console.log("im here")
             const response = await axios.post(`${API_BASE_URL}/login`, {
                 email,
                 password
@@ -156,7 +158,6 @@ export default function UserContextProvider({ children }) {
     };
 
 
-
     const RegisterUser = async (userData) => {
         try {
             const result = await fetch(`${API_BASE_URL}/register`, {
@@ -174,6 +175,7 @@ export default function UserContextProvider({ children }) {
             throw new Error('Registration failed');
         }
     };
+
 
 
     const findUserByOwnerId = (users, ownerId) => {

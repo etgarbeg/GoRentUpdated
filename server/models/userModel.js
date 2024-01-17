@@ -31,18 +31,16 @@ class UserModel {
         this.image = image;
         this.requested = null;//creating new user, no request yet
     }
-    //functions 
-    static async Register(username, password, firstName, lastName, email, country, city) {
-        const hashedPassword = await hashPassword(password);
 
+    static async Register(username, password, firstName, lastName, email, country, city) {
         const user = {
-            username,
-            password,
-            firstName,
-            lastName,
-            email,
-            country,
-            city,
+            username: String(username),
+            password: String(password), // Remember to hash the password in a real implementation
+            firstName: String(firstName),
+            lastName: String(lastName),
+            email: String(email),
+            country: String(country),
+            city: String(city),
         };
 
         try {
@@ -53,7 +51,6 @@ class UserModel {
             throw new Error('Registration failed');
         }
     }
-
 
 
 

@@ -62,24 +62,20 @@ userRouter.post('/sendRentRequest', async (req, res) => {
 
 
 
-
-userRouter.post('/register', UploadImage, async (req, res) => {
+userRouter.post('/register', async (req, res) => {
     try {
-        //create user
-        let { username, password, firstName, lastName, email, country, city } = req.body;
-        //save image
-        let { cloudinaryRes } = req;
-        console.log("2");
-        console.log(cloudinaryRes);
-        let imageUrl = cloudinaryRes != undefined ? cloudinaryRes.secure_url : '';
-        let user = await UserModel.Register(username, password, firstName, lastName, email, country, city, imageUrl);
-        res.status(201).json({ user });
-    }
-    catch (error) {
-        res.status(500).json({ error });
-    }
+        // Extract user data from the request body
+        const { username, password, firstName, lastName, email, country, city, imageUrl } = req.body;
 
-})
+        // Call the simplified Register method
+        const user = await UserModel.Register(username, password, firstName, lastName, email, country, city, imageUrl);
+
+        res.status(201).json({ user });
+    } catch (error) {
+        console.error('Registration failed. Please try again.', error);
+        res.status(500).json({ error: 'Registration failed' });
+    }
+});
 
 
 
