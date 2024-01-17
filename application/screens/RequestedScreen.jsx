@@ -2,18 +2,24 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import styles from '../assets/Styles/style';
+import { UserContext } from '../assets/UserContext/UserContext';
+import { useContext } from 'react';
 
-const RequestedItem = ({ item, onAccept, onCancel }) => {
+const RequestedItem = ({ item, onAccept, onCancel, products }) => {
+    const { users } = useContext(UserContext);
+    const requestedUser = users.find((user) => user._id === item.userRequested);
+    const product = products.find((p) => p.productId === item.productId);
+
     return (
         <View style={styles.requestedItemContainer}>
             <Image
-                source={{ uri: `${item.productImage}.jpg` }}
+                source={{ uri: `${product.productImage}.jpg` }}
                 style={styles.requestedItemImage}
             />
             <View style={styles.requestedItemDetails}>
-                <Text style={styles.requestedItemName}>{item.productName}</Text>
+                <Text style={styles.requestedItemName}>{product.productName}</Text>
                 <Text style={styles.requestedItemDetailsText}>
-                    Requested by: {item.userRequested}
+                    Requested by: {requestedUser.username}
                 </Text>
                 <Text style={styles.requestedItemDetailsText}>
                     Owner: {item.userAprovedId}
@@ -37,7 +43,11 @@ const RequestedItem = ({ item, onAccept, onCancel }) => {
     );
 };
 
-const RequestedListComponent = ({ requestedItems, onAccept, onCancel }) => {
+const RequestedListComponent = ({ onAccept, onCancel, users, products }) => {
+    const { currentUser } = useContext(UserContext);
+
+    const requestedItems = currentUser.requested || [];
+
     return (
         <View style={styles.requestedListContainer}>
             <Text style={styles.requestedListTitle}>Requested Items</Text>
@@ -50,12 +60,13 @@ const RequestedListComponent = ({ requestedItems, onAccept, onCancel }) => {
                         item={item}
                         onAccept={onAccept}
                         onCancel={onCancel}
+                        users={users}
+                        products={products}
                     />
                 ))
             )}
         </View>
     );
 };
-
 
 export default RequestedListComponent;
