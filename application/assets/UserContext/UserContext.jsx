@@ -142,7 +142,7 @@ export default function UserContextProvider({ children }) {
 
             // Check if the user object exists
             if (user) {
-                const otherUsers = users.filter(User => User.email !== user.email);
+                const otherUsers = users.filter(User => User._id !== user._id);
                 setOtherUsers(otherUsers)
                 console.log("user context - > other  users", otherUsers)
                 return user;  // Return the user object
