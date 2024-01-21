@@ -39,8 +39,20 @@ class UserModel {
             firstName: String(firstName),
             lastName: String(lastName),
             email: String(email),
-            country: String(country),
-            city: String(city),
+            adress: {
+                city: String(city),
+                street: "",  // You may need to provide street information if required
+            },
+            creditCard: {
+                cardNo: "",
+                exp: "",
+                cvv: "",
+            },
+            products: [],
+            requested: [],
+            image: "",  // Provide a default image URL or handle image upload separately
+            cart: [],
+            messages: [],
         };
 
         try {
@@ -53,7 +65,6 @@ class UserModel {
             throw new Error('Registration failed');
         }
     }
-
 
 
 
