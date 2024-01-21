@@ -191,12 +191,13 @@ export default function UserContextProvider({ children }) {
     };
 
 
-    const sendRentRequest = async ({ currentUserId, productId }) => {
+    const sendRentRequest = async ({ currentUserId, userWithProductId, productId }) => {
         try {
             const response = await axios.post(
                 `${API_BASE_URL}/sendRentRequest`,
                 {
                     currentUser: currentUserId,
+                    userWithProduct: userWithProductId,
                     product: productId
                 },
                 {
