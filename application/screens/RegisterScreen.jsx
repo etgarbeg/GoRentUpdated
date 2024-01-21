@@ -7,7 +7,7 @@ const RegisterScreen = ({ navigation }) => {
     const [err, setErrors] = useState('');
     const [Validpassword, setValidPassword] = useState('');
     const [AllCities, setAllCities] = useState([{}]);
-    const [id, setId] = useState(3);
+
 
     const {
         firstName,
@@ -46,7 +46,7 @@ const RegisterScreen = ({ navigation }) => {
 
         const ans = validateFormRegister(username, password, firstName, lastName, email, country, city, Validpassword);
         setErrors(ans);
-        setId(id + 1);
+
         if (ans == 'complited') {
 
             RegisterUser(username, password, firstName, lastName, email, country, city);
