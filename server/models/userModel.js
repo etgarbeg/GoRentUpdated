@@ -80,23 +80,25 @@ class UserModel {
 
         return { user };
     }
-    static async sendRentRequest(currentUserId, productId) {
+    // UserModel.js
 
+    static async sendRentRequest(currentUser, userWithProduct, product) {
         try {
-            const currentUser = this.FindById(currentUserId)
-            currentUser.cart.push(productId);
+            userWithProduct.requested.push(product);
 
-            await this.updateUser(currentUser);
+            await this.updateUser(userWithProduct);
 
             return {
-                productId
-
+                currentUser: currentUser,
+                product: product,
+                userWithProduct: userWithProduct,
             };
         } catch (error) {
             console.error('Error during sending rent request:', error);
             throw new Error('Rent request failed');
         }
     }
+
 
     static async updateUser(userData) {
         try {

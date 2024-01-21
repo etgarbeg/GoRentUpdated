@@ -33,22 +33,23 @@ userRouter.post('/login', async (req, res) => {
 
 
 
+// userRouter.js
+
 userRouter.post('/sendRentRequest', async (req, res) => {
-
-
     try {
-        const { currentUserId, productId } = req.body;
+        // Extract rent request data from the request body
+        const { currentUser, userWithProduct, product } = req.body;
 
-        // Call the sendRentRequest function from your user model
-        const result = await UserModel.sendRentRequest(currentUserId, productId);
+        // Call the sendRentRequest method
+        const rentRequest = await UserModel.sendRentRequest(currentUser, userWithProduct, product);
 
-        res.status(200).json({ success: true, message: 'Rent request sent successfully', data: result });
+        res.status(200).json(rentRequest);
     } catch (error) {
-
-
-        res.status(500).json({ success: false, error: `Rent request failed: ${error.message}` });
+        console.error('Rent request failed. Please try again.', error);
+        res.status(500).json({ error: 'Rent request failed' });
     }
 });
+
 
 
 

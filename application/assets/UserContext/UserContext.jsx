@@ -196,9 +196,8 @@ export default function UserContextProvider({ children }) {
             const response = await axios.post(
                 `${API_BASE_URL}/sendRentRequest`,
                 {
-                    currentUserId,
-
-                    productId
+                    currentUser: currentUserId,
+                    product: productId
                 },
                 {
                     headers: {
@@ -217,7 +216,6 @@ export default function UserContextProvider({ children }) {
             throw new Error(`Rent request failed: ${error.message}`);
         }
     };
-
 
 
     const value = {
