@@ -66,10 +66,10 @@ userRouter.post('/sendRentRequest', async (req, res) => {
 userRouter.post('/register', async (req, res) => {
     try {
         // Extract user data from the request body
-        const { username, password, firstName, lastName, email, country, city, imageUrl } = req.body;
+        const { username, password, firstName, lastName, email, country, city } = req.body;
 
         // Call the simplified Register method
-        const user = await UserModel.Register(username, password, firstName, lastName, email, country, city, imageUrl);
+        const user = await UserModel.Register(username, password, firstName, lastName, email, country, city);
 
         res.status(201).json({ user });
     } catch (error) {
