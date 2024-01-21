@@ -159,6 +159,8 @@ export default function UserContextProvider({ children }) {
     };
 
 
+    // Client-side code (React Native)
+
     const RegisterUser = async (userData) => {
         try {
             const result = await fetch(`${API_BASE_URL}/register`, {
