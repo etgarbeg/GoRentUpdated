@@ -144,6 +144,7 @@ export default function UserContextProvider({ children }) {
             if (user) {
                 const otherUsers = users.filter(User => User._id !== user._id);
                 setOtherUsers(otherUsers)
+                console.log("users", users)
                 console.log("user context - > other  users", otherUsers)
                 return user;  // Return the user object
 
