@@ -44,13 +44,16 @@ class UserModel {
         };
 
         try {
-            const insertedUser = await new DB().Insert("users", user);
-            return { user: insertedUser };
+            const response = await new DB().Insert("users", user);
+            console.log('Server Response:', response); // Log the entire response
+
+            return { user: response };
         } catch (error) {
             console.error('Error during registration:', error);
             throw new Error('Registration failed');
         }
     }
+
 
 
 
