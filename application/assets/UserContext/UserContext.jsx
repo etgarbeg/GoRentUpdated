@@ -161,24 +161,33 @@ export default function UserContextProvider({ children }) {
 
     // Client-side code (React Native)
 
-    const RegisterUser = async (userData) => {
+    const RegisterUser = async (username, password, firstName, lastName, email, country, city) => {
         try {
             const result = await fetch(`${API_BASE_URL}/register`, {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(userData)
+                body: JSON.stringify({
+                    username,
+                    password,
+                    firstName,
+                    lastName,
+                    email,
+                    country,
+                    city,
+                })
             });
 
             const data = await result.json();
+            console.log("in user context");
+            console.log(data);
             return data;
         } catch (error) {
             console.error('Registration failed. Please try again.', error);
             throw new Error('Registration failed');
         }
     };
-
 
 
     const findUserByOwnerId = (users, ownerId) => {

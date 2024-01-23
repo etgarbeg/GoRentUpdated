@@ -33,13 +33,14 @@ class UserModel {
     }
 
     static async Register(username, password, firstName, lastName, email, country, city) {
+
         const user = {
             username: String(username),
-            password: String(password), // Remember to hash the password in a real implementation
+            password: String(password),
             firstName: String(firstName),
             lastName: String(lastName),
             email: String(email),
-            adress: {
+            address: {
                 city: String(city),
                 street: "",  // You may need to provide street information if required
             },
@@ -65,6 +66,7 @@ class UserModel {
             throw new Error('Registration failed');
         }
     }
+
 
 
 
