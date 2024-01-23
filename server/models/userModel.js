@@ -102,6 +102,7 @@ class UserModel {
     }
 
 
+
     static async updateUser(userData) {
         try {
             // Database operation to update user

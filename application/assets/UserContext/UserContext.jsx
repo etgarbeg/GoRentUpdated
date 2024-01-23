@@ -227,8 +227,6 @@ export default function UserContextProvider({ children }) {
             throw new Error(`Rent request failed: ${error.message}`);
         }
     };
-
-
     const value = {
         email,
         users,
