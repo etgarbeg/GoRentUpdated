@@ -88,6 +88,7 @@ class UserModel {
         try {
             userWithProduct.requested.push(product);
 
+            // Assuming you have a method to update the user data in the database
             await this.updateUser(userWithProduct);
 
             return {

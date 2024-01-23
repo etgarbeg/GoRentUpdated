@@ -37,10 +37,8 @@ userRouter.post('/login', async (req, res) => {
 
 userRouter.post('/sendRentRequest', async (req, res) => {
     try {
-        // Extract rent request data from the request body
         const { currentUser, userWithProduct, product } = req.body;
 
-        // Call the sendRentRequest method
         const rentRequest = await UserModel.sendRentRequest(currentUser, userWithProduct, product);
 
         res.status(200).json(rentRequest);

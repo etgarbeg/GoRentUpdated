@@ -200,35 +200,25 @@ export default function UserContextProvider({ children }) {
     };
 
 
-    const sendRentRequest = async ({ currentUser, userWithProduct, product }) => {
+    const sendRentRequest = async (currentUser, userWithProduct, product) => {
+        const rentRequestData = {
+            currentUser: currentUser,
+            userWithProduct: userWithProduct,
+            product: product
+        };
+
         try {
-            const response = await axios.post(
-                `${API_BASE_URL}/sendRentRequest`,
-                {
-                    method: 'post',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        currentUser,
-                        userWithProduct,
-                        product
-                    })
+            userWithProduct.requested.push(product);
 
-                },
+            // You may need to update the user data in your database here
 
-            );
-            const data = await result.json();
-            if (!data) {
-                throw new Error(`Rent request failed: ${data}`);
-            }
-
-            alert(data);
-            return data; // Assuming the data field contains the relevant information
+            return rentRequestData;
         } catch (error) {
-            throw new Error(`Rent request failed: ${error.message}`);
+            console.error('Error during sending rent request:', error);
+            throw new Error('Rent request failed');
         }
     };
+
     const value = {
         email,
         users,
