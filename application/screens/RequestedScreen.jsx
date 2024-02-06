@@ -1,28 +1,23 @@
-// RequestedListComponent.js
-import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
-import styles from '../assets/Styles/style';
+import React, { useContext } from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { UserContext } from '../assets/UserContext/UserContext';
-import { useContext } from 'react';
+import styles from '../assets/Styles/style';
 
-const RequestedItem = ({ item, onAccept, onCancel, products }) => {
-    const { users } = useContext(UserContext);
+const RequestedItem = ({ item, onAccept, onCancel }) => {
+    const { users, currentUser } = useContext(UserContext);
+
     const requestedUser = users.find((user) => user._id === item.userRequested);
-    const product = products.find((p) => p.productId === item.productId);
+    const product = currentUser.products.find((p) => p.productId === item.productId);
 
     return (
         <View style={styles.requestedItemContainer}>
-            <Image
-                source={{ uri: `${product.productImage}.jpg` }}
-                style={styles.requestedItemImage}
-            />
             <View style={styles.requestedItemDetails}>
-                <Text style={styles.requestedItemName}>{product.productName}</Text>
+                <Text style={styles.requestedItemName}>{product?.productName}</Text>
                 <Text style={styles.requestedItemDetailsText}>
-                    Requested by: {requestedUser.username}
+                    Requested by: {requestedUser ? requestedUser.username : 'Unknown'}
                 </Text>
                 <Text style={styles.requestedItemDetailsText}>
-                    Owner: {item.userAprovedId}
+                    Owner: {item.userAprovedId || 'Unknown'}
                 </Text>
             </View>
             <View style={styles.requestedItemButtons}>
@@ -43,10 +38,9 @@ const RequestedItem = ({ item, onAccept, onCancel, products }) => {
     );
 };
 
-const RequestedListComponent = ({ onAccept, onCancel, users, products }) => {
+const RequestedListComponent = ({ onAccept, onCancel }) => {
     const { currentUser } = useContext(UserContext);
-
-    const requestedItems = currentUser.requested || [];
+    const requestedItems = currentUser?.requested || [];
 
     return (
         <View style={styles.requestedListContainer}>
@@ -60,8 +54,6 @@ const RequestedListComponent = ({ onAccept, onCancel, users, products }) => {
                         item={item}
                         onAccept={onAccept}
                         onCancel={onCancel}
-                        users={users}
-                        products={products}
                     />
                 ))
             )}
