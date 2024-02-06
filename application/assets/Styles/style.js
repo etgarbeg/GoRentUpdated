@@ -1765,6 +1765,69 @@ const styles = StyleSheet.create({
         color: '#424242', // Dark grey color
         fontWeight: 'bold', // Adjust as needed
     },
+    requestedListContainer: {
+        flex: 1,
+        padding: 20,
+        marginTop: 40,
+        marginHorizontal: 20,
+
+    },
+    requestedListTitle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    requestedItemContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 20,
+        paddingVertical: 20,
+        borderBottomWidth: 1,
+        borderBottomColor: '#ccc',
+        backgroundColor: 'rgba(0,0,0,0.1)',
+        borderRadius: 30,
+
+    },
+    requestedItemDetailsText: {
+        fontSize: 15
+    },
+
+    requestedItemDetails: {
+        flex: 1,
+        marginRight: 10,
+    },
+    requestedItemName: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 5,
+    },
+    requestedItemText: {
+        fontSize: 14,
+        marginBottom: 3,
+    },
+    requestedItemButtons: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    requestedItemButton: {
+        padding: 5,
+        borderRadius: 5,
+        marginHorizontal: 5,
+    },
+    acceptButton: {
+        backgroundColor: 'green',
+    },
+    cancelButton: {
+        backgroundColor: 'red',
+    },
+    buttonText: {
+        color: 'white',
+    },
+    noItemsText: {
+        fontSize: 16,
+        textAlign: 'center',
+    },
 }
 );
 

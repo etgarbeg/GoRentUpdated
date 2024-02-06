@@ -6,8 +6,8 @@ import styles from '../assets/Styles/style';
 const RequestedItem = ({ item, onAccept, onCancel }) => {
     const { users, currentUser } = useContext(UserContext);
 
-    const requestedUser = users.find((user) => user._id === item.userRequested);
-    const product = currentUser.products.find((p) => p.productId === item.productId);
+    const requestedUser = users.find((user) => user._id === item.userRequestId);
+    const product = currentUser.products.find((p) => p.productId == item.productId);
 
     return (
         <View style={styles.requestedItemContainer}>
@@ -16,9 +16,7 @@ const RequestedItem = ({ item, onAccept, onCancel }) => {
                 <Text style={styles.requestedItemDetailsText}>
                     Requested by: {requestedUser ? requestedUser.username : 'Unknown'}
                 </Text>
-                <Text style={styles.requestedItemDetailsText}>
-                    Owner: {item.userAprovedId || 'Unknown'}
-                </Text>
+
             </View>
             <View style={styles.requestedItemButtons}>
                 <TouchableOpacity
