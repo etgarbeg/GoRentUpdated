@@ -1829,6 +1829,73 @@ const styles = StyleSheet.create({
         fontSize: 16,
         textAlign: 'center',
     },
+    containerInbox: {
+        flex: 1,
+        backgroundColor: '#fff',
+        paddingHorizontal: 20,
+        paddingTop: 20,
+    },
+    profileSection: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 20,
+    },
+    profilePicture: {
+        width: 50,
+        height: 50,
+        resizeMode: 'cover',
+        borderRadius: 25,
+        marginRight: 10,
+    },
+    title: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#333',
+    },
+    actionButtonsContainerMas: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 20,
+    },
+    actionButtonMas: {
+        backgroundColor: '#007bff',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 5,
+    },
+    actionButtonTextMas: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    messageContainerMas: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 15,
+    },
+    messageContentMas: {
+        flex: 1,
+        marginLeft: 10,
+    },
+    usernameMas: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginBottom: 5,
+        color: '#333',
+    },
+    timestampMas: {
+        fontSize: 12,
+        color: '#666',
+        marginBottom: 5,
+    },
+    messageTextMas: {
+        fontSize: 14,
+        color: '#333',
+    },
+    productTextMas: {
+        fontWeight: 'bold',
+    },
+    
 }
 );
 

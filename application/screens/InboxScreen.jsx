@@ -1,89 +1,90 @@
 import React, { useContext } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
 import styles from '../assets/Styles/style';
 import SearchBar from '../assets/components/SearchBar';
 import { UserContext } from '../../application/assets/UserContext/UserContext';
 
 const InboxScreen = ({ navigation }) => {
-    const { currentUser, sendMessage, findUserByOwnerId, users } = useContext(UserContext);
+    const { currentUser, users, sendMessage } = useContext(UserContext);
 
     const findProductById = (productId) => currentUser.products.find((product) => product.productId === productId);
-    
     const findUserById = (userId) => users.find((user) => user._id === userId);
 
     const currentUserMessages = currentUser.messages;
 
     return (
         <View style={styles.containerInbox}>
-            <View style={styles.overlay} />
-            <View style={styles.profilePictureContainerInbox1}>
+            {/* Profile Picture and User Name */}
+            <View style={styles.profileSection}>
                 <Image
-                    style={{ width: '100%', height: '100%', resizeMode: 'cover', borderRadius: 50, borderWidth: 5, borderColor: 'rgba(255,255,255,0.9)' }}
+                    style={styles.profilePicture}
                     source={{ uri: currentUser.image }}
                     onError={(error) => console.error("Image error:", error)}
                 />
+                <Text style={styles.title}>{currentUser?.username || "Loading..."}</Text>
             </View>
-            <Text style={styles.titlee}>{currentUser?.username || "Loading..."}</Text>
+
+            {/* Search Bar */}
             <SearchBar />
-            <View style={styles.MainSectionInbox}>
-                <TouchableOpacity style={styles.actionButton3Inbox}>
-                    <Text style={styles.newMessageTextInbox}>New Message</Text>
+
+            {/* Action Buttons */}
+            <View style={styles.actionButtonsContainerMas}>
+                <TouchableOpacity style={styles.actionButtonMas} onPress={() => navigation.navigate('NewMessage')}>
+                    <Text style={styles.actionButtonTextMas}>New Message</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.actionButton3Inbox}>
-                    <Text style={styles.newMessageTextInbox}>Archive</Text>
-                </TouchableOpacity>
+                
             </View>
-            {currentUserMessages && currentUserMessages.length > 0 ? (
+
+            {/* Messages List */}
+            {currentUserMessages ? (
                 <FlatList
                     data={currentUserMessages}
-                    keyExtractor={(item, index) => index.toString()}
+                    keyExtractor={(item) => item._id} // Assuming each message has a unique ID
                     renderItem={({ item }) => {
                         const otherUserId = item.senderID === currentUser._id ? item.receiverId : item.senderID;
                         const otherUser = findUserById(otherUserId);
-                        const latestMessage = item;
+                        const product = findProductById(item.productRequestedID);
                         return (
                             <TouchableOpacity
-                                style={styles.useMessageContainerInbox}
-                                onPress={() =>
-                                    navigation.navigate('SingleChat', {
-                                        otherUserId: otherUser._id,
-                                        productRequestedID: latestMessage.productRequestedID,
-                                    })
-                                }
+                                style={styles.messageContainerMas}
+                                onPress={() => navigation.navigate('SingleChat', { otherUserId })}
                             >
                                 <Image
-                                    style={styles.profilePictureContainerInbox}
+                                    style={styles.profilePicture}
                                     source={{ uri: otherUser?.image }}
                                     onError={(error) => console.error("Image error:", error)}
                                 />
-                                <View style={styles.itemBoxInbox}>
-                                    <Text style={styles.usernameTitleInbox}>{otherUser.username}</Text>
-                                    <Text style={styles.timestampText}>
-                                        {new Date(latestMessage.timeStemp).toLocaleString('en-US', {
+                                <View style={styles.messageContentMas}>
+                                    <Text style={styles.username}>{otherUser?.username}</Text>
+                                    <Text style={styles.timestampMas}>
+                                        {new Date(item.timeStemp).toLocaleString('en-US', {
                                             hour: 'numeric',
                                             minute: 'numeric',
                                             month: 'numeric',
                                             day: 'numeric',
                                         })}
                                     </Text>
-                                    <Text style={styles.messageTextInbox}>
-                                        {latestMessage.txt}{' '}
-                                        {latestMessage.productRequestedID && (
-                                            <Text style={styles.productText}>
-                                                - {findProductById(latestMessage.productRequestedID)?.productName}
-                                            </Text>
+                                   
+                                    <Text style={styles.messageTextMas}>
+                                        {item.txt}{' '}
+                                        {item.productRequestedID && (
+                                            <Text style={styles.productTextMas}> - {product?.productName}</Text>
                                         )}
                                     </Text>
                                 </View>
+                            
                             </TouchableOpacity>
+                            
+                          
                         );
                     }}
                 />
+
             ) : (
-                <View style={styles.containerInbox}>
-                    <Text>No messages to display</Text>
-                </View>
+                <ActivityIndicator size="large" color="#0000ff" />
             )}
+
+
         </View>
     );
 };
