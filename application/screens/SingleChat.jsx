@@ -31,7 +31,12 @@ const SingleChat = ({ route, navigation }) => {
 
     const handleSendMessage = async () => {
         try {
-           
+            const senderID = currentUser._id; // Assuming currentUser contains user data
+            const receiverID = otherUserId; // Replace with actual receiver ID
+            const txt = newMessage; // Replace with the message text
+            const productRequestedID = productRequestedID; // Replace with actual product ID
+            const timeStemp = new Date().toISOString();
+
             const success = await sendUserMessage(senderID, receiverID, txt, productRequestedID, timeStemp);
 
             if (success) {
