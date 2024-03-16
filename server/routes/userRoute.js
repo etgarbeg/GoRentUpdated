@@ -92,7 +92,7 @@ userRouter.post('/messages', async (req, res) => {
         }
 
         // Call the sendMessage static method on UserModel
-        await UserModel.sendMessage({
+      const massege=  await UserModel.sendMessage({
             senderID,
             receiverID,
             txt,
@@ -100,7 +100,7 @@ userRouter.post('/messages', async (req, res) => {
             timeStemp
         });
 
-        res.status(200).json({ msg: "Message sent successfully." });
+        res.status(200).json(massege);
     } catch (error) {
         console.error('Error:', error); // Log the error for debugging
         res.status(500).json({ error: error.message }); // Send the error message in the response
