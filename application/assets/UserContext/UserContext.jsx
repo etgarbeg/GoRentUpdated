@@ -201,23 +201,26 @@ export default function UserContextProvider({ children }) {
 
 
 // In the UserContext.js file
-const sendMessage = async ( senderID, receiverID,txt,productRequestedID,timeStemp) => {
+const sendMessage = async (senderID, receiverID, txt, productRequestedID, timeStemp) => {
     try {
-       
         const result = await fetch(`${API_BASE_URL}/messages`, {
-            method: 'post',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                senderID,receiverID, txt,productRequestedID,timeStemp
+                senderID,
+                receiverID,
+                txt,
+                productRequestedID,
+                timeStemp
             })
         });
         const data = await result.json();
-        
-        console.log(data); // Optionally handle the response from the server
+        return data.success; // Assuming the server returns a success flag
     } catch (error) {
         console.error('Error sending message:', error);
+        throw new Error('Failed to send message');
     }
 };
 

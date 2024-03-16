@@ -30,15 +30,14 @@ const SingleChat = ({ route, navigation }) => {
     };
 
     const handleSendMessage = () => {
-    
-        sendMessage(currentUser._id, otherUserId,newMessage,productRequestedID,new Date().toISOString());
-        
-          
-
-        
-    
-        // Clear the message input
-        setNewMessage('');
+        sendMessage(currentUser._id, otherUserId, newMessage, productRequestedID, new Date().toISOString())
+            .then(() => {
+                console.log('Message sent successfully');
+                setNewMessage('');
+            })
+            .catch((error) => {
+                console.error('Error sending message:', error);
+            });
     };
     
 
