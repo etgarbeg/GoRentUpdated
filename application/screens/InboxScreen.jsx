@@ -1,44 +1,30 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native';
-
 import styles from '../assets/Styles/style';
 import SearchBar from '../assets/components/SearchBar';
-
 import { UserContext } from '../../application/assets/UserContext/UserContext';
 
 const InboxScreen = ({ navigation }) => {
-    const { currentUser, users } = useContext(UserContext);
+    const { currentUser, sendMessage, findUserByOwnerId, users } = useContext(UserContext);
 
-    const findProductById = (productId) => {
-        return currentUser.products.find((product) => product.productId === productId);
-    };
+    const findProductById = (productId) => currentUser.products.find((product) => product.productId === productId);
+    
+    const findUserById = (userId) => users.find((user) => user._id === userId);
 
-    const findUserById = (userId) => {
-        return users.find((user) => user._id === userId);
-    };
-
-    // Sort messages by date in descending order
-    const sortedMessages = currentUser.messages.slice().sort((a, b) => new Date(b.timeStemp) - new Date(a.timeStemp));
+    const currentUserMessages = currentUser.messages;
 
     return (
         <View style={styles.containerInbox}>
             <View style={styles.overlay} />
             <View style={styles.profilePictureContainerInbox1}>
                 <Image
-                    source={require('../assets/images/icon/navbar/profile.png')}
-                    style={{ width: '100%', height: '100%', resizeMode: 'cover' }}
+                    style={{ width: '100%', height: '100%', resizeMode: 'cover', borderRadius: '50%', borderWidth: 5, borderColor: 'rgba(255,255,255,0.9)' }}
+                    source={{ uri: currentUser.image }}
+                    onError={(error) => console.error("Image error:", error)}
                 />
             </View>
-            <Text style={styles.titlee}>
-                {sortedMessages.length > 0
-                    ? sortedMessages[0]?.receiverID === currentUser._id
-                        ? findUserById(sortedMessages[0]?.senderID)?.username
-                        : findUserById(sortedMessages[0]?.receiverID)?.username
-                    : ''}
-            </Text>
-
+            <Text style={styles.titlee}>{currentUser?.username || "Loading..."}</Text>
             <SearchBar />
-
             <View style={styles.MainSectionInbox}>
                 <TouchableOpacity style={styles.actionButton3Inbox}>
                     <Text style={styles.newMessageTextInbox}>New Message</Text>
@@ -47,52 +33,57 @@ const InboxScreen = ({ navigation }) => {
                     <Text style={styles.newMessageTextInbox}>Archive</Text>
                 </TouchableOpacity>
             </View>
-
-            <FlatList
-                data={sortedMessages}
-                keyExtractor={(message) => message.timeStemp}
-                renderItem={({ item: message }) => {
-                    const isCurrentUserSender = message.senderID === currentUser._id;
-                    const otherUserId = isCurrentUserSender ? message.receiverID : message.senderID;
-                    const otherUser = findUserById(otherUserId);
-
-                    return (
-                        <TouchableOpacity
-                            style={styles.useMessageContainerInbox}
-                            onPress={() =>
-                                navigation.navigate('SingleChat', {
-                                    otherUserId: otherUserId,
-                                    productRequestedID: message.productRequestedID,
-                                })
-                            }
-                        >
-                            <Image
-                                style={styles.profilePictureContainerInbox}
-                                source={{ uri: otherUser?.image }}
-                            />
-                            <View style={styles.itemBoxInbox}>
-                                <Text style={styles.usernameTitleInbox}>{otherUser?.username}</Text>
-                                <Text style={styles.timestampText}>
-                                    {new Date(message.timeStemp).toLocaleString('en-US', {
-                                        hour: 'numeric',
-                                        minute: 'numeric',
-                                        month: 'numeric',
-                                        day: 'numeric',
-                                    })}
-                                </Text>
-                                <Text style={styles.messageTextInbox}>
-                                    {message.txt}{' '}
-                                    {message.productRequestedID && (
-                                        <Text style={styles.productText}>
-                                            - {findProductById(message.productRequestedID)?.productName}
-                                        </Text>
-                                    )}
-                                </Text>
-                            </View>
-                        </TouchableOpacity>
-                    );
-                }}
-            />
+            {currentUserMessages && currentUserMessages.length > 0 ? (
+                <FlatList
+                    data={currentUserMessages}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({ item }) => {
+                        const otherUserId = item.senderID === currentUser._id ? item.receiverId : item.senderID;
+                        const otherUser = findUserById(otherUserId);
+                        const latestMessage = item;
+                        return (
+                            <TouchableOpacity
+                                style={styles.useMessageContainerInbox}
+                                onPress={() =>
+                                    navigation.navigate('SingleChat', {
+                                        otherUserId: otherUser._id,
+                                        productRequestedID: latestMessage.productRequestedID,
+                                    })
+                                }
+                            >
+                                <Image
+                                    style={styles.profilePictureContainerInbox}
+                                    source={{ uri: otherUser?.image }}
+                                    onError={(error) => console.error("Image error:", error)}
+                                />
+                                <View style={styles.itemBoxInbox}>
+                                    <Text style={styles.usernameTitleInbox}>{otherUser.username}</Text>
+                                    <Text style={styles.timestampText}>
+                                        {new Date(latestMessage.timeStemp).toLocaleString('en-US', {
+                                            hour: 'numeric',
+                                            minute: 'numeric',
+                                            month: 'numeric',
+                                            day: 'numeric',
+                                        })}
+                                    </Text>
+                                    <Text style={styles.messageTextInbox}>
+                                        {latestMessage.txt}{' '}
+                                        {latestMessage.productRequestedID && (
+                                            <Text style={styles.productText}>
+                                                - {findProductById(latestMessage.productRequestedID)?.productName}
+                                            </Text>
+                                        )}
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
+                        );
+                    }}
+                />
+            ) : (
+                <View style={styles.containerInbox}>
+                    <Text>No messages to display</Text>
+                </View>
+            )}
         </View>
     );
 };

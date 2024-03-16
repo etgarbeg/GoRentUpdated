@@ -106,7 +106,7 @@ const SingleChat = ({ route, navigation }) => {
                                                 <TouchableOpacity
                                                     style={styles.wideButton}
                                                     onPress={() =>
-                                                        navigation.navigate('MyRequestScreen', {
+                                                        navigation.navigate('RequestedScreen', {
                                                             // Pass any necessary parameters here
                                                         })
                                                     }

@@ -84,6 +84,13 @@ class UserModel {
     }
     // UserModel.js
 
+
+
+
+
+
+    
+
     static async sendRentRequest(currentUser, userWithProduct, product) {
         try {
             userWithProduct.requested.push(product);

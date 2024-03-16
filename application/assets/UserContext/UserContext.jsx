@@ -200,6 +200,30 @@ export default function UserContextProvider({ children }) {
     };
 
 
+
+    const sendMessage = async (senderId, receiverId, text) => {
+        try {
+            const response = await axios.post(`${API_BASE_URL}/messages`, {
+                userId1: senderId,
+                userId2: receiverId,
+            });
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
+    };
+
+
+
+
+
+
+
+
+
+
+
+
     const sendRentRequest = async (currentUser, userWithProduct, product) => {
         const rentRequestData = {
             currentUser: currentUser,
@@ -250,7 +274,7 @@ export default function UserContextProvider({ children }) {
         setCountry,
         RegisterUser,
         sendRentRequest, findUserByOwnerId,
-        setCurrentUser
+        setCurrentUser,sendMessage
 
     }
 
