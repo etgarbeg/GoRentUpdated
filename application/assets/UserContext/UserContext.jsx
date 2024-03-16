@@ -200,31 +200,16 @@ export default function UserContextProvider({ children }) {
     };
 
 
- const sendMessage = async (senderID, receiverID, txt, productRequestedID, timeStemp) => {
-    try {
-        // Send the message to the server
-        const response = await fetch(`${API_BASE_URL}/sendMessage`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ senderID, receiverID, txt, productRequestedID, timeStemp })
-        });
-
-        const data = await response.json();
-
-        if (data.success) {
-            console.log('Message sent successfully');
-            return true;
-        } else {
-            console.error('Failed to send message');
+    const sendUserMessage = async (senderID, receiverID, txt, productRequestedID, timeStemp) => {
+        try {
+            const success = await sendMessage(senderID, receiverID, txt, productRequestedID, timeStemp);
+            return success;
+        } catch (error) {
+            console.error('Error sending message from context:', error);
             return false;
         }
-    } catch (error) {
-        console.error('Error sending message:', error);
-        throw new Error('Failed to send message');
-    }
-}
+    };
+
 
 
 
@@ -287,7 +272,7 @@ export default function UserContextProvider({ children }) {
         setCountry,
         RegisterUser,
         sendRentRequest, findUserByOwnerId,
-        setCurrentUser,sendMessage
+        setCurrentUser,sendUserMessage
 
     }
 
