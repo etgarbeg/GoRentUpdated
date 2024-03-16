@@ -140,7 +140,7 @@ class UserModel {
         try {
             // Find sender and receiver users
             const senderUser = await UserModel.FindById(messageObj.senderID);
-            const receiverUser = await UserModel.FindById(messageObj.receiverID);
+            const receiverUser = await UserModel.FindById(messageObj.receiverId);
     
             if (!senderUser || !receiverUser) {
                 throw new Error("Sender or receiver not found.");
