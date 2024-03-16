@@ -140,29 +140,33 @@ class UserModel {
 
     static async sendMessage(senderID, receiverID, txt, productRequestedID, timeStemp) {
         try {
-            // Find sender and receiver users
-           
-           
-            
+            // Construct the message object
             const message = {
                 senderID: senderID,
                 receiverId: receiverID,
                 txt: txt,
                 productRequestedID: productRequestedID,
                 timeStemp: timeStemp
-            };   
-      
-           
-
+            };
+    
+            // Push the message to the sender's messages array
+            const sender = await UserModel.FindById(senderID);
+            sender.messages.push(message);
+            await UserModel.updateUser(sender);
+    
+            // Push the message to the receiver's messages array
+            const receiver = await UserModel.FindById(receiverID);
+            receiver.messages.push(message);
+            await UserModel.updateUser(receiver);
+    
+            console.log('Message sent successfully:', message);
             return true;
-        }
-        
-        
-        
-        catch (error) {
-            throw error;
+        } catch (error) {
+            console.error('Error sending message:', error);
+            throw new Error('Failed to send message');
         }
     }
+    
     
     
 
