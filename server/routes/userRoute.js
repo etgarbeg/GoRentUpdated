@@ -91,7 +91,7 @@ userRouter.post('/messages', async (req, res) => {
             timeStemp} = req.body;
            
 
-        if (senderID || !receiverID || !txt || !productRequestedID||!timeStemp) {
+        if (!senderID || !receiverID || !txt || !productRequestedID||!timeStemp) {
             res.status(400).json({ msg: "Missing message details in the request body." });
             return;
         }
@@ -106,11 +106,7 @@ userRouter.post('/messages', async (req, res) => {
         }
 
         // Add the message to sender's messages array
-        const message = await UserModel.sendMessage(senderID,
-            receiverID,
-            txt,
-            productRequestedID,
-            timeStemp);
+        const message = await UserModel.sendMessage(senderID,receiverID,txt,productRequestedID,timeStemp);
 
 
         // Update sender in the database
