@@ -210,13 +210,13 @@ const sendMessage = async (messageObj) => {
             },
             body: JSON.stringify(messageObj),
         });
-        const data = await result.json(); // Corrected from response to result
+
+        const data = await result.json();
         console.log(data); // Optionally handle the response from the server
     } catch (error) {
         console.error('Error sending message:', error);
     }
 };
-
 
 
 

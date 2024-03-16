@@ -150,7 +150,7 @@ class UserModel {
             senderUser.messages.push(messageObj);
     
             // Update sender in the database
-            await UpdateUser(senderUser);
+            await UserModel.updateUser(senderUser);
     
             return "Message sent successfully!";
         } catch (error) {
