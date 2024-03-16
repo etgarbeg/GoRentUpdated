@@ -151,9 +151,8 @@ class UserModel {
             };   
       
            
-console.log("Message added to receiver's messages array:", message);
 
-            return "Message sent successfully!";
+            return true;
         }
         
         
