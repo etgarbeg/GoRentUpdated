@@ -39,7 +39,7 @@ const InboxScreen = ({ navigation }) => {
             {currentUserMessages ? (
                 <FlatList
                     data={currentUserMessages}
-                    keyExtractor={(item) => item._id} // Assuming each message has a unique ID
+                    keyExtractor={(item) => item.timeStemp} // Assuming each message has a unique ID
                     renderItem={({ item }) => {
                         const otherUserId = item.senderID === currentUser._id ? item.receiverId : item.senderID;
                         const otherUser = findUserById(otherUserId);

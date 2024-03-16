@@ -90,7 +90,7 @@ userRouter.post('/messages', async (req, res) => {
             res.status(400).json({ msg: "Missing message details in the request body." });
             return;
         }
-
+        console.log("here")
         // Call the sendMessage static method on UserModel
       const massege=  await UserModel.sendMessage(
             senderID,

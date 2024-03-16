@@ -139,13 +139,14 @@ class UserModel {
     static async sendMessage(senderID, receiverID, txt, productRequestedID, timeStemp) {
         try {
             // Find sender and receiver users
+           
             const senderUser = await UserModel.FindById(senderID);
             const receiverUser = await UserModel.FindById(receiverID);
     
             if (!senderUser || !receiverUser) {
                 throw new Error("Sender or receiver not found.");
             }
-            console.log("here")
+          
             const message = {
                 senderID: senderID,
                 receiverId: receiverID,
@@ -153,16 +154,16 @@ class UserModel {
                 productRequestedID: productRequestedID,
                 timeStemp: timeStemp
             };   
-            
+       
          // Add the message to sender's messages array
 console.log("Message added to sender's messages array:", message);
 senderUser.messages.push(message);
-await UserModel.updateUser(senderUser);
+//await UserModel.updateUser(senderUser);
 
 // Add the message to receiver's messages array
 console.log("Message added to receiver's messages array:", message);
 receiverUser.messages.push(message);
-await UserModel.updateUser(receiverUser);
+//await UserModel.updateUser(receiverUser);
 
             return "Message sent successfully!";
         } catch (error) {
