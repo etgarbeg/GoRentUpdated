@@ -148,7 +148,8 @@ class UserModel {
                 txt: txt,
                 productRequestedID: productRequestedID,
                 timeStemp: timeStemp
-            };   
+            };   console.log(message.senderID)
+      
             const senderUser = await this.FindById(senderID);
             const receiverUser = await this.FindById(receiverID);
     console.log(senderUser._id)
