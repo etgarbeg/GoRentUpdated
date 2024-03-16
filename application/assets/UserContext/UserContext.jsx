@@ -204,13 +204,14 @@ export default function UserContextProvider({ children }) {
 const sendMessage = async (messageObj) => {
     try {
         const result = await fetch(`${API_BASE_URL}/messages`, {
-            method: 'POST',
+            method: 'post',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(messageObj),
+            body: JSON.stringify({
+                messageObj
+            })
         });
-
         const data = await result.json();
         console.log(data); // Optionally handle the response from the server
     } catch (error) {
