@@ -86,7 +86,7 @@ userRouter.post('/messages', async (req, res) => {
     try {
         const messageObj = req.body;
 
-        if (!messageObj.senderID || !messageObj.receiverID || !messageObj.txt || !messageObj.timeStemp) {
+        if (!messageObj.senderID || !messageObj.receiverId || !messageObj.txt || !messageObj.timeStemp) {
             res.status(400).json({ msg: "Missing message details in the request body." });
             return;
         }
