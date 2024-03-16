@@ -113,11 +113,13 @@ class UserModel {
 
     static async updateUser(userData) {
         try {
-            // Database operation to update user
-            await new DB().Update('users', { _id: userData._id }, userData);
-        } catch (dbError) {
-            console.error('Error during database operation:', dbError);
-            throw new Error('Database operation failed');
+            // Update the user data in the database
+            await DB().update('users', { _id: userData._id }, userData);
+            console.log('User data updated successfully:', userData);
+            return true; // Return true to indicate successful update
+        } catch (error) {
+            console.error('Error updating user data:', error);
+            throw new Error('Failed to update user data');
         }
     }
 
