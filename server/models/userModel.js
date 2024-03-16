@@ -136,7 +136,7 @@ class UserModel {
     }
 
 
-    static async sendMessage(senderID,receiverID,txt,productRequestedID,timeStemp) {
+    static async sendMessage(senderID, receiverID, txt, productRequestedID, timeStemp) {
         try {
             // Find sender and receiver users
             const senderUser = await UserModel.FindById(senderID);
@@ -145,18 +145,29 @@ class UserModel {
             if (!senderUser || !receiverUser) {
                 throw new Error("Sender or receiver not found.");
             }
-    const message={senderID:senderID,receiverId:receiverID,txt:txt,productRequestedID:productRequestedID,timeStemp:timeStemp};
-            // Add the message to sender's messages array
+    
+            const message = {
+                senderID: senderID,
+                receiverId: receiverID,
+                txt: txt,
+                productRequestedID: productRequestedID,
+                timeStemp: timeStemp
+            };
+    
+            // Add the message to sender's and receiver's messages array
             senderUser.messages.push(message);
             receiverUser.messages.push(message);
     
-       
+            // Update sender and receiver in the database
+            await UserModel.updateUser(senderUser);
+            await UserModel.updateUser(receiverUser);
     
             return "Message sent successfully!";
         } catch (error) {
             throw error;
         }
     }
+    
     
 
 
