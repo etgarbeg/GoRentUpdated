@@ -18,7 +18,7 @@ const InboxScreen = ({ navigation }) => {
             <View style={styles.overlay} />
             <View style={styles.profilePictureContainerInbox1}>
                 <Image
-                    style={{ width: '100%', height: '100%', resizeMode: 'cover', borderRadius: '50%', borderWidth: 5, borderColor: 'rgba(255,255,255,0.9)' }}
+                    style={{ width: '100%', height: '100%', resizeMode: 'cover', borderRadius: 50, borderWidth: 5, borderColor: 'rgba(255,255,255,0.9)' }}
                     source={{ uri: currentUser.image }}
                     onError={(error) => console.error("Image error:", error)}
                 />
