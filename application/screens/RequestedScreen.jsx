@@ -10,7 +10,7 @@ const RequestedItem = ({ item, onAccept, onCancel }) => {
     const product = currentUser.products.find((p) => p.productId == item.productId);
 
     return (
-        <View style={styles.requestedItemContainer}>
+        <View style={[styles.requestedItemContainer, { marginBottom: 15 }]}>
             <View style={styles.requestedItemDetails}>
                 <Text style={styles.requestedItemName}>{product?.productName}</Text>
                 <Text style={styles.requestedItemDetailsText}>
@@ -39,6 +39,19 @@ const RequestedListComponent = ({ onAccept, onCancel }) => {
     const { currentUser } = useContext(UserContext);
     const requestedItems = currentUser?.requested || [];
 
+
+    const handleAccept = (item) => {
+        // Call the onAccept function passed from props with the item
+        onAccept(item);
+    };
+
+    const handleCancel = (item) => {
+       alert("canclation")
+    };
+
+
+
+
     return (
         <View style={styles.requestedListContainer}>
             <Text style={styles.requestedListTitle}>Requested Items</Text>
@@ -46,7 +59,7 @@ const RequestedListComponent = ({ onAccept, onCancel }) => {
                 data={requestedItems}
                 keyExtractor={(item) => item.userRequestId}
                 renderItem={({ item }) => (
-                    <RequestedItem item={item} onAccept={onAccept} onCancel={onCancel} />
+                    <RequestedItem item={item} onAccept={handleAccept} onCancel={handleCancel} />
                 )}
             />
         </View>
