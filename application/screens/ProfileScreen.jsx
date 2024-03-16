@@ -23,7 +23,7 @@ const ProfileScreen = ({ navigation }) => {
 
             <View style={styles.overlay} />
             <View style={styles.profilePictureContainer}>
-            <Image   style={{ width: '100%', height: '100%', resizeMode: 'cover',borderRadius:'50%',borderWidth:5,borderColor:'rgba(255,255,255,0.9)' }} source={{ uri: currentUser.image }} onError={(error) => console.error("Image error:", error)} />
+            <Image   style={{ width: '100%', height: '100%', resizeMode: 'cover',borderRadius:50,borderWidth:5,borderColor:'rgba(255,255,255,0.9)' }} source={{ uri: currentUser.image }} onError={(error) => console.error("Image error:", error)} />
                   
                 
                 <Text style={styles.title}>{currentUser.username}</Text>

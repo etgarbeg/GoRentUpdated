@@ -6,7 +6,7 @@ import { UserContext } from '../../application/assets/UserContext/UserContext';
 
 const SingleChat = ({ route, navigation }) => {
     const { otherUserId, productRequestedID } = route.params;
-    const { currentUser, users, setUsers } = useContext(UserContext);
+    const { currentUser, users, setUsers,sendMessage } = useContext(UserContext);
     const [newMessage, setNewMessage] = useState('');
     const scrollViewRef = useRef();
 
@@ -37,21 +37,14 @@ const SingleChat = ({ route, navigation }) => {
             productRequestedID: productRequestedID,
             timeStemp: new Date().toISOString(),
         };
-
-        currentUser.messages.push(newMessageObj);
-
-        // Find the recipient user
-        const recipient = users.find((user) => user._id === otherUserId);
-
-        if (recipient) {
-            recipient.messages.push(newMessageObj);
-
-            // Update the state to trigger re-render
-            setUsers([...users]);
-        }
-
+    
+        // Use the sendMessage function from the UserContext to send the message
+        sendMessage(senderID,receiverID,txt);
+    
+        // Clear the message input
         setNewMessage('');
     };
+    
 
     return (
         <KeyboardAvoidingView
