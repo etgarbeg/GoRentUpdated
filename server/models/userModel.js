@@ -136,40 +136,30 @@ class UserModel {
     }
 
 
-    static async sendMessage(senderId, receiverId, text) {
+    static async sendMessage(messageObj) {
         try {
             // Find sender and receiver users
-            const senderUser = await UserModel.FindById(senderId);
-            const receiverUser = await UserModel.FindById(receiverId);
+            const senderUser = await UserModel.FindById(messageObj.senderID);
+            const receiverUser = await UserModel.FindById(messageObj.receiverID);
     
             if (!senderUser || !receiverUser) {
                 throw new Error("Sender or receiver not found.");
             }
     
-            // Create a message object
-            const message = {
-                senderID: senderId, // Update to sender's ID
-                receiverID: receiverId, // Update to receiver's ID
-                txt: text, // Update to message text
-                timeStemp: new Date().toISOString(), // Include a timestamp for when the message is sent
-            };
-    
             // Add the message to sender's messages array
-            senderUser.messages.push(message);
+            senderUser.messages.push(messageObj);
     
             // Update sender in the database
-            await UserModel.UpdateUser(senderUser);
+            await UpdateUser(senderUser);
     
             return "Message sent successfully!";
         } catch (error) {
             throw error;
         }
     }
-
     
 
 
-    
     static async updateProfile(userId, updatedProfile) {
         const db = new DB();
         await db.Update("users", { _id: userId }, updatedProfile);

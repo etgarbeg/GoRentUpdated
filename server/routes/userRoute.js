@@ -84,32 +84,24 @@ userRouter.post('/register', async (req, res) => {
 ///messeges between two users 
 userRouter.post('/messages', async (req, res) => {
     try {
-        const { senderID, receiverID, txt, timeStemp } = req.body;
+        const messageObj = req.body;
 
-        if (!senderID || !receiverID || !txt || !timeStemp) {
+        if (!messageObj.senderID || !messageObj.receiverId || !messageObj.txt || !messageObj.timeStemp) {
             res.status(400).json({ msg: "Missing message details in the request body." });
             return;
         }
 
         // Find sender and receiver users
-        const senderUser = await UserModel.FindById(senderID);
-        const receiverUser = await UserModel.FindById(receiverID);
+        const senderUser = await UserModel.FindById(messageObj.senderID);
+        const receiverUser = await UserModel.FindById(messageObj.receiverId);
 
         if (!senderUser || !receiverUser) {
             res.status(404).json({ msg: "One or both users not found." });
             return;
         }
 
-        // Create a message object
-        const message = {
-            senderID: senderID,
-            receiverID: receiverID,
-            txt: txt,
-            timeStemp: timeStemp,
-        };
-
         // Add the message to sender's messages array
-        senderUser.messages.push(message);
+        senderUser.messages.push(messageObj);
 
         // Update sender and receiver in the database
         await UserModel.UpdateUser(senderUser);
@@ -119,7 +111,6 @@ userRouter.post('/messages', async (req, res) => {
         res.status(500).json({ error });
     }
 });
-
 
 // { username: "newUsername", email: "newEmail@example.com", ...otherFields }
 // Express route handler for updating a user's profile based on form data
