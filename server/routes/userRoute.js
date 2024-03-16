@@ -84,35 +84,41 @@ userRouter.post('/register', async (req, res) => {
 ///messeges between two users 
 userRouter.post('/messages', async (req, res) => {
     try {
-        const { userId1, userId2 } = req.body;
+        const { senderID, receiverID, txt, timeStemp } = req.body;
 
-        if (!userId1 || !userId2) {
-            res.status(400).json({ msg: "Both user IDs are required in the request body." });
+        if (!senderID || !receiverID || !txt || !timeStemp) {
+            res.status(400).json({ msg: "Missing message details in the request body." });
             return;
         }
 
-        const user1 = await UserModel.FindById(userId1);
-        const user2 = await UserModel.FindById(userId2);
+        // Find sender and receiver users
+        const senderUser = await UserModel.FindById(senderID);
+        const receiverUser = await UserModel.FindById(receiverID);
 
-        if (!user1 || !user2) {
+        if (!senderUser || !receiverUser) {
             res.status(404).json({ msg: "One or both users not found." });
             return;
         }
 
-        const messagesBetweenUsers = user1.messages.filter(message => {
-            // Considering a basic two-way communication (where sender and receiver are considered)
-            return (
-                (message.name === user1.name && message.text.includes(user2.name)) ||
-                (message.name === user2.name && message.text.includes(user1.name))
-            );
-        });
+        // Create a message object
+        const message = {
+            senderID: senderID,
+            receiverID: receiverID,
+            txt: txt,
+            timeStemp: timeStemp,
+        };
 
-        res.status(200).json(messagesBetweenUsers);
+        // Add the message to sender's messages array
+        senderUser.messages.push(message);
+
+        // Update sender and receiver in the database
+        await UserModel.UpdateUser(senderUser);
+
+        res.status(200).json({ msg: "Message sent successfully." });
     } catch (error) {
         res.status(500).json({ error });
     }
 });
-
 
 
 // { username: "newUsername", email: "newEmail@example.com", ...otherFields }

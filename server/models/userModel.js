@@ -141,33 +141,35 @@ class UserModel {
             // Find sender and receiver users
             const senderUser = await UserModel.FindById(senderId);
             const receiverUser = await UserModel.FindById(receiverId);
-
+    
             if (!senderUser || !receiverUser) {
                 throw new Error("Sender or receiver not found.");
             }
-
+    
             // Create a message object
             const message = {
-                sender: senderUser.name,
-                receiver: receiverUser.name,
-                text: text,
-                timestamp: new Date().toISOString(), // Include a timestamp for when the message is sent
+                senderID: senderId, // Update to sender's ID
+                receiverID: receiverId, // Update to receiver's ID
+                txt: text, // Update to message text
+                timeStemp: new Date().toISOString(), // Include a timestamp for when the message is sent
             };
-
-            // Add the message to sender's and receiver's messages array
+    
+            // Add the message to sender's messages array
             senderUser.messages.push(message);
-            receiverUser.messages.push(message);
-
-            // Update sender and receiver in the database
+    
+            // Update sender in the database
             await UserModel.UpdateUser(senderUser);
-            await UserModel.UpdateUser(receiverUser);
-
+    
             return "Message sent successfully!";
         } catch (error) {
             throw error;
         }
     }
-    //?????
+
+    
+
+
+    
     static async updateProfile(userId, updatedProfile) {
         const db = new DB();
         await db.Update("users", { _id: userId }, updatedProfile);

@@ -201,17 +201,22 @@ export default function UserContextProvider({ children }) {
 
 
 
-    const sendMessage = async (senderId, receiverId, text) => {
-        try {
-            const response = await axios.post(`${API_BASE_URL}/messages`, {
-                userId1: senderId,
-                userId2: receiverId,
-            });
-            return response.data;
-        } catch (error) {
-            throw error;
-        }
-    };
+    // In the UserContext.js file
+const sendMessage = async (messageObj) => {
+    try {
+        const response = await fetch('/messages', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(messageObj),
+        });
+        const data = await response.json();
+        console.log(data); // Optionally handle the response from the server
+    } catch (error) {
+        console.error('Error sending message:', error);
+    }
+};
 
 
 
