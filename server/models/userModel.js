@@ -197,14 +197,7 @@ class UserModel {
         }
     }
 
-    static async SearchUsers(query) {
-        // Implement a search mechanism based on your application's requirements
-        const results = await new DB().FindAll("users", { $text: { $search: query } });
-
-        return results;
-    }
-
-
+   
 
 }
 
