@@ -148,6 +148,7 @@ class UserModel {
     const message={senderID:senderID,receiverId:receiverID,txt:txt,productRequestedID:productRequestedID,timeStemp:timeStemp};
             // Add the message to sender's messages array
             senderUser.messages.push(message);
+            receiverUser.messages.push(message);
     
             // Update sender in the database
             await UserModel.updateUser(senderUser);

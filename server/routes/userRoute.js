@@ -86,19 +86,19 @@ userRouter.post('/messages', async (req, res) => {
     try {
         const { senderID, receiverID, txt, productRequestedID, timeStemp } = req.body;
 
-        if (!senderID || !receiverID || !txt || !productRequestedID || !timeStemp) {
+        if (!txt ) {
             res.status(400).json({ msg: "Missing message details in the request body." });
             return;
         }
 
         // Call the sendMessage static method on UserModel
-      const massege=  await UserModel.sendMessage({
+      const massege=  await UserModel.sendMessage(
             senderID,
             receiverID,
             txt,
             productRequestedID,
             timeStemp
-        });
+        );
 
         res.status(200).json(massege);
     } catch (error) {
