@@ -154,14 +154,16 @@ class UserModel {
                 timeStemp: timeStemp
             };
     
-            // Add the message to sender's and receiver's messages array
-            senderUser.messages.push(message);
-            receiverUser.messages.push(message);
-    
-            // Update sender and receiver in the database
-            await UserModel.updateUser(senderUser);
-            await UserModel.updateUser(receiverUser);
-    
+         // Add the message to sender's messages array
+console.log("Message added to sender's messages array:", message);
+senderUser.messages.push(message);
+await UserModel.updateUser(senderUser);
+
+// Add the message to receiver's messages array
+console.log("Message added to receiver's messages array:", message);
+receiverUser.messages.push(message);
+await UserModel.updateUser(receiverUser);
+
             return "Message sent successfully!";
         } catch (error) {
             throw error;
