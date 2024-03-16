@@ -102,9 +102,11 @@ userRouter.post('/messages', async (req, res) => {
 
         res.status(200).json({ msg: "Message sent successfully." });
     } catch (error) {
-        res.status(500).json({ error });
+        console.error('Error:', error); // Log the error for debugging
+        res.status(500).json({ error: error.message }); // Send the error message in the response
     }
 });
+
 
 
 

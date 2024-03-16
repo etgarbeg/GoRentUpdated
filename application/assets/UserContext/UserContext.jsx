@@ -213,6 +213,7 @@ const sendMessage = async ( senderID, receiverID,txt,productRequestedID,timeStem
             })
         });
         const data = await result.json();
+       
         console.log(data); // Optionally handle the response from the server
     } catch (error) {
         console.error('Error sending message:', error);

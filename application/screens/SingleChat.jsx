@@ -30,16 +30,7 @@ const SingleChat = ({ route, navigation }) => {
     };
 
     const handleSendMessage = () => {
-        // const newMessageObj = {
-        //     senderID: currentUser._id,
-        //     receiverId: otherUserId,
-        //     txt: newMessage,
-        //     productRequestedID: productRequestedID,
-        //     timeStemp: new Date().toISOString(),
-        // };
     
-        // Use the sendMessage function from the UserContext to send the message
-  
         sendMessage(currentUser._id, otherUserId,newMessage,productRequestedID,new Date().toISOString());
     
         // Clear the message input
