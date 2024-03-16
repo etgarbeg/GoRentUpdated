@@ -31,10 +31,11 @@ const SingleChat = ({ route, navigation }) => {
 
     const handleSendMessage = () => {
     
-        if(sendMessage(currentUser._id, otherUserId,newMessage,productRequestedID,new Date().toISOString()))
-        {
-console.log("Message sent successfull")
-        };
+        sendMessage(currentUser._id, otherUserId,newMessage,productRequestedID,new Date().toISOString());
+        
+          
+
+        
     
         // Clear the message input
         setNewMessage('');
