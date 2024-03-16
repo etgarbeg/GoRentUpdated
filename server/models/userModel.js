@@ -141,14 +141,14 @@ class UserModel {
             // Find sender and receiver users
            
            
-          
+            console.log(senderID)
             const message = {
                 senderID: senderID,
                 receiverId: receiverID,
                 txt: txt,
                 productRequestedID: productRequestedID,
                 timeStemp: timeStemp
-            };   console.log(message.senderID)
+            };   
       
             const senderUser = await this.FindById(senderID);
             const receiverUser = await this.FindById(receiverID);
