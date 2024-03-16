@@ -150,22 +150,8 @@ class UserModel {
                 timeStemp: timeStemp
             };   
       
-            const senderUser = await this.FindById(senderID);
-            const receiverUser = await this.FindById(receiverID);
-    console.log(senderUser._id)
-    console.log(senderUser._id)
-            if (!senderUser || !receiverUser) {
-                throw new Error("Sender or receiver not found.");
-            }
-
-console.log("Message added to sender's messages array:", message);
-senderUser.messages.push(message);
-await this.updateUser(senderUser);
-
-
+           
 console.log("Message added to receiver's messages array:", message);
-receiverUser.messages.push(message);
-await this.updateUser(receiverUser);
 
             return "Message sent successfully!";
         }
