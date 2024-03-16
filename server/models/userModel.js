@@ -141,7 +141,7 @@ class UserModel {
             // Find sender and receiver users
            
            
-            console.log(senderID)
+            
             const message = {
                 senderID: senderID,
                 receiverId: receiverID,
