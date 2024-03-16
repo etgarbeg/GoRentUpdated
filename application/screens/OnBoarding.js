@@ -24,6 +24,14 @@ const OnBoardingScreen = ({ navigation }) => { // Add onComplete as a prop
                             community
                         </Text>
                     ),
+                    subtitle: (
+                        <Text style={{ fontSize: 30, fontWeight: 'bold', textAlign: 'center', width: 300, position: 'absolute', top: 230, color: 'rgba(0,0,0,0.8)' }}>
+
+                          
+                        </Text>
+
+                    ),
+
 
                     image: (
                         <Image

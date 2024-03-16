@@ -857,7 +857,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: 300,
-        position: 'fixed',
+      
         top: 50,
         left: 50,
         height: 300,
