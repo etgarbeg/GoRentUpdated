@@ -140,8 +140,8 @@ class UserModel {
         try {
             // Find sender and receiver users
            
-            const senderUser = await FindById(senderID);
-            const receiverUser = await FindById(receiverID);
+            const senderUser = await UserModel.FindById(senderID);
+            const receiverUser = await UserModel.FindById(receiverID);
     
             if (!senderUser || !receiverUser) {
                 throw new Error("Sender or receiver not found.");
@@ -158,12 +158,12 @@ class UserModel {
          // Add the message to sender's messages array
 console.log("Message added to sender's messages array:", message);
 senderUser.messages.push(message);
-await updateUser(senderUser);
+await UserModel.updateUser(senderUser);
 
 // Add the message to receiver's messages array
 console.log("Message added to receiver's messages array:", message);
 receiverUser.messages.push(message);
-await updateUser(receiverUser);
+await UserModel.updateUser(receiverUser);
 
             return "Message sent successfully!";
         } catch (error) {
