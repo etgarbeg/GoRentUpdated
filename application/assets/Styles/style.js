@@ -231,7 +231,15 @@ const styles = StyleSheet.create({
          // Optional: Add borderRadius for rounded corners
         
     },
+    itemContainer1:{
+backgroundColor:'white',
+padding:10,
+borderRadius:30,
 
+
+
+
+    },
     //icon
     heartIconContainer: {
         position: 'absolute',
@@ -1570,7 +1578,7 @@ const styles = StyleSheet.create({
         padding: 15,
         backgroundColor: '#ffffff',
         borderRadius: 10,
-        marginBottom: 10,
+        marginBottom: 20,
         marginTop: 40,
         elevation: 2, // For Android shadow
         shadowColor: '#000', // For iOS shadow

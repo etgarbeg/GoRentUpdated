@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { UserContext } from '../assets/UserContext/UserContext';
 import styles from '../assets/Styles/style';
 
@@ -41,27 +41,14 @@ const RequestedListComponent = ({ onAccept, onCancel }) => {
 
     return (
         <View style={styles.requestedListContainer}>
-            <Text style={styles.requestedListTitle}>Cart Items</Text>
-            {currentUser.cart && currentUser.cart.length > 0 ? (
-                currentUser.cart.map((item) => (
-                    <Text key={item.productId}>{item.productName}</Text>
-                ))
-            ) : (
-                <Text>No items in cart</Text>
-            )}
             <Text style={styles.requestedListTitle}>Requested Items</Text>
-            {requestedItems.length === 0 ? (
-                <Text>No items</Text>
-            ) : (
-                requestedItems.map((item) => (
-                    <RequestedItem
-                        key={item.userRequestId}
-                        item={item}
-                        onAccept={onAccept}
-                        onCancel={onCancel}
-                    />
-                ))
-            )}
+            <FlatList
+                data={requestedItems}
+                keyExtractor={(item) => item.userRequestId}
+                renderItem={({ item }) => (
+                    <RequestedItem item={item} onAccept={onAccept} onCancel={onCancel} />
+                )}
+            />
         </View>
     );
 };
