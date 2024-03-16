@@ -33,6 +33,8 @@ const SingleChat = ({ route, navigation }) => {
         sendMessage(currentUser._id, otherUserId, newMessage, productRequestedID, new Date().toISOString())
             .then(() => {
                 console.log('Message sent successfully');
+                console.log(currentUser.messages);
+
                 setNewMessage('');
             })
             .catch((error) => {
