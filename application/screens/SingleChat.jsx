@@ -29,17 +29,26 @@ const SingleChat = ({ route, navigation }) => {
         return foundProduct;
     };
 
-    const handleSendMessage = () => {
-        sendMessage(currentUser._id, otherUserId, newMessage, productRequestedID, new Date().toISOString())
-            .then(() => {
+    const handleSendMessage = async () => {
+        try {
+            // Send the message
+            const success = await sendMessage(currentUser._id, otherUserId, newMessage, productRequestedID, new Date().toISOString());
+            
+            if (success) {
                 console.log('Message sent successfully');
-                console.log(currentUser.messages);
-
+                
+                // Fetch updated user data from the server
+                const updatedUser = await fetchUserData(currentUser._id); // Implement fetchUserData function to fetch user data
+                
+               
+                
                 setNewMessage('');
-            })
-            .catch((error) => {
-                console.error('Error sending message:', error);
-            });
+            } else {
+                console.error('Failed to send message');
+            }
+        } catch (error) {
+            console.error('Error sending message:', error);
+        }
     };
     
 
