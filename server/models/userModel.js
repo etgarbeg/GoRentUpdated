@@ -140,6 +140,7 @@ class UserModel {
 
     static async sendMessage(senderID, receiverID, txt, productRequestedID, timeStemp) {
         try {
+            console.log("het")
             // Construct the message object
             const message = {
                 senderID: senderID,
@@ -149,15 +150,21 @@ class UserModel {
                 timeStemp: timeStemp
             };
     
-            // Push the message to the sender's messages array
+            // Get the sender and receiver from the database
             const sender = await UserModel.FindById(senderID);
+            const receiver = await UserModel.FindById(receiverID);
+    
+            // Push the message to the sender's messages array
             sender.messages.push(message);
-            await UserModel.updateUser(sender);
     
             // Push the message to the receiver's messages array
-            const receiver = await UserModel.FindById(receiverID);
             receiver.messages.push(message);
-            await UserModel.updateUser(receiver);
+    
+            // Update both sender and receiver in the database
+            await Promise.all([
+                UserModel.updateUser(sender),
+                UserModel.updateUser(receiver)
+            ]);
     
             console.log('Message sent successfully:', message);
             return true;
@@ -166,7 +173,6 @@ class UserModel {
             throw new Error('Failed to send message');
         }
     }
-    
     
     
 
