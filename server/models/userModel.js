@@ -139,8 +139,8 @@ class UserModel {
     static async sendMessage(senderID,receiverID,txt,productRequestedID,timeStemp) {
         try {
             // Find sender and receiver users
-            const senderUser = await UserModel.FindById(messageObj.senderID);
-            const receiverUser = await UserModel.FindById(messageObj.receiverID);
+            const senderUser = await UserModel.FindById(senderID);
+            const receiverUser = await UserModel.FindById(receiverID);
     
             if (!senderUser || !receiverUser) {
                 throw new Error("Sender or receiver not found.");
