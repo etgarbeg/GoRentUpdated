@@ -201,15 +201,15 @@ export default function UserContextProvider({ children }) {
 
 
 // In the UserContext.js file
-const sendMessage = async (messageObj) => {
+const sendMessage = async ( senderID, receiverID,txt,productRequestedID,timeStemp) => {
     try {
-        const result = await fetch(`${API_BASE_URL}/messages`, {
+        const result = await fetch(`${API_BASE_URL}/messges`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                messageObj
+                senderID,receiverID, txt,productRequestedID,timeStemp
             })
         });
         const data = await result.json();

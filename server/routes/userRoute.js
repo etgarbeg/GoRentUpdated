@@ -84,16 +84,21 @@ userRouter.post('/register', async (req, res) => {
 ///messeges between two users 
 userRouter.post('/messages', async (req, res) => {
     try {
-        const messageObj = req.body;
+        const {  senderID,
+            receiverID,
+            txt,
+            productRequestedID,
+            timeStemp} = req.body;
+           
 
-        if (!messageObj.senderID || !messageObj.receiverId || !messageObj.txt || !messageObj.timeStemp) {
+        if (senderID || !receiverID || !txt || !productRequestedID||!timeStemp) {
             res.status(400).json({ msg: "Missing message details in the request body." });
             return;
         }
 
         // Find sender and receiver users
-        const senderUser = await UserModel.FindById(messageObj.senderID);
-        const receiverUser = await UserModel.FindById(messageObj.receiverID);
+        const senderUser = await UserModel.FindById(senderID);
+        const receiverUser = await UserModel.FindById(receiverID);
 
         if (!senderUser || !receiverUser) {
             res.status(404).json({ msg: "One or both users not found." });
@@ -101,7 +106,12 @@ userRouter.post('/messages', async (req, res) => {
         }
 
         // Add the message to sender's messages array
-        senderUser.messages.push(messageObj);
+        const message = await UserModel.sendMessage(senderID,
+            receiverID,
+            txt,
+            productRequestedID,
+            timeStemp);
+
 
         // Update sender in the database
         await UserModel.updateUser(senderUser);
