@@ -128,10 +128,10 @@ class UserModel {
 
 
     static async FindById(userId) {
-        // Assuming you have a DB method to find a user by ID
+      
         const user = await new DB().FindById("users", userId);
 
-        // Return the found user or null if not found
+      
         return user || null;
     }
 
@@ -140,8 +140,8 @@ class UserModel {
         try {
             // Find sender and receiver users
            
-            const senderUser = await UserModel.FindById(senderID);
-            const receiverUser = await UserModel.FindById(receiverID);
+            const senderUser = await this.FindById(senderID);
+            const receiverUser = await this.FindById(receiverID);
     
             if (!senderUser || !receiverUser) {
                 throw new Error("Sender or receiver not found.");
@@ -155,18 +155,22 @@ class UserModel {
                 timeStemp: timeStemp
             };   
        
-         // Add the message to sender's messages array
+
 console.log("Message added to sender's messages array:", message);
 senderUser.messages.push(message);
-await UserModel.updateUser(senderUser);
+await this.updateUser(senderUser);
 
-// Add the message to receiver's messages array
+
 console.log("Message added to receiver's messages array:", message);
 receiverUser.messages.push(message);
-await UserModel.updateUser(receiverUser);
+await this.updateUser(receiverUser);
 
             return "Message sent successfully!";
-        } catch (error) {
+        }
+        
+        
+        
+        catch (error) {
             throw error;
         }
     }
