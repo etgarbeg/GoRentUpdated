@@ -21,23 +21,28 @@ const ItemScreen = ({ route, navigation }) => {
             alert('In cart, waiting to accept');
             return;
         }
-
-        if (productInMyCart) {
+        else if(!isAvToRented){
+            alert('Not Avaliable');
+        }
+   
+        else if (productInMyCart) {
             alert('Removed from rent requests');
             const updatedCart = currentUser.cart.filter(item => item.productId !== product.productId);
             setCurrentUser(prevUser => ({ ...prevUser, cart: updatedCart }));
-        } else if (!product.productAvaliable) {
+        } 
+        else if (!product.productAvaliable) {
             alert('Item is taken');
-        } else {
+        } 
+        
+        else {
             const userWithProduct = findUserByOwnerId(users, product.ownerId);
-
+    
             if (!userWithProduct) {
                 alert('Second user not found');
                 return;
             }
-
+    
             try {
-
                 const message = await sendRentRequest(
                     currentUser,
                     userWithProduct,
@@ -50,6 +55,7 @@ const ItemScreen = ({ route, navigation }) => {
             }
         }
     };
+    
 
     const handleEdit = () => {
         alert('Edit product details');
