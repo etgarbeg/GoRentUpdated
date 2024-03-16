@@ -114,7 +114,7 @@ class UserModel {
     static async updateUser(userData) {
         try {
             // Database operation to update user
-            await new DB().Update("users", { _id: userData._id }, userData);
+            await new DB().Update('users', { _id: userData._id }, userData);
         } catch (dbError) {
             console.error('Error during database operation:', dbError);
             throw new Error('Database operation failed');
@@ -129,7 +129,7 @@ class UserModel {
 
     static async FindById(userId) {
       
-        const user = await new DB().FindById("users", userId);
+        const user = await new DB().FindById('users', userId);
 
       
         return user || null;
