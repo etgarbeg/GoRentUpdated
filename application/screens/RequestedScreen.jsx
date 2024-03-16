@@ -16,7 +16,6 @@ const RequestedItem = ({ item, onAccept, onCancel }) => {
                 <Text style={styles.requestedItemDetailsText}>
                     Requested by: {requestedUser ? requestedUser.username : 'Unknown'}
                 </Text>
-
             </View>
             <View style={styles.requestedItemButtons}>
                 <TouchableOpacity
@@ -42,6 +41,14 @@ const RequestedListComponent = ({ onAccept, onCancel }) => {
 
     return (
         <View style={styles.requestedListContainer}>
+            <Text style={styles.requestedListTitle}>Cart Items</Text>
+            {currentUser.cart && currentUser.cart.length > 0 ? (
+                currentUser.cart.map((item) => (
+                    <Text key={item.productId}>{item.productName}</Text>
+                ))
+            ) : (
+                <Text>No items in cart</Text>
+            )}
             <Text style={styles.requestedListTitle}>Requested Items</Text>
             {requestedItems.length === 0 ? (
                 <Text>No items</Text>
