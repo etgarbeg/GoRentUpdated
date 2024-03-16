@@ -1,35 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState ,useContext} from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import styles from '../assets/Styles/style'; // Import your styles here
+import { UserContext } from '../assets/UserContext/UserContext';
 
 const PasswordResetVerification = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [resetCodeGiven, setResetCodeGiven] = useState(1);
-    const [resetCodeEntered, setResetCodeEntered] = useState(0);
+    const [resetCodeEntered, setResetCodeEntered] = useState("");
     const [txt, setTxt] = useState(' ');
     const [state, setState] = useState(0);
     const [newPassword, setNewPassword] = useState('x');
     const [newPasswordCopy, setNewPasswordCopy] = useState('');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+   
 
 
-
+    const {  users} = useContext(UserContext);
     const handleVerifyAndReset = () => {
 
         console.log("state", state)
         if (state == 0) {
-
-            chekcValidEmail = emailRegex.test(email);
-            if (chekcValidEmail) {
-                //send code to email
+            const isRegisteredEmail = users.some(user => user.email === email);
+            if (isRegisteredEmail) {
+                // Email is registered, proceed with sending the verification code
                 setState(1);
-                setTxt(' ')
+                setTxt(' ');
+                // Code to send verification code to the email
+            } else {
+                // Email is not registered, display an error message
+                setTxt('Email is not registered. Please try again.');
             }
-
-            else {
-                setTxt('inVaild email, try again')
-            }
-
         }
         else if (state == 1) {
             console.log(resetCodeEntered, resetCodeGiven, txt)
@@ -101,12 +101,13 @@ const PasswordResetVerification = ({ navigation }) => {
                             <Text style={styles.InboxTitle}>verification code </Text>
                             <Text style={styles.txt7}> code sent to {email}</Text>
                             <TextInput
-                                style={styles.input7}
-                                placeholder="Verification Code"
-                                placeholderTextColor="#555"
-                                value={resetCodeEntered}
-                                onChangeText={setResetCodeEntered}
-                            />
+    style={styles.input7}
+    placeholder="Verification Code"
+    placeholderTextColor="#555"
+    value={resetCodeEntered.toString()} // Convert to string
+    onChangeText={setResetCodeEntered}
+/>
+
                             <TouchableOpacity style={styles.button7} onPress={handleVerifyAndReset}>
                                 <Text style={styles.buttonText7}>Send</Text>
                             </TouchableOpacity>
