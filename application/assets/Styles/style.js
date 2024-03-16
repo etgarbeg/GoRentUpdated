@@ -953,7 +953,7 @@ borderRadius:30,
         justifyContent: 'center',
         alignItems: 'center',
         width: 200,
-        position: 'fixed',
+      
         top: 0,
         left: 100,
         height: 200,
