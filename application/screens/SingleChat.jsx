@@ -6,7 +6,7 @@ import { UserContext } from '../../application/assets/UserContext/UserContext';
 
 const SingleChat = ({ route, navigation }) => {
     const { otherUserId, productRequestedID } = route.params;
-    const { currentUser, users,sendMessage } = useContext(UserContext);
+    const { currentUser, users,sendUserMessage } = useContext(UserContext);
     const [newMessage, setNewMessage] = useState('');
     const scrollViewRef = useRef();
 
@@ -31,23 +31,18 @@ const SingleChat = ({ route, navigation }) => {
 
     const handleSendMessage = async () => {
         try {
-            // Send the message
-            const success = await sendMessage(currentUser._id, otherUserId, newMessage, productRequestedID, new Date().toISOString());
-            
+           
+            const success = await sendUserMessage(senderID, receiverID, txt, productRequestedID, timeStemp);
+
             if (success) {
-                console.log('Message sent successfully');
-                
-                // Fetch updated user data from the server
-                const updatedUser = await fetchUserData(currentUser._id); // Implement fetchUserData function to fetch user data
-                
-               
-                
+                console.log('ההודעה נשלחה בהצלחה');
+             
                 setNewMessage('');
             } else {
-                console.error('Failed to send message');
+                console.error('נכשל בשליחת ההודעה');
             }
         } catch (error) {
-            console.error('Error sending message:', error);
+            console.error('שגיאה בשליחת ההודעה:', error);
         }
     };
     

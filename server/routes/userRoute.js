@@ -82,31 +82,31 @@ userRouter.post('/register', async (req, res) => {
 
 
 ///messeges between two users 
-userRouter.post('/messages', async (req, res) => {
+userRouter.post('/sendMessage', async (req, res) => {
     try {
+        // קבלת הפרמטרים מהבקשה
         const { senderID, receiverID, txt, productRequestedID, timeStemp } = req.body;
 
-        if (!txt ) {
-            res.status(400).json({ msg: "Missing message details in the request body." });
-            return;
+        // בדיקת תקינות הפרמטרים
+        if (!senderID || !receiverID || !txt || !timeStemp) {
+            return res.status(400).json({ success: false, message: 'Missing required parameters.' });
         }
-        console.log(senderID)
-        // Call the sendMessage static method on UserModel
-      const massege=  await UserModel.sendMessage(
-            senderID,
-            receiverID,
-            txt,
-            productRequestedID,
-            timeStemp
-        );
 
-        res.status(200).json(massege);
+        // שליחת ההודעה וקבלת התוצאה
+        const success = await UserModel.sendMessage(senderID, receiverID, txt, productRequestedID, timeStemp);
+
+        // בדיקת תוצאת השליחה
+        if (success) {
+            return res.status(200).json({ success: true, message: 'Message sent successfully.' });
+        } else {
+            return res.status(500).json({ success: false, message: 'Failed to send message.' });
+        }
     } catch (error) {
-        console.error('Error:', error); // Log the error for debugging
-        res.status(500).json({ error: error.message }); // Send the error message in the response
+        // טיפול בשגיאה במידה וקרתה
+        console.error('Error sending message:', error);
+        return res.status(500).json({ success: false, message: 'Internal server error.' });
     }
 });
-
 
 
 
