@@ -6,7 +6,7 @@ import { UserContext } from '../../application/assets/UserContext/UserContext';
 
 const SingleChat = ({ route, navigation }) => {
     const { otherUserId, productRequestedID } = route.params;
-    const { currentUser, users, setUsers,sendMessage } = useContext(UserContext);
+    const { currentUser, users,sendMessage } = useContext(UserContext);
     const [newMessage, setNewMessage] = useState('');
     const scrollViewRef = useRef();
 
@@ -30,17 +30,17 @@ const SingleChat = ({ route, navigation }) => {
     };
 
     const handleSendMessage = () => {
-        const newMessageObj = {
-            senderID: currentUser._id,
-            receiverId: otherUserId,
-            txt: newMessage,
-            productRequestedID: productRequestedID,
-            timeStemp: new Date().toISOString(),
-        };
+        // const newMessageObj = {
+        //     senderID: currentUser._id,
+        //     receiverId: otherUserId,
+        //     txt: newMessage,
+        //     productRequestedID: productRequestedID,
+        //     timeStemp: new Date().toISOString(),
+        // };
     
         // Use the sendMessage function from the UserContext to send the message
-        console.log(newMessageObj)
-        sendMessage(newMessageObj.senderID,newMessageObj.receiverId,newMessageObj.txt,newMessageObj.productRequestedID,newMessageObj.timeStemp);
+  
+        sendMessage(currentUser._id, otherUserId,newMessage,productRequestedID,new Date().toISOString());
     
         // Clear the message input
         setNewMessage('');

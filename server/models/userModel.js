@@ -145,7 +145,7 @@ class UserModel {
             if (!senderUser || !receiverUser) {
                 throw new Error("Sender or receiver not found.");
             }
-    const message={senderID:senderID,receiverID:receiverID,txt:txt,productRequestedID:productRequestedID,timeStemp:timeStemp};
+    const message={senderID:senderID,receiverId:receiverID,txt:txt,productRequestedID:productRequestedID,timeStemp:timeStemp};
             // Add the message to sender's messages array
             senderUser.messages.push(message);
     
