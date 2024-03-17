@@ -30,6 +30,7 @@ const LoginScreen = ({ navigation }) => {
             console.log("the user recieved in handel", user)
             if (user) {
                 setCurrentUser(user);
+            
 
                 console.log("other", otherUsers)
                 navigation.replace('Profile');
